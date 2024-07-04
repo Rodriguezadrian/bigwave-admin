@@ -6,8 +6,9 @@ import Button from "@mui/joy/Button";
 import Card from "@mui/joy/Card";
 import Chip from "@mui/joy/Chip";
 import Divider from "@mui/joy/Divider";
-import IconButton from "@mui/joy/IconButton";
+import { IconButton } from "@mui/joy";
 import Input from "@mui/joy/Input";
+import Link from "@mui/joy/Link";
 import LinearProgress from "@mui/joy/LinearProgress";
 import List from "@mui/joy/List";
 import ListItem from "@mui/joy/ListItem";
@@ -29,7 +30,6 @@ import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import BrightnessAutoRoundedIcon from "@mui/icons-material/BrightnessAutoRounded";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-
 import ColorSchemeToggle from "./ColorSchemeToggle";
 import { closeSidebar } from "../utils";
 
@@ -112,8 +112,8 @@ export default function Sidebar() {
       <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
         <IconButton variant="soft" color="primary" size="sm">
           <BrightnessAutoRoundedIcon />
-        </IconButton>Icon
-        <Typography level="title-lg">Acme Co.</Typography>
+        </IconButton>
+        <Typography level="title-lg">BigWave</Typography>
         <ColorSchemeToggle sx={{ ml: "auto" }} />
       </Box>
       <Input
@@ -145,7 +145,9 @@ export default function Sidebar() {
             <ListItemButton>
               <HomeRoundedIcon />
               <ListItemContent>
-                <Typography level="title-sm">Home</Typography>
+                <Typography level="title-sm">
+                  <Link href="/">Home</Link>
+                </Typography>
               </ListItemContent>
             </ListItemButton>
           </ListItem>
@@ -154,7 +156,10 @@ export default function Sidebar() {
             <ListItemButton>
               <DashboardRoundedIcon />
               <ListItemContent>
-                <Typography level="title-sm">Dashboard</Typography>
+                <Typography level="title-sm">
+                  {" "}
+                  <Link href="/dashboard">Dashboard</Link>
+                </Typography>
               </ListItemContent>
             </ListItemButton>
           </ListItem>
@@ -206,6 +211,7 @@ export default function Sidebar() {
               </List>
             </Toggler>
           </ListItem>
+
           <ListItem>
             <ListItemButton
               role="menuitem"
@@ -277,12 +283,6 @@ export default function Sidebar() {
             <ListItemButton>
               <SupportRoundedIcon />
               Support
-            </ListItemButton>
-          </ListItem>
-          <ListItem>
-            <ListItemButton>
-              <SettingsRoundedIcon />
-              Settings
             </ListItemButton>
           </ListItem>
         </List>

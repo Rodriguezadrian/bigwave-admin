@@ -35,10 +35,36 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import MoreHorizRoundedIcon from "@mui/icons-material/MoreHorizRounded";
 
-const rows = [
-  // ... (rows data remains the same)
+const data = [
+  {
+    id: 1,
+    invoice: "INV-001",
+    date: "2023-07-01",
+    status: "Paid",
+    customer: "John Doe",
+    email: "john@example.com",
+    avatar: "",
+  },
+  {
+    id: 2,
+    invoice: "INV-002",
+    date: "2024-07-02",
+    status: "Pending",
+    customer: "Steve Hampton",
+    email: "steve.hampton@example.com",
+    avatar: "https://i.pravatar.cc/300?img=2",
+    products: ["Product C", "Product D"],
+  },
+  {
+    id: 3,
+    invoice: "INV-003",
+    date: "2023-07-03",
+    status: "Cancelled",
+    customer: "Bob Brown",
+    email: "bob@example.com",
+    avatar: "",
+  },
 ];
-
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -212,16 +238,16 @@ export default function OrderTable() {
                 <Checkbox
                   size="sm"
                   indeterminate={
-                    selected.length > 0 && selected.length !== rows.length
+                    selected.length > 0 && selected.length !== data.length
                   }
-                  checked={selected.length === rows.length}
+                  checked={selected.length === data.length}
                   onChange={(event) => {
                     setSelected(
-                      event.target.checked ? rows.map((row) => row.id) : []
+                      event.target.checked ? data.map((row) => row.id) : []
                     );
                   }}
                   color={
-                    selected.length > 0 || selected.length === rows.length
+                    selected.length > 0 || selected.length === data.length
                       ? "primary"
                       : undefined
                   }
@@ -258,8 +284,9 @@ export default function OrderTable() {
               <th style={{ width: 140, padding: "12px 6px" }}> </th>
             </tr>
           </thead>
+          {/* ***********************aca se renderiza la tabla *********************************** */}
           <tbody>
-            {rows.map((row) => {
+            {data.map((row) => {
               const isSelected = selected.indexOf(row.id) !== -1;
               return (
                 <tr key={row.id} aria-checked={isSelected} role="checkbox">
