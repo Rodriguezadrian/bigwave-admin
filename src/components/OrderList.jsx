@@ -57,7 +57,7 @@ const listItems = [
   },
   {
     id: "INV-1231",
-    date: "Feb 3, 2023",
+    date: "Feb 10, 2024",
     status: "Refunded",
     customer: {
       initial: "M",
@@ -123,14 +123,14 @@ function OrderList() {
               sx={{ display: "flex", gap: 2, alignItems: "start" }}
             >
               <ListItemDecorator>
-                <Avatar size="sm">{listItem.customer.initial}</Avatar>
+                <Avatar size="sm">imagen</Avatar>
               </ListItemDecorator>
               <div>
                 <Typography gutterBottom sx={{ fontWeight: 600 }}>
-                  {listItem.customer.name}
+                  nombre
                 </Typography>
                 <Typography level="body-xs" gutterBottom>
-                  {listItem.customer.email}
+                  email
                 </Typography>
                 <Box
                   sx={{
@@ -141,12 +141,17 @@ function OrderList() {
                     mb: 1,
                   }}
                 >
-                  <Typography level="body-xs">{listItem.date}</Typography>
+                  <Typography level="body-xs">fecha</Typography>
                   <Typography level="body-xs">&bull;</Typography>
-                  <Typography level="body-xs">{listItem.id}</Typography>
+                  <Typography level="body-xs">id</Typography>
                 </Box>
                 <Box
-                  sx={{ display: "flex", alignItems: "center", gap: 1, mb: 1 }}
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 1,
+                    mb: 1,
+                  }}
                 >
                   <Link level="body-sm" component="button">
                     Download

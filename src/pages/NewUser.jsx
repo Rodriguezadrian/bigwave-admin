@@ -2,18 +2,37 @@ import {
   Box,
   Breadcrumbs,
   Button,
+  Container,
   CssBaseline,
   Link,
   Typography,
 } from "@mui/joy";
+import Paper from "@mui/material/Paper";
+import TextField from "@mui/material/TextField";
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
-import OrderTable from "../components/OrderTable";
-import OrderList from "../components/OrderList";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
+import { useState } from "react";
 
 function NewUser() {
+  const [formData, setFormData] = useState({
+    name: "",
+    lastname: "",
+    email: "",
+    password: "",
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Aquí se puede agregar la lógica para enviar los datos del formulario a la API
+    console.log(formData);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
   return (
     <>
       <CssBaseline />
@@ -62,7 +81,7 @@ function NewUser() {
                 color="primary"
                 sx={{ fontWeight: 500, fontSize: 12 }}
               >
-                Orders
+                Create new user
               </Typography>
             </Breadcrumbs>
           </Box>
@@ -78,14 +97,65 @@ function NewUser() {
             }}
           >
             <Typography level="h2" component="h1">
-              Orders
+              Create new user
             </Typography>
-            <Button color="primary" size="sm">
-              Download PDF
-            </Button>
           </Box>
-          <OrderTable />
-          <OrderList />
+          <Container maxWidth="sm">
+            <Paper elevation={3} sx={{ padding: 2, marginTop: 4 }}>
+              <Typography variant="h4" component="h1" gutterBottom>
+                Create new User
+              </Typography>
+              <Box
+                component="form"
+                sx={{
+                  "& .MuiTextField-root": { marginBottom: 2 },
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+                noValidate
+                autoComplete="off"
+                onSubmit={handleSubmit}
+              >
+                <TextField
+                  required
+                  id="name"
+                  name="name"
+                  label="Name"
+                  value={formData.name}
+                  onChange={handleChange}
+                />
+                <TextField
+                  required
+                  id="lastname"
+                  name="lastname"
+                  label="Lastname"
+                  value={formData.lastname}
+                  onChange={handleChange}
+                />
+                <TextField
+                  required
+                  id="email"
+                  name="email"
+                  label="Email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+                <TextField
+                  required
+                  id="password"
+                  name="password"
+                  label="Password"
+                  type="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                />
+                <Button type="submit" variant="contained" color="primary">
+                  Crear Usuario
+                </Button>
+              </Box>
+            </Paper>
+          </Container>
         </Box>
       </Box>
     </>

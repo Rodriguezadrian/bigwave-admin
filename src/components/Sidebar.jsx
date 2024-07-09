@@ -26,6 +26,7 @@ import BrightnessAutoRoundedIcon from "@mui/icons-material/BrightnessAutoRounded
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import ColorSchemeToggle from "./ColorSchemeToggle";
 import { closeSidebar } from "../utils";
+import { LoginOutlined } from "@mui/icons-material";
 
 function Toggler({ defaultExpanded = false, renderToggle, children }) {
   const [open, setOpen] = React.useState(defaultExpanded);
@@ -243,7 +244,7 @@ export default function Sidebar() {
                   <ListItemButton
                     role="menuitem"
                     component={Link}
-                    href="/joy-ui/getting-started/templates/profile-dashboard/"
+                    href="/my-profile"
                   >
                     My profile
                   </ListItemButton>
@@ -275,6 +276,14 @@ export default function Sidebar() {
               <SupportRoundedIcon />
               <ListItemContent>
                 <Typography level="title-sm">Support</Typography>
+              </ListItemContent>
+            </ListItemButton>
+          </ListItem>
+          <ListItem>
+            <ListItemButton component={Link} href="/login">
+              <LoginOutlined />
+              <ListItemContent>
+                <Typography level="title-sm">Log In</Typography>
               </ListItemContent>
             </ListItemButton>
           </ListItem>

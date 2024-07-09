@@ -29,7 +29,6 @@ import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import BlockIcon from "@mui/icons-material/Block";
 import AutorenewRoundedIcon from "@mui/icons-material/AutorenewRounded";
 import MoreHorizRoundedIcon from "@mui/icons-material/MoreHorizRounded";
-import React from "react";
 
 const data = [
   {
@@ -42,6 +41,7 @@ const data = [
     avatar: "",
   },
 ];
+
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
