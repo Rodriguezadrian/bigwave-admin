@@ -26,7 +26,6 @@ import BrightnessAutoRoundedIcon from "@mui/icons-material/BrightnessAutoRounded
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import ColorSchemeToggle from "./ColorSchemeToggle";
 import { closeSidebar } from "../utils";
-import { NavLink } from "react-router-dom";
 
 function Toggler({ defaultExpanded = false, renderToggle, children }) {
   const [open, setOpen] = React.useState(defaultExpanded);
@@ -137,24 +136,19 @@ export default function Sidebar() {
           }}
         >
           <ListItem>
-            <ListItemButton>
+            <ListItemButton component={Link} href="/">
               <HomeRoundedIcon />
               <ListItemContent>
-                <Typography level="title-sm">
-                  <Link href="/">Home</Link>
-                </Typography>
+                <Typography level="title-sm">Home</Typography>
               </ListItemContent>
             </ListItemButton>
           </ListItem>
 
           <ListItem>
-            <ListItemButton>
+            <ListItemButton component={Link} href="/dashboard">
               <DashboardRoundedIcon />
               <ListItemContent>
-                <Typography level="title-sm">
-                  {" "}
-                  <Link href="/dashboard">Dashboard</Link>
-                </Typography>
+                <Typography level="title-sm">Dashboard</Typography>
               </ListItemContent>
             </ListItemButton>
           </ListItem>
@@ -210,7 +204,7 @@ export default function Sidebar() {
           <ListItem>
             <ListItemButton
               role="menuitem"
-              component="a"
+              component={Link}
               href="/joy-ui/getting-started/templates/messages/"
             >
               <QuestionAnswerRoundedIcon />
@@ -248,20 +242,20 @@ export default function Sidebar() {
                 <ListItem sx={{ mt: 0.5 }}>
                   <ListItemButton
                     role="menuitem"
-                    component="a"
+                    component={Link}
                     href="/joy-ui/getting-started/templates/profile-dashboard/"
                   >
-                    <NavLink to={"/profile"}>My profile</NavLink>
+                    My profile
                   </ListItemButton>
                 </ListItem>
                 <ListItem>
-                  <ListItemButton>
-                    <NavLink to={"/create-user"}>Create a new user</NavLink>
+                  <ListItemButton component={Link} href="/create-user">
+                    Create a new user
                   </ListItemButton>
                 </ListItem>
                 <ListItem>
-                  <ListItemButton>
-                    <NavLink to={"/update-user"}>Update user</NavLink>
+                  <ListItemButton component={Link} href="/update-user">
+                    Update user
                   </ListItemButton>
                 </ListItem>
               </List>
@@ -273,44 +267,54 @@ export default function Sidebar() {
           sx={{
             mt: "auto",
             flexGrow: 0,
-            "--ListItem-radius": (theme) => theme.vars.radius.sm,
-            "--List-gap": "8px",
-            mb: 2,
+            "--ListItem-minHeight": "32px",
           }}
         >
           <ListItem>
-            <ListItemButton>
+            <ListItemButton component={Link} href="/support">
               <SupportRoundedIcon />
-              Support
+              <ListItemContent>
+                <Typography level="title-sm">Support</Typography>
+              </ListItemContent>
+            </ListItemButton>
+          </ListItem>
+          <ListItem>
+            <ListItemButton component={Link} href="/logout">
+              <LogoutRoundedIcon />
+              <ListItemContent>
+                <Typography level="title-sm">Log out</Typography>
+              </ListItemContent>
             </ListItemButton>
           </ListItem>
         </List>
-        <Card
-          invertedColors
-          variant="soft"
-          color="primary"
-          size="sm"
-          sx={{ display: "flex", gap: 1, [`& > *`]: { minWidth: 0 } }}
-        >
-          <Avatar
-            size="sm"
-            src="/static/images/avatar/3.jpg"
-            sx={{ "--Avatar-size": "2.5rem" }}
-          />
-          <div>
-            <Typography fontWeight="lg">Grace Owen</Typography>
-            <Typography level="body2">grace.owen@gmail.com</Typography>
-          </div>
-          <IconButton
-            variant="plain"
-            size="sm"
-            color="neutral"
-            sx={{ ml: "auto" }}
-          >
-            <LogoutRoundedIcon />
-          </IconButton>
-        </Card>
       </Box>
+      <Card
+        variant="soft"
+        color="primary"
+        invertedColors
+        sx={{
+          bgcolor: "background.level1",
+          boxShadow: "none",
+          display: "flex",
+          flexDirection: "column",
+          gap: 2,
+          flexGrow: 0,
+        }}
+      >
+        <Typography level="body2">Need Help?</Typography>
+        <Typography level="body2" fontWeight="lg">
+          Please check our docs.
+        </Typography>
+        <Link
+          href="/help"
+          level="body2"
+          underline="none"
+          startDecorator={<SupportRoundedIcon />}
+          sx={{ alignItems: "flex-start" }}
+        >
+          Help center
+        </Link>
+      </Card>
     </Sheet>
   );
 }
