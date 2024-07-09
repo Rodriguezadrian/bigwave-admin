@@ -36,6 +36,8 @@ import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import MoreHorizRoundedIcon from "@mui/icons-material/MoreHorizRounded";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 
 const data = [
   {
@@ -83,30 +85,11 @@ function getComparator(order, orderBy) {
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
-function RowMenu() {
-  return (
-    <Dropdown>
-      <MenuButton
-        slots={{ root: IconButton }}
-        slotProps={{ root: { variant: "plain", color: "neutral", size: "sm" } }}
-      >
-        <MoreHorizRoundedIcon />
-      </MenuButton>
-      <Menu size="sm" sx={{ minWidth: 140 }}>
-        <MenuItem>Edit</MenuItem>
-        <MenuItem>Rename</MenuItem>
-        <MenuItem>Move</MenuItem>
-        <Divider />
-        <MenuItem color="danger">Delete</MenuItem>
-      </Menu>
-    </Dropdown>
-  );
-}
-
 export default function OrderTable() {
   const [order, setOrder] = React.useState("desc");
   const [selected, setSelected] = React.useState([]);
   const [open, setOpen] = React.useState(false);
+  const user = useSelector((state) => state.user);
 
   const [orders, setOrders] = useState();
 
@@ -115,12 +98,41 @@ export default function OrderTable() {
       const response = await axios({
         url: `${import.meta.env.VITE_API_URL}/orders`,
         method: "get",
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+          "Content-Type": "application/json",
+        },
       });
       setOrders(response.data);
     };
     getOrders();
   }, []);
- 
+
+  function RowMenu({ order }) {
+  
+    return (
+      <Dropdown>
+        <MenuButton
+          slots={{ root: IconButton }}
+          slotProps={{
+            root: { variant: "plain", color: "neutral", size: "sm" },
+          }}
+        >
+          <MoreHorizRoundedIcon />
+        </MenuButton>
+        <Menu size="sm" sx={{ minWidth: 140 }}>
+          <MenuItem>
+            <NavLink to={`/orders/details/${order.id}`}>Editsss</NavLink>
+          </MenuItem>
+          <MenuItem>Rename</MenuItem>
+          <MenuItem>Move</MenuItem>
+          <Divider />
+          <MenuItem color="danger">Delete</MenuItem>
+        </Menu>
+      </Dropdown>
+    );
+  }
+
   const renderFilters = () => (
     <React.Fragment>
       <FormControl size="sm">
@@ -371,7 +383,7 @@ export default function OrderTable() {
                         <Avatar size="sm" src={order.avatar} sx={{ mr: 2 }} />
                         <Box>
                           <Typography fontWeight="lg" level="body2">
-                            {order.customer}
+                            {order.address}
                           </Typography>
                           <Typography
                             level="body2"
@@ -383,7 +395,7 @@ export default function OrderTable() {
                       </Box>
                     </td>
                     <td>
-                      <RowMenu />
+                      <RowMenu order={order} />
                     </td>
                   </tr>
                 );

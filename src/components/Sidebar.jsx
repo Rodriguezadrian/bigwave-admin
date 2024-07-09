@@ -155,7 +155,7 @@ export default function Sidebar() {
           </ListItem>
 
           <ListItem>
-            <ListItemButton selected>
+            <ListItemButton component={Link} href="/">
               <ShoppingCartRoundedIcon />
               <ListItemContent>
                 <Typography level="title-sm">Orders</Typography>
