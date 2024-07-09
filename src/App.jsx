@@ -8,6 +8,7 @@ import Dashboard from "./pages/Dashboard";
 import OrderView from "./pages/OrderView";
 import CategoriesView from "./components/CategoriesView";
 import ProductsView from "./components/ProductsView";
+import CategoriesEdit from "./components/CategoriesEdit";
 
 function App() {
   const router = createBrowserRouter([
@@ -19,6 +20,7 @@ function App() {
     { path: "/update-user", element: <UpdateUser /> },
     { path: "/orders/details/:id", element: <OrderView /> },
     { path: "/edit", element: <ProductsView /> },
+    { path: "/categories/edit/:id", element: <CategoriesEdit /> },
     {
       path: "*",
       element: <ErrorPage />,

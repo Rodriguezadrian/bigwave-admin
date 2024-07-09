@@ -79,14 +79,14 @@ function CategoriesView() {
                     variant="contained"
                     color="primary"
                     component={Link}
-                    to={`/categories/edit/${category.id}`}
+                    to={`/categories/edit/${category.slug}`}
                   >
                     Edit
                   </Button>
                   <Button
                     variant="contained"
                     color="secondary"
-                    onClick={() => handleDelete(category.id)}
+                    onClick={() => handleDelete(category.slug)}
                   >
                     Delete
                   </Button>
