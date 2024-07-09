@@ -55,10 +55,10 @@ function CategoriesEdit() {
         setCategoriesDetails(response.data);
         console.log(response.data);
         setFormData({
-          name: response.data.categoryId.name,
-          image: response.data.categoryId.image,
-          description: response.data.categoryId.description,
-          products: JSON.stringify(response.data.category),
+          name: response.data.name,
+          image: response.data.image,
+          description: response.data.description,
+          products: JSON.stringify(response.data.Products),
         });
       } catch (error) {
         console.error("Error:", error);
@@ -66,28 +66,37 @@ function CategoriesEdit() {
     };
     getCategoriesDetails();
   }, []);
-
+  console.log(categoriesDetails);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = new FormData();
+    /*   const data = new FormData();
     data.append("name", formData.name);
     data.append("description", formData.description);
     data.append("image", formData.image);
-    data.append("products", JSON.stringify(JSON.parse(formData.products)));
+    data.append("products", JSON.stringify(JSON.parse(formData.products))); */
+    const data = {
+      name: formData.name,
+      description: formData.description,
+      image: formData.image,
+      products: JSON.parse(formData.products),
+    };
+
     try {
       const response = await axios({
-        url: `${import.meta.env.VITE_API_URL}/orders/${params.id}`,
+        url: `${import.meta.env.VITE_API_URL}/categories/${
+          categoriesDetails.id
+        }`,
         method: "PATCH",
         headers: {
           Authorization: `Bearer ${user.token}`,
-          "Content-Type": "multipart/form-data",
         },
         data: data,
       });
 
-      console.log("order updated:", response.data);
+      console.log("category updated:", response.data);
+      console.log(data.name);
     } catch (error) {
-      console.error("Error updating the order:", error);
+      console.error("Error updating the category:", error);
     }
   };
 
@@ -200,7 +209,7 @@ function CategoriesEdit() {
                   </Typography>
 
                   <List>
-                    {categoriesDetails.category.map((product, index) => (
+                    {categoriesDetails.Products.map((product, index) => (
                       <ListItem key={index}>
                         <ListItemText
                           primary={product.name}

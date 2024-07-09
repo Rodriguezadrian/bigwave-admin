@@ -34,16 +34,18 @@ function CategoriesView() {
     };
     getCategories();
   }, []);
-  //   const handleDelete = (id) => {
-  //     axios
-  //       .delete(`/api/categories/${id}`)
-  //       .then(() => {
-  //         setCategories(categories.filter((category) => category.id !== id));
-  //       })
-  //       .catch((error) => {
-  //         console.error("Error deleting category:", error);
-  //       });
-  //   };
+
+  const handleDelete = async (id) => {
+    try {
+      const response = await axios({
+        method: "delete",
+        url: `${import.meta.env.VITE_API_URL}/categories/${id}`,
+      });
+      setCategories(categories.filter((category) => category.id !== id));
+    } catch (error) {
+      console.error("Error deleting category:", error);
+    }
+  };
 
   return (
     <Container>
@@ -86,7 +88,7 @@ function CategoriesView() {
                   <Button
                     variant="contained"
                     color="secondary"
-                    onClick={() => handleDelete(category.slug)}
+                    onClick={() => handleDelete(category.id)}
                   >
                     Delete
                   </Button>
