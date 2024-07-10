@@ -197,7 +197,7 @@ function OrderView() {
                     Products
                   </Typography>
                   <List>
-                    {JSON.parse(formData.products).map((product, index) => (
+                    {orderDetails.products.map((product, index) => (
                       <ListItem key={index}>
                         <ListItemText
                           primary={product.name}
