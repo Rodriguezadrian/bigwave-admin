@@ -320,9 +320,6 @@ export default function OrderTable() {
             <tbody>
               {orders &&
                 orders.map((order) => {
-                  {
-                    console.log(order);
-                  }
                   const isSelected = selected.indexOf(order.id) !== -1;
                   return (
                     <tr
