@@ -22,6 +22,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function CategoriesEdit() {
   const params = useParams();
@@ -40,6 +42,8 @@ function CategoriesEdit() {
       [e.target.name]: e.target.value,
     });
   };
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getCategoriesDetails = async () => {
@@ -87,6 +91,8 @@ function CategoriesEdit() {
       });
 
       console.log("category updated:", response.data);
+      navigate("/dashboard");
+      toast.info("category created succesfully");
       console.log(data.name);
     } catch (error) {
       console.error("Error updating the category:", error);

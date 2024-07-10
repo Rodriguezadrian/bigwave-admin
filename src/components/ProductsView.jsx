@@ -17,7 +17,7 @@ import {
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 function ProductsView() {
   const [products, setProducts] = useState([]);

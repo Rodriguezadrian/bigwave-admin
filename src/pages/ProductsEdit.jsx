@@ -22,11 +22,14 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function ProductsEdit() {
-  const params = useParams();
   const user = useSelector((state) => state.user);
-  const [productDetails, setProductDetails] = useState();
+  const params = useParams();
+  const [productsDetails, setProductsDetails] = useState();
+
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -41,28 +44,31 @@ function ProductsEdit() {
     });
   };
 
+  const navigate = useNavigate();
+
   useEffect(() => {
-    const getProductDetails = async () => {
+    const getProductsDetails = async () => {
       try {
         const response = await axios({
           url: `${import.meta.env.VITE_API_URL}/products/${params.id}`,
           method: "get",
           headers: {
             Authorization: `Bearer ${user.token}`,
+            "Content-Type": "application/json",
           },
         });
-        setProductDetails(response.data);
+        setProductsDetails(response.data);
         setFormData({
           name: response.data.name,
-          image: response.data.image,
           description: response.data.description,
           price: response.data.price,
+          image: response.data.image,
         });
       } catch (error) {
         console.error("Error:", error);
       }
     };
-    getProductDetails();
+    getProductsDetails();
   }, []);
 
   const handleSubmit = async (e) => {
@@ -75,7 +81,7 @@ function ProductsEdit() {
     };
     try {
       const response = await axios({
-        url: `${import.meta.env.VITE_API_URL}/categories/${productDetails.id}`,
+        url: `${import.meta.env.VITE_API_URL}/products/${productsDetails.id}`,
         method: "PATCH",
         headers: {
           Authorization: `Bearer ${user.token}`,
@@ -84,13 +90,14 @@ function ProductsEdit() {
       });
 
       console.log("product updated:", response.data);
+      toast.info("product created succesfully");
+      navigate("/dashboard");
     } catch (error) {
       console.error("Error updating the product:", error);
     }
   };
-
   return (
-    productDetails && (
+    productsDetails && (
       <>
         <CssBaseline />
         <Box

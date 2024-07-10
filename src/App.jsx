@@ -17,7 +17,6 @@ import { createRoutesFromElements, Route } from "react-router-dom";
 
 function App() {
   const user = useSelector((state) => state.user);
-  console.log(user.token);
   const ProtectedRoute = ({ children }) => {
     if (!user.token) {
       return <Navigate to="/login" />;

@@ -12,7 +12,6 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { CssBaseline } from "@mui/joy";
 import Header from "../components/Header";
-import Sidebar from "../components/Sidebar";
 import { useDispatch } from "react-redux";
 import { login } from "../redux/userSlice";
 import axios from "axios";
@@ -46,7 +45,6 @@ const Login = () => {
       <CssBaseline />
       <Box sx={{ display: "flex", minHeight: "100dvh" }}>
         <Header />
-        <Sidebar />
         <Box
           component="main"
           className="MainContent"
@@ -150,7 +148,7 @@ const Login = () => {
                 is provided:
               </Typography>
               <Box mt={2}>
-                <Typography variant="subtitle1">Log in as a buyer</Typography>
+                <Typography variant="subtitle1">Login as an admin</Typography>
                 <ul>
                   <li>Email: pepito@gmail.com</li>
                   <li>Password: 1234</li>
