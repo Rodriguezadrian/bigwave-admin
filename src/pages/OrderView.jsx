@@ -68,23 +68,23 @@ function OrderView() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = new FormData();
-    data.append("status", formData.status);
-    data.append("address", formData.address);
-    data.append("totalAmount", formData.totalAmount);
-    data.append("products", JSON.stringify(JSON.parse(formData.products)));
+    const data = {
+      status: formData.status,
+      address: formData.address,
+      totalAmount: formData.totalAmount,
+      products: formData.products,
+    };
     try {
       const response = await axios({
         url: `${import.meta.env.VITE_API_URL}/orders/${params.id}`,
         method: "PATCH",
         headers: {
           Authorization: `Bearer ${user.token}`,
-          "Content-Type": "multipart/form-data",
         },
         data: data,
       });
-    
       console.log("order updated:", response.data);
+      navigate("/orders");
     } catch (error) {
       console.error("Error updating the order:", error);
     }

@@ -109,7 +109,6 @@ export default function OrderTable() {
   }, []);
 
   function RowMenu({ order }) {
-  
     return (
       <Dropdown>
         <MenuButton
@@ -122,7 +121,7 @@ export default function OrderTable() {
         </MenuButton>
         <Menu size="sm" sx={{ minWidth: 140 }}>
           <MenuItem>
-            <NavLink to={`/orders/details/${order.id}`}>Editsss</NavLink>
+            <NavLink to={`/orders/details/${order.id}`}>Edit</NavLink>
           </MenuItem>
           <MenuItem>Rename</MenuItem>
           <MenuItem>Move</MenuItem>
@@ -313,6 +312,7 @@ export default function OrderTable() {
                   </Link>
                 </th>
                 <th style={{ width: 140, padding: "12px 6px" }}>Date</th>
+                <th style={{ width: 140, padding: "12px 6px" }}>Address</th>
                 <th style={{ width: 140, padding: "12px 6px" }}>Status</th>
                 <th style={{ width: 240, padding: "12px 6px" }}>Customer</th>
                 <th style={{ width: 140, padding: "12px 6px" }}> </th>
@@ -352,17 +352,20 @@ export default function OrderTable() {
                       </Link>
                     </td>
                     <td>{order.updatedAt.slice(0, 10)}</td>
+                    <td>{order.address ? order.address : "Undefined"}</td>
                     <td>
                       <Chip
                         variant="soft"
                         size="sm"
                         color={
                           order.status === "Paid"
-                            ? "success"
+                            ? "green"
                             : order.status === "Pending"
                             ? "warning"
                             : order.status === "Cancelled"
                             ? "danger"
+                            : order.status === "shipped"
+                            ? "info"
                             : "neutral"
                         }
                         startDecorator={
@@ -383,13 +386,13 @@ export default function OrderTable() {
                         <Avatar size="sm" src={order.avatar} sx={{ mr: 2 }} />
                         <Box>
                           <Typography fontWeight="lg" level="body2">
-                            {order.address}
+                            {order.name ? order.name : "Undefined"}
                           </Typography>
                           <Typography
                             level="body2"
                             sx={{ color: "text.secondary" }}
                           >
-                            {order.email}
+                            {order.email ? order.email : "default@gmail.com"}
                           </Typography>
                         </Box>
                       </Box>
