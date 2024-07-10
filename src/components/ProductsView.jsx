@@ -17,6 +17,7 @@ import {
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { toast, ToastContainer } from "react-toastify";
 
 function ProductsView() {
   const [products, setProducts] = useState([]);
@@ -65,6 +66,26 @@ function ProductsView() {
       ...formData,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const handleAddNewProduct = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios({
+        url: `${import.meta.env.VITE_API_URL}/products`,
+        method: "post",
+        data: {
+          name: formData.name,
+          description: formData.description,
+          price: formData.price,
+          image: formData.image,
+        },
+      });
+      handleCloseModal();
+      toast.info("product created successfully");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleSubmit = (e) => {
@@ -206,6 +227,7 @@ function ProductsView() {
             color="primary"
             fullWidth
             sx={{ mt: 2 }}
+            onClick={handleAddNewProduct}
           >
             Save
           </Button>
