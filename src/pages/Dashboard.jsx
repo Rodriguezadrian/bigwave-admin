@@ -34,21 +34,9 @@ function Dashboard() {
                 <Link
                   to="/categories"
                   style={{ textDecoration: "none", color: "inherit" }}
-                >
-                  <Typography variant="h5" align="center" padding={3}>
-                    Categories
-                  </Typography>
-                </Link>
+                ></Link>
                 <Box display="flex" justifyContent="center" padding={2}>
                   <CategoriesView />
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    component={Link}
-                    to="/categories/add"
-                  >
-                    Add Category
-                  </Button>
                 </Box>
               </Paper>
             </Box>
@@ -57,21 +45,9 @@ function Dashboard() {
                 <Link
                   to="/products"
                   style={{ textDecoration: "none", color: "inherit" }}
-                >
-                  <Typography variant="h5" align="center" padding={3}>
-                    Products
-                  </Typography>
-                </Link>
+                ></Link>
                 <Box display="flex" justifyContent="center" padding={2}>
                   <ProductsView />
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    component={Link}
-                    to="/products/add"
-                  >
-                    Add Product
-                  </Button>
                 </Box>
               </Paper>
             </Box>
