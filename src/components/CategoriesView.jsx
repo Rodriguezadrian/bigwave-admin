@@ -17,42 +17,12 @@ import {
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function CategoriesView() {
   const [categories, setCategories] = useState([]);
   const user = useSelector((state) => state.user);
-
-  //open update profile modal
-  const [openModal, setOpenModal] = useState(false);
-  const handleOpenModal = () => setOpenModal(true);
-  const handleCloseModal = () => setOpenModal(false);
-
-  useEffect(() => {
-    const getCategories = async () => {
-      const response = await axios({
-        url: `${import.meta.env.VITE_API_URL}/categories`,
-        method: "get",
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-          "Content-Type": "application/json",
-        },
-      });
-      setCategories(response.data);
-    };
-    getCategories();
-  }, []);
-
-//   const handleDelete = async (id) => {
-//     try {
-//       const response = await axios({
-//         method: "delete",
-//         url: `${import.meta.env.VITE_API_URL}/categories/${id}`,
-//       });
-//       setCategories(categories.filter((category) => category.id !== id));
-//     } catch (error) {
-//       console.error("Error deleting category:", error);
-//     }
-//   };
 
   const [formData, setFormData] = useState({
     name: "",
@@ -67,15 +37,60 @@ function CategoriesView() {
     });
   };
 
-  const handleSubmit = (e) => {
+  //open update profile modal
+  const [openModal, setOpenModal] = useState(false);
+  const handleOpenModal = () => setOpenModal(true);
+  const handleCloseModal = () => setOpenModal(false);
+
+  useEffect(() => {
+    const getCategories = async () => {
+      const response = await axios({
+        url: `${import.meta.env.VITE_API_URL}/categories`,
+        method: "get",
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      setCategories(response.data);
+    };
+    getCategories();
+  }, []);
+
+  const handleNewCategory = async (e) => {
     e.preventDefault();
-    console.log("Form Data Submitted: ", formData);
-    handleCloseModal();
+    try {
+      const response = await axios({
+        url: `${import.meta.env.VITE_API_URL}/categories`,
+        method: "post",
+        data: {
+          name: formData.name,
+          description: formData.description,
+          image: formData.image,
+        },
+      });
+      handleCloseModal();
+      toast.info("Category created successfully");
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+  //   const handleDelete = async (id) => {
+  //     try {
+  //       const response = await axios({
+  //         method: "delete",
+  //         url: `${import.meta.env.VITE_API_URL}/categories/${id}`,
+  //       });
+  //       setCategories(categories.filter((category) => category.id !== id));
+  //     } catch (error) {
+  //       console.error("Error deleting category:", error);
+  //     }
+  //   };
 
   return (
     <>
       <Container>
+        <ToastContainer />
         <Typography variant="h4" gutterBottom>
           Categories
         </Typography>
@@ -126,7 +141,7 @@ function CategoriesView() {
           </Table>
         </TableContainer>
       </Container>
-     
+
       <Modal
         open={openModal}
         onClose={handleCloseModal}
@@ -135,7 +150,7 @@ function CategoriesView() {
       >
         <Box
           component="form"
-          onSubmit={handleSubmit}
+          onSubmit={handleNewCategory}
           sx={{
             position: "absolute",
             top: "50%",

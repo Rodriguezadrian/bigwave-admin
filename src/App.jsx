@@ -10,10 +10,12 @@ import CategoriesView from "./components/CategoriesView";
 import ProductsView from "./components/ProductsView";
 import CategoriesEdit from "./pages/CategoriesEdit";
 import ProductsEdit from "./pages/ProductsEdit";
+import Login from "./pages/Login";
 
 function App() {
   const router = createBrowserRouter([
     { path: "/", element: <Home /> },
+    { path: "/login", element: <Login /> },
 
     { path: "/profile", element: <Profile /> },
     { path: "/create-user", element: <NewUser /> },

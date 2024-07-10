@@ -7,9 +7,12 @@ const userSlice = createSlice({
     login(state, action) {
       return (state = action.payload);
     },
+    logout(state, action) {
+      return (state = {});
+    },
   },
 });
 
 const { actions, reducer } = userSlice;
-export const { login } = actions;
+export const { login, logout } = actions;
 export default reducer;
