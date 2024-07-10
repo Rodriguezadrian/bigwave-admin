@@ -86,12 +86,10 @@ function getComparator(order, orderBy) {
 }
 
 export default function OrderTable() {
-  const [order, setOrder] = React.useState("desc");
   const [selected, setSelected] = React.useState([]);
   const [open, setOpen] = React.useState(false);
   const user = useSelector((state) => state.user);
-
-  const [orders, setOrders] = useState();
+  const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     const getOrders = async () => {
@@ -290,7 +288,7 @@ export default function OrderTable() {
                     underline="none"
                     color="primary"
                     component="button"
-                    onClick={() => setOrder(order === "asc" ? "desc" : "asc")}
+                    onClick={() => setOrders(orders === "asc" ? "desc" : "asc")}
                     endDecorator={<ArrowDropDownIcon />}
                     sx={[
                       {
@@ -298,12 +296,12 @@ export default function OrderTable() {
                         "& svg": {
                           transition: "0.2s",
                           transform:
-                            order === "desc"
+                            orders === "desc"
                               ? "rotate(0deg)"
                               : "rotate(180deg)",
                         },
                       },
-                      order === "desc"
+                      orders === "desc"
                         ? { "& svg": { transform: "rotate(0deg)" } }
                         : { "& svg": { transform: "rotate(180deg)" } },
                     ]}
@@ -320,89 +318,97 @@ export default function OrderTable() {
             </thead>
             {/* ***********************aca se renderiza la tabla *********************************** */}
             <tbody>
-              {orders.map((order) => {
-                const isSelected = selected.indexOf(order.id) !== -1;
-                return (
-                  <tr key={order.id} aria-checked={isSelected} role="checkbox">
-                    <td style={{ textAlign: "center" }}>
-                      <Checkbox
-                        size="sm"
-                        checked={isSelected}
-                        onChange={(event) => {
-                          setSelected((prevSelected) =>
-                            event.target.checked
-                              ? [...prevSelected, order.id]
-                              : prevSelected.filter((id) => id !== order.id)
-                          );
-                        }}
-                        color={isSelected ? "primary" : undefined}
-                        slotProps={{
-                          checkbox: { sx: { verticalAlign: "text-bottom" } },
-                        }}
-                      />
-                    </td>
-                    <td>
-                      <Link
-                        component="button"
-                        onClick={() =>
-                          console.log(`Navigating to invoice ${order.id}`)
-                        }
-                      >
-                        {order.id}
-                      </Link>
-                    </td>
-                    <td>{order.updatedAt.slice(0, 10)}</td>
-                    <td>{order.address ? order.address : "Undefined"}</td>
-                    <td>
-                      <Chip
-                        variant="soft"
-                        size="sm"
-                        color={
-                          order.status === "Paid"
-                            ? "green"
-                            : order.status === "Pending"
-                            ? "warning"
-                            : order.status === "Cancelled"
-                            ? "danger"
-                            : order.status === "shipped"
-                            ? "info"
-                            : "neutral"
-                        }
-                        startDecorator={
-                          order.status === "Paid" ? (
-                            <CheckRoundedIcon />
-                          ) : order.status === "Cancelled" ? (
-                            <BlockIcon />
-                          ) : (
-                            <AutorenewRoundedIcon />
-                          )
-                        }
-                      >
-                        {order.status}
-                      </Chip>
-                    </td>
-                    <td>
-                      <Box sx={{ display: "flex", alignItems: "center" }}>
-                        <Avatar size="sm" src={order.avatar} sx={{ mr: 2 }} />
-                        <Box>
-                          <Typography fontWeight="lg" level="body2">
-                            {order.name ? order.name : "Undefined"}
-                          </Typography>
-                          <Typography
-                            level="body2"
-                            sx={{ color: "text.secondary" }}
-                          >
-                            {order.email ? order.email : "default@gmail.com"}
-                          </Typography>
+              {orders &&
+                orders.map((order) => {
+                  {
+                    console.log(order);
+                  }
+                  const isSelected = selected.indexOf(order.id) !== -1;
+                  return (
+                    <tr
+                      key={order.id}
+                      aria-checked={isSelected}
+                      role="checkbox"
+                    >
+                      <td style={{ textAlign: "center" }}>
+                        <Checkbox
+                          size="sm"
+                          checked={isSelected}
+                          onChange={(event) => {
+                            setSelected((prevSelected) =>
+                              event.target.checked
+                                ? [...prevSelected, order.id]
+                                : prevSelected.filter((id) => id !== order.id)
+                            );
+                          }}
+                          color={isSelected ? "primary" : undefined}
+                          slotProps={{
+                            checkbox: { sx: { verticalAlign: "text-bottom" } },
+                          }}
+                        />
+                      </td>
+                      <td>
+                        <Link
+                          component="button"
+                          onClick={() =>
+                            console.log(`Navigating to invoice ${order.id}`)
+                          }
+                        >
+                          {order.id}
+                        </Link>
+                      </td>
+                      <td>{order.updatedAt.slice(0, 10)}</td>
+                      <td>{order.address ? order.address : "Undefined"}</td>
+                      <td>
+                        <Chip
+                          variant="soft"
+                          size="sm"
+                          color={
+                            order.status === "Paid"
+                              ? "green"
+                              : order.status === "Pending"
+                              ? "warning"
+                              : order.status === "Cancelled"
+                              ? "danger"
+                              : order.status === "shipped"
+                              ? "info"
+                              : "neutral"
+                          }
+                          startDecorator={
+                            order.status === "Paid" ? (
+                              <CheckRoundedIcon />
+                            ) : order.status === "Cancelled" ? (
+                              <BlockIcon />
+                            ) : (
+                              <AutorenewRoundedIcon />
+                            )
+                          }
+                        >
+                          {order.status}
+                        </Chip>
+                      </td>
+                      <td>
+                        <Box sx={{ display: "flex", alignItems: "center" }}>
+                          <Avatar size="sm" src={order.avatar} sx={{ mr: 2 }} />
+                          <Box>
+                            <Typography fontWeight="lg" level="body2">
+                              {order.User.firstname ? order.User.firstname : "Undefined"}
+                            </Typography>
+                            <Typography
+                              level="body2"
+                              sx={{ color: "text.secondary" }}
+                            >
+                              {order.User.email ? order.User.email : "default@gmail.com"}
+                            </Typography>
+                          </Box>
                         </Box>
-                      </Box>
-                    </td>
-                    <td>
-                      <RowMenu order={order} />
-                    </td>
-                  </tr>
-                );
-              })}
+                      </td>
+                      <td>
+                        <RowMenu order={order} />
+                      </td>
+                    </tr>
+                  );
+                })}
             </tbody>
           </Table>
         </Sheet>
