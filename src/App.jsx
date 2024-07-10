@@ -11,25 +11,40 @@ import ProductsView from "./components/ProductsView";
 import CategoriesEdit from "./pages/CategoriesEdit";
 import ProductsEdit from "./pages/ProductsEdit";
 import Login from "./pages/Login";
+import { useSelector } from "react-redux";
+import { Navigate, Outlet } from "react-router-dom";
+import { createRoutesFromElements, Route } from "react-router-dom";
 
 function App() {
-  const router = createBrowserRouter([
-    { path: "/", element: <Home /> },
-    { path: "/login", element: <Login /> },
+  const user = useSelector((state) => state.user);
+  console.log(user.token);
+  const ProtectedRoute = ({ children }) => {
+    if (!user.token) {
+      return <Navigate to="/login" />;
+    }
+    return children ? children : <Outlet />;
+  };
 
-    { path: "/profile", element: <Profile /> },
-    { path: "/create-user", element: <NewUser /> },
-    { path: "/dashboard", element: <Dashboard /> },
-    { path: "/update-user", element: <UpdateUser /> },
-    { path: "/orders/details/:id", element: <OrderView /> },
-    { path: "/edit", element: <ProductsView /> },
-    { path: "/categories/edit/:id", element: <CategoriesEdit /> },
-    { path: "/products/edit/:id", element: <ProductsEdit /> },
-    {
-      path: "*",
-      element: <ErrorPage />,
-    },
-  ]);
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <>
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<ProtectedRoute />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/create-user" element={<NewUser />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/update-user" element={<UpdateUser />} />
+          <Route path="/orders/details/:id" element={<OrderView />} />
+          <Route path="/edit" element={<ProductsView />} />
+          <Route path="/categories/edit/:id" element={<CategoriesEdit />} />
+          <Route path="/products/edit/:id" element={<ProductsEdit />} />
+        </Route>
+
+        <Route path="*" element={<ErrorPage />} />
+      </>
+    )
+  );
   return <RouterProvider router={router} />;
 }
 export default App;
