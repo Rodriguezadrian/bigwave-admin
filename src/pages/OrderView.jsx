@@ -19,25 +19,13 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { Formik, Form, Field } from "formik";
+import * as Yup from "yup";
 
 function OrderView() {
   const [orderDetails, setOrderDetails] = useState();
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
-
-  const [formData, setFormData] = useState({
-    status: "",
-    address: "",
-    products: [],
-    totalAmount: "",
-  });
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
 
   const params = useParams();
 
@@ -53,12 +41,6 @@ function OrderView() {
           },
         });
         setOrderDetails(response.data);
-        setFormData({
-          status: response.data.status,
-          address: response.data.address,
-          products: JSON.stringify(response.data.products),
-          totalAmount: response.data.totalAmount,
-        });
       } catch (error) {
         console.error("Error:", error);
       }
@@ -66,13 +48,18 @@ function OrderView() {
     getOrderDetails();
   }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const validationSchema = Yup.object().shape({
+    status: Yup.string().required("Status is required"),
+    address: Yup.string().required("Address is required"),
+    totalAmount: Yup.number().required("Total Amount is required").positive(),
+  });
+
+  const handleSubmit = async (values) => {
     const data = {
-      status: formData.status,
-      address: formData.address,
-      totalAmount: formData.totalAmount,
-      products: formData.products,
+      status: values.status,
+      address: values.address,
+      totalAmount: values.totalAmount,
+      products: values.products,
     };
     try {
       const response = await axios({
@@ -84,11 +71,12 @@ function OrderView() {
         data: data,
       });
       console.log("order updated:", response.data);
-      navigate("/orders");
+      navigate("/");
     } catch (error) {
       console.error("Error updating the order:", error);
     }
   };
+
   return (
     orderDetails && (
       <>
@@ -162,69 +150,75 @@ function OrderView() {
                 <Typography variant="h4" component="h1" gutterBottom>
                   Order details
                 </Typography>
-                <Box
-                  component="form"
-                  sx={{
-                    "& .MuiTextField-root": { marginBottom: 2 },
-                    display: "flex",
-                    flexDirection: "column",
+                <Formik
+                  initialValues={{
+                    status: orderDetails.status,
+                    address: orderDetails.address,
+                    products: orderDetails.products,
+                    totalAmount: orderDetails.totalAmount,
                   }}
-                  noValidate
-                  autoComplete="off"
+                  validationSchema={validationSchema}
                   onSubmit={handleSubmit}
                 >
-                  <TextField
-                    required
-                    id="status"
-                    name="status"
-                    label="Status"
-                    value={formData.status}
-                    onChange={handleChange}
-                    fullWidth
-                    margin="normal"
-                  />
-                  <TextField
-                    required
-                    id="address"
-                    name="address"
-                    label="Address"
-                    value={formData.address}
-                    onChange={handleChange}
-                    fullWidth
-                    margin="normal"
-                  />
-                  <Typography variant="h6" gutterBottom>
-                    Products
-                  </Typography>
-                  <List>
-                    {orderDetails.products.map((product, index) => (
-                      <ListItem key={index}>
-                        <ListItemText
-                          primary={product.name}
-                          secondary={`Quantity: ${product.quantity}, Price: ${product.price}`}
-                        />
-                      </ListItem>
-                    ))}
-                  </List>
-                  <TextField
-                    required
-                    id="totalAmount"
-                    name="totalAmount"
-                    label="Total Amount"
-                    value={formData.totalAmount}
-                    onChange={handleChange}
-                    fullWidth
-                    margin="normal"
-                  />
-                  <Button
-                    sx={{ backgroundColor: "blue" }}
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                  >
-                    Update Order
-                  </Button>
-                </Box>
+                  {({ errors, touched }) => (
+                    <Form>
+                      <Field
+                        as={TextField}
+                        required
+                        id="status"
+                        name="status"
+                        label="Status"
+                        fullWidth
+                        margin="normal"
+                        error={touched.status && !!errors.status}
+                        helperText={touched.status && errors.status}
+                      />
+                      <Field
+                        as={TextField}
+                        required
+                        id="address"
+                        name="address"
+                        label="Address"
+                        fullWidth
+                        margin="normal"
+                        error={touched.address && !!errors.address}
+                        helperText={touched.address && errors.address}
+                      />
+                      <Typography variant="h6" gutterBottom>
+                        Products
+                      </Typography>
+                      <List>
+                        {orderDetails.products.map((product, index) => (
+                          <ListItem key={index}>
+                            <ListItemText
+                              primary={product.name}
+                              secondary={`Quantity: ${product.quantity}, Price: ${product.price}`}
+                            />
+                          </ListItem>
+                        ))}
+                      </List>
+                      <Field
+                        as={TextField}
+                        required
+                        id="totalAmount"
+                        name="totalAmount"
+                        label="Total Amount"
+                        fullWidth
+                        margin="normal"
+                        error={touched.totalAmount && !!errors.totalAmount}
+                        helperText={touched.totalAmount && errors.totalAmount}
+                      />
+                      <Button
+                        sx={{ backgroundColor: "blue" }}
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                      >
+                        Update Order
+                      </Button>
+                    </Form>
+                  )}
+                </Formik>
               </Paper>
             </Container>
           </Box>
