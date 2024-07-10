@@ -110,7 +110,7 @@ function ProductsView() {
                       variant="contained"
                       color="primary"
                       component={Link}
-                      to={`/products/edit/${product.id}`}
+                      to={`/products/edit/${product.slug}`}
                     >
                       Edit
                     </Button>

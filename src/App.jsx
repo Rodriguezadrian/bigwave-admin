@@ -8,7 +8,8 @@ import Dashboard from "./pages/Dashboard";
 import OrderView from "./pages/OrderView";
 import CategoriesView from "./components/CategoriesView";
 import ProductsView from "./components/ProductsView";
-import CategoriesEdit from "./components/CategoriesEdit";
+import CategoriesEdit from "./pages/CategoriesEdit";
+import ProductsEdit from "./pages/ProductsEdit";
 
 function App() {
   const router = createBrowserRouter([
@@ -21,6 +22,7 @@ function App() {
     { path: "/orders/details/:id", element: <OrderView /> },
     { path: "/edit", element: <ProductsView /> },
     { path: "/categories/edit/:id", element: <CategoriesEdit /> },
+    { path: "/products/edit/:id", element: <ProductsEdit /> },
     {
       path: "*",
       element: <ErrorPage />,
