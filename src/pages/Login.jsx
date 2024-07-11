@@ -150,7 +150,7 @@ const Login = () => {
               <Box mt={2}>
                 <Typography variant="subtitle1">Login as an admin</Typography>
                 <ul>
-                  <li>Email: pepito@gmail.com</li>
+                  <li>Email: menganito@gmail.com</li>
                   <li>Password: 1234</li>
                 </ul>
               </Box>
