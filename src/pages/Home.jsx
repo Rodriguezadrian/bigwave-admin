@@ -12,10 +12,10 @@ import Sidebar from "../components/Sidebar";
 import OrderTable from "../components/OrderTable";
 import OrderList from "../components/OrderList";
 import Header from "../components/Header";
+import ChartProductsSold from "../components/ChartProductsSold";
+import BarChartUsers from "../components/BarChartUsers";
 
 function Home() {
-
-  
   return (
     <div>
       <CssBaseline />
@@ -94,6 +94,14 @@ function Home() {
               Download PDF
             </Button>
           </Box>
+          <div className="chart-father">
+            <div className="chart-container">
+              <ChartProductsSold />
+            </div>
+            <div className="chart-container">
+              <BarChartUsers />
+            </div>
+          </div>
           <OrderTable />
           <OrderList />
         </Box>

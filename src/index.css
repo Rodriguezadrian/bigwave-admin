@@ -12,3 +12,11 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.chart-father {
+  display: flex;
+  justify-content: space-between;
+}
+
+.chart-container {
+  margin: 10px;
+}
