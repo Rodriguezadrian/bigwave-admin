@@ -15,6 +15,7 @@ import { useSelector } from "react-redux";
 import { Navigate, Outlet } from "react-router-dom";
 import { createRoutesFromElements, Route } from "react-router-dom";
 import Messages from "./pages/Messages";
+import UsersList from "./pages/UsersList";
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -37,6 +38,7 @@ function App() {
           <Route path="/update-user" element={<UpdateUser />} />
           <Route path="/orders/details/:id" element={<OrderView />} />
           <Route path="/edit" element={<ProductsView />} />
+          <Route path="/users" element={<UsersList />} />
           <Route path="/categories/edit/:id" element={<CategoriesEdit />} />
           <Route path="/products/edit/:id" element={<ProductsEdit />} />
           <Route path="/messages" element={<Messages />} />

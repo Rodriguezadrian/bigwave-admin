@@ -15,30 +15,59 @@ import { InputLabel, Select, MenuItem, FormControl } from "@mui/material";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 import { useState } from "react";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function NewUser() {
-  const [user, setUser] = useState({
-    name: "Admin",
-    lastname: "User",
-    role: "UI Developer",
-    email: "admin@example.com",
-    password: "1234",
+  const user = useSelector((state) => state.user);
+  const [userData, setUserData] = useState({
+    firstname: "",
+    lastname: "",
+    role: "",
+    email: "",
+    password: "",
   });
+  const navigate = useNavigate();
+  const adminsPost = `${import.meta.env.VITE_API_URL}/admins`;
+  const userPost = `${import.meta.env.VITE_API_URL}/users`;
 
-  const handleSubmit = (e) => {
+  const handleAddNewUser = async (e) => {
     e.preventDefault();
-    // Aquí se puede agregar la lógica para enviar los datos del formulario a la API
-    console.log(formData);
+    try {
+      {
+        userData.role === "Admin" ? adminsPost : userPost;
+      }
+      const response = await axios({
+        url: `${import.meta.env.VITE_API_URL}/${axiosUrl}`,
+        method: "post",
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+        data: {
+          email: userData.email,
+          password: userData.password,
+          firstname: userData.firstname,
+          lastname: userData.lastname,
+        },
+      });
+      console.log("User created:", response.data);
+      toast.info("User created successfully");
+      navigate("/users");
+    } catch (error) {
+      console.log(error);
+      toast.error("Failed to create user");
+    }
   };
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUser((prevUser) => ({
-      ...prevUser,
-      [name]: value,
-    }));
+    setUserData({
+      ...userData,
+      [e.target.name]: e.target.value,
+    });
   };
-
+  console.log(userData);
   return (
     <>
       <CssBaseline />
@@ -125,14 +154,14 @@ function NewUser() {
                 }}
                 noValidate
                 autoComplete="off"
-                onSubmit={handleSubmit}
+                onSubmit={handleAddNewUser}
               >
                 <TextField
                   required
                   id="name"
                   name="name"
                   label="Name"
-                  value={user.name}
+                  value={userData.name}
                   onChange={handleChange}
                 />
                 <TextField
@@ -140,7 +169,7 @@ function NewUser() {
                   id="lastname"
                   name="lastname"
                   label="Lastname"
-                  value={user.lastname}
+                  value={userData.lastname}
                   onChange={handleChange}
                 />
                 <FormControl fullWidth margin="normal" variant="outlined">
@@ -148,7 +177,7 @@ function NewUser() {
                   <Select
                     sx={{ marginBottom: 2 }}
                     name="role"
-                    value={user.role}
+                    value={userData.role}
                     label="Role"
                     onChange={handleChange}
                   >
@@ -162,7 +191,7 @@ function NewUser() {
                   name="email"
                   label="Email"
                   type="email"
-                  value={user.email}
+                  value={userData.email}
                   onChange={handleChange}
                 />
                 <TextField
@@ -171,7 +200,7 @@ function NewUser() {
                   name="password"
                   label="Password"
                   type="password"
-                  value={user.password}
+                  value={userData.password}
                   onChange={handleChange}
                 />
                 <Button

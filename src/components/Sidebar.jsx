@@ -235,7 +235,7 @@ export default function Sidebar() {
                   <ListItemButton onClick={() => setOpen(!open)}>
                     <GroupRoundedIcon />
                     <ListItemContent>
-                      <Typography level="title-sm">Users</Typography>
+                      <Typography component={Link} href="/users" level="title-sm">Users</Typography>
                     </ListItemContent>
                     <KeyboardArrowDownIcon
                       sx={[

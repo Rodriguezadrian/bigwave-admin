@@ -26,7 +26,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios({
-        url: `${import.meta.env.VITE_API_URL}/tokens/user`,
+        url: `${import.meta.env.VITE_API_URL}/tokens/admin`,
         method: "post",
         data: { email, password },
       });
