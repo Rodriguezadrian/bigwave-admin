@@ -11,16 +11,18 @@ import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
+import { InputLabel, Select, MenuItem, FormControl } from "@mui/material";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 import { useState } from "react";
 
 function NewUser() {
-  const [formData, setFormData] = useState({
-    name: "",
-    lastname: "",
-    email: "",
-    password: "",
+  const [user, setUser] = useState({
+    name: "Admin",
+    lastname: "User",
+    role: "UI Developer",
+    email: "admin@example.com",
+    password: "1234",
   });
 
   const handleSubmit = (e) => {
@@ -31,8 +33,12 @@ function NewUser() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setUser((prevUser) => ({
+      ...prevUser,
+      [name]: value,
+    }));
   };
+
   return (
     <>
       <CssBaseline />
@@ -75,7 +81,7 @@ function NewUser() {
                 href="/dashboard"
                 sx={{ fontSize: 12, fontWeight: 500 }}
               >
-                Dashboard
+                Users
               </Link>
               <Typography
                 color="primary"
@@ -102,8 +108,13 @@ function NewUser() {
           </Box>
           <Container maxWidth="sm">
             <Paper elevation={3} sx={{ padding: 2, marginTop: 4 }}>
-              <Typography variant="h4" component="h1" gutterBottom>
-                Create new User
+              <Typography
+                sx={{ marginBottom: 4 }}
+                variant="h4"
+                component="h1"
+                gutterBottom
+              >
+                Information
               </Typography>
               <Box
                 component="form"
@@ -121,7 +132,7 @@ function NewUser() {
                   id="name"
                   name="name"
                   label="Name"
-                  value={formData.name}
+                  value={user.name}
                   onChange={handleChange}
                 />
                 <TextField
@@ -129,16 +140,29 @@ function NewUser() {
                   id="lastname"
                   name="lastname"
                   label="Lastname"
-                  value={formData.lastname}
+                  value={user.lastname}
                   onChange={handleChange}
                 />
+                <FormControl fullWidth margin="normal" variant="outlined">
+                  <InputLabel>Role</InputLabel>
+                  <Select
+                    sx={{ marginBottom: 2 }}
+                    name="role"
+                    value={user.role}
+                    label="Role"
+                    onChange={handleChange}
+                  >
+                    <MenuItem value="Customer">Customer</MenuItem>
+                    <MenuItem value="Admin">Admin</MenuItem>
+                  </Select>
+                </FormControl>
                 <TextField
                   required
                   id="email"
                   name="email"
                   label="Email"
                   type="email"
-                  value={formData.email}
+                  value={user.email}
                   onChange={handleChange}
                 />
                 <TextField
@@ -147,11 +171,16 @@ function NewUser() {
                   name="password"
                   label="Password"
                   type="password"
-                  value={formData.password}
+                  value={user.password}
                   onChange={handleChange}
                 />
-                <Button type="submit" variant="contained" color="primary">
-                  Crear Usuario
+                <Button
+                  sx={{ backgroundColor: "blueviolet" }}
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                >
+                  Create user
                 </Button>
               </Box>
             </Paper>
