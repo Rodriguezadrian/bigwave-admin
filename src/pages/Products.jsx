@@ -17,7 +17,6 @@ import React, { useEffect, useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
-import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 import { Link } from "react-router-dom";
@@ -25,7 +24,8 @@ import { ToastContainer, toast } from "react-toastify";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import "react-toastify/dist/ReactToastify.css";
-import { Breadcrumbs, CssBaseline } from "@mui/joy";
+import CloseIcon from "@mui/icons-material/Close";
+import { Breadcrumbs, CssBaseline, IconButton, Tooltip } from "@mui/joy";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
@@ -36,6 +36,7 @@ function Products() {
     name: "",
     description: "",
     image: "",
+    price: "",
   });
 
   const handleChange = (e) => {
@@ -75,6 +76,7 @@ function Products() {
           name: formData.name,
           description: formData.description,
           image: formData.image,
+          price: formData.price,
         },
       });
       handleCloseModal();
@@ -87,6 +89,7 @@ function Products() {
   return (
     <>
       <CssBaseline />
+      <ToastContainer />
       <Box sx={{ display: "flex", minHeight: "100dvh" }}>
         <Header />
         <Sidebar />
@@ -139,9 +142,8 @@ function Products() {
             }}
           ></Box>
           <Container>
-            <ToastContainer />
             <Typography variant="h4" gutterBottom>
-            Products
+              Products
             </Typography>
             <Box display="flex" justifyContent="flex-end" mb={2}>
               <Button
@@ -175,7 +177,7 @@ function Products() {
                       <TableCell
                         sx={{ display: "flex", justifyContent: "space-evenly" }}
                       >
-                        <Link to={`/categories/edit/${product.slug}`}>
+                        <Link to={`/products/edit/${product.slug}`}>
                           <EditIcon />
                         </Link>
                         <Link onClick={() => handleDelete(product.id)}>
@@ -209,9 +211,21 @@ function Products() {
                 borderRadius: 1,
               }}
             >
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                Add New Category
-              </Typography>
+              <Box
+                display={"flex"}
+                justifyContent={"space-between"}
+                alignItems={"center"}
+              >
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  Add New Product
+                </Typography>
+                <Tooltip title="Close">
+                  <IconButton>
+                    <CloseIcon color="danger" onClick={handleCloseModal} />
+                  </IconButton>
+                </Tooltip>
+              </Box>
+
               <TextField
                 id="name"
                 name="name"
@@ -237,6 +251,18 @@ function Products() {
                 sx={{ marginBottom: 2 }}
               />
               <TextField
+                id="price"
+                name="price"
+                label="Price"
+                type="text"
+                variant="outlined"
+                value={formData.price}
+                onChange={handleChange}
+                fullWidth
+                required
+                sx={{ marginBottom: 2 }}
+              />
+              <TextField
                 id="image"
                 name="image"
                 label="Image Link"
@@ -251,7 +277,7 @@ function Products() {
               <Button
                 type="submit"
                 variant="contained"
-                color="primary"
+                color="success"
                 fullWidth
                 sx={{ mt: 2 }}
               >

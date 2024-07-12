@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
+import CloseIcon from "@mui/icons-material/Close";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded";
@@ -25,7 +26,7 @@ import { ToastContainer, toast } from "react-toastify";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import "react-toastify/dist/ReactToastify.css";
-import { Breadcrumbs, CssBaseline } from "@mui/joy";
+import { Breadcrumbs, CssBaseline, IconButton, Tooltip } from "@mui/joy";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
@@ -86,6 +87,7 @@ function Categories() {
   return (
     <>
       <CssBaseline />
+      <ToastContainer />
       <Box sx={{ display: "flex", minHeight: "100dvh" }}>
         <Header />
         <Sidebar />
@@ -138,7 +140,6 @@ function Categories() {
             }}
           ></Box>
           <Container>
-            <ToastContainer />
             <Typography variant="h4" gutterBottom>
               Categories
             </Typography>
@@ -208,9 +209,20 @@ function Categories() {
                 borderRadius: 1,
               }}
             >
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                Add New Category
-              </Typography>
+              <Box
+                display={"flex"}
+                justifyContent={"space-between"}
+                alignItems={"center"}
+              >
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  Add New Category
+                </Typography>
+                <Tooltip title="Close">
+                  <IconButton>
+                    <CloseIcon color="danger" onClick={handleCloseModal} />
+                  </IconButton>
+                </Tooltip>
+              </Box>
               <TextField
                 id="name"
                 name="name"
