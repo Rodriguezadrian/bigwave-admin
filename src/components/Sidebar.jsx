@@ -322,6 +322,14 @@ export default function Sidebar() {
                 <List sx={{ gap: 0.5 }}>
                   <Link
                     style={{ color: "black", textDecoration: "none" }}
+                    to={"/users"}
+                  >
+                    <ListItem sx={{ mt: 0.5 }}>
+                      <ListItemButton role="menuitem">All users</ListItemButton>
+                    </ListItem>
+                  </Link>
+                  <Link
+                    style={{ color: "black", textDecoration: "none" }}
                     to={"/profile"}
                   >
                     <ListItem sx={{ mt: 0.5 }}>
