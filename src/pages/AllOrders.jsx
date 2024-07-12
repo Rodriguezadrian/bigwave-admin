@@ -1,21 +1,23 @@
-import * as React from "react";
-import CssBaseline from "@mui/joy/CssBaseline";
-import Box from "@mui/joy/Box";
-import Button from "@mui/joy/Button";
-import Breadcrumbs from "@mui/joy/Breadcrumbs";
-import Typography from "@mui/joy/Typography";
-import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
-import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
-import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded";
-import Sidebar from "../components/Sidebar";
-import OrderTable from "../components/OrderTable";
-import OrderList from "../components/OrderList";
+import {
+  Box,
+  Breadcrumbs,
+  Container,
+  CssBaseline,
+  Grid,
+  Typography,
+  Button,
+} from "@mui/joy";
+import React from "react";
 import Header from "../components/Header";
-import ChartProductsSold from "../components/ChartProductsSold";
-import BarChartUsers from "../components/BarChartUsers";
+import Sidebar from "../components/Sidebar";
+import Paper from "@mui/material/Paper";
+import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
+import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import { Link } from "react-router-dom";
+import OrderList from "../components/OrderList";
+import OrderTable from "../components/OrderTable";
 
-function Dashboard() {
+function AllOrders() {
   return (
     <>
       <CssBaseline />
@@ -55,7 +57,7 @@ function Dashboard() {
                 color="primary"
                 sx={{ fontWeight: 500, fontSize: 12 }}
               >
-                Dashboard
+                Orders
               </Typography>
             </Breadcrumbs>
           </Box>
@@ -70,14 +72,6 @@ function Dashboard() {
               justifyContent: "space-between",
             }}
           ></Box>
-          <div className="chart-father">
-            <div className="chart-container">
-              <ChartProductsSold />
-            </div>
-            <div className="chart-container">
-              <BarChartUsers />
-            </div>
-          </div>
           <OrderTable />
           <OrderList />
         </Box>
@@ -86,4 +80,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default AllOrders;

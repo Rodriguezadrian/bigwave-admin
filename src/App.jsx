@@ -16,6 +16,7 @@ import { createRoutesFromElements, Route } from "react-router-dom";
 import Messages from "./pages/Messages";
 import UsersList from "./pages/UsersList";
 import Products from "./pages/Products";
+import AllOrders from "./pages/AllOrders";
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -33,11 +34,12 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<ProtectedRoute />}>
           <Route index element={<Home />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/users" element={<UsersList />} />
           <Route path="/create-user" element={<NewUser />} />
           <Route path="/update-user" element={<UpdateUser />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/orders" element={<AllOrders />} />
           <Route path="/orders/details/:id" element={<OrderView />} />
           <Route path="/products" element={<Products />} />
           <Route path="/products/edit/:id" element={<ProductsEdit />} />

@@ -180,11 +180,13 @@ export default function Sidebar() {
               </ListItem>
             </Link>
 
-            <Link to={"/"} style={{ color: "black", textDecoration: "none" }}>
+            <Link
+              to={"/orders"}
+              style={{ color: "black", textDecoration: "none" }}
+            >
               <ListItem>
                 <ListItemButton>
                   <ShoppingCartRoundedIcon />
-
                   <ListItemContent>
                     <Typography level="title-sm">Orders</Typography>
                   </ListItemContent>
