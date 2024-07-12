@@ -4,7 +4,6 @@ import {
   Button,
   Container,
   CssBaseline,
-  Link,
   Typography,
 } from "@mui/joy";
 import Paper from "@mui/material/Paper";
@@ -40,7 +39,7 @@ function NewUser() {
         userData.role === "Admin" ? adminsPost : userPost;
       }
       const response = await axios({
-        url: `${import.meta.env.VITE_API_URL}/${axiosUrl}`,
+        url: `${import.meta.env.VITE_API_URL}/users`,
         method: "post",
         headers: {
           Authorization: `Bearer ${user.token}`,
@@ -95,23 +94,10 @@ function NewUser() {
         >
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <Breadcrumbs size="sm" aria-label="breadcrumbs" sx={{ pl: 0 }}>
-              <Link
-                underline="none"
-                color="neutral"
-                href="#some-link"
-                aria-label="Home"
-                separator={<ChevronRightRoundedIcon fontSize="sm" />}
-              >
+              <Link separator={<ChevronRightRoundedIcon fontSize="sm" />}>
                 <HomeRoundedIcon />
               </Link>
-              <Link
-                underline="hover"
-                color="neutral"
-                href="/dashboard"
-                sx={{ fontSize: 12, fontWeight: 500 }}
-              >
-                Users
-              </Link>
+              <Link sx={{ fontSize: 12, fontWeight: 500 }}>Users</Link>
               <Typography
                 color="primary"
                 sx={{ fontWeight: 500, fontSize: 12 }}

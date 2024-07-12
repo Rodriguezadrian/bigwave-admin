@@ -4,7 +4,6 @@ import {
   Button,
   Container,
   CssBaseline,
-  Link,
   Typography,
 } from "@mui/joy";
 import Paper from "@mui/material/Paper";
@@ -14,17 +13,22 @@ import Header from "../components/Header";
 import { InputLabel, Select, MenuItem, FormControl } from "@mui/material";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { Link, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function NewUser() {
-  const [user, setUser] = useState({
+  const user = useSelector((state) => state.user);
+  const [usersData, setUsersData] = useState();
+  const [userInfo, setUserInfo] = useState({
     name: "Admin",
     lastname: "User",
     role: "UI Developer",
     email: "admin@example.com",
     password: "1234",
   });
-
+  const params = useParams();
   const handleSubmit = (e) => {
     e.preventDefault();
     // Aquí se puede agregar la lógica para enviar los datos del formulario a la API
@@ -38,6 +42,31 @@ function NewUser() {
       [name]: value,
     }));
   };
+
+  useEffect(() => {
+    const getUserDetails = async () => {
+      try {
+        const response = await axios({
+          url: `${import.meta.env.VITE_API_URL}/users`,
+          method: "get",
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+            "Content-Type": "application/json",
+          },
+        });
+        setUsersData(response.data);
+        setUserInfo({
+          name: response.data.name,
+          description: response.data.description,
+          price: response.data.price,
+          image: response.data.image,
+        });
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+    getUserDetails();
+  }, []);
 
   return (
     <>
@@ -66,21 +95,10 @@ function NewUser() {
         >
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <Breadcrumbs size="sm" aria-label="breadcrumbs" sx={{ pl: 0 }}>
-              <Link
-                underline="none"
-                color="neutral"
-                href="#some-link"
-                aria-label="Home"
-                separator={<ChevronRightRoundedIcon fontSize="sm" />}
-              >
+              <Link separator={<ChevronRightRoundedIcon fontSize="sm" />}>
                 <HomeRoundedIcon />
               </Link>
-              <Link
-                underline="hover"
-                color="neutral"
-                href="/dashboard"
-                sx={{ fontSize: 12, fontWeight: 500 }}
-              >
+              <Link to={"/dashboard"} sx={{ fontSize: 12, fontWeight: 500 }}>
                 Users
               </Link>
               <Typography

@@ -14,6 +14,9 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import AddIcon from "@mui/icons-material/Add";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
@@ -95,13 +98,8 @@ function CategoriesView() {
           Categories
         </Typography>
         <Box display="flex" justifyContent="flex-end" mb={2}>
-          <Button
-            variant="contained"
-            color="primary"
-            component={Link}
-            onClick={handleOpenModal}
-          >
-            Add Category
+          <Button onClick={handleOpenModal} variant="contained" color="success">
+            <AddIcon fontSize="medium" color="white" />
           </Button>
         </Box>
         <TableContainer component={Paper}>
@@ -118,22 +116,15 @@ function CategoriesView() {
                 <TableRow key={category.id}>
                   <TableCell>{category.id}</TableCell>
                   <TableCell>{category.name}</TableCell>
-                  <TableCell>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      component={Link}
-                      to={`/categories/edit/${category.slug}`}
-                    >
-                      Edit
-                    </Button>
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      onClick={() => handleDelete(category.id)}
-                    >
-                      Delete
-                    </Button>
+                  <TableCell
+                    sx={{ display: "flex", justifyContent: "space-around" }}
+                  >
+                    <Link to={`/categories/edit/${category.slug}`}>
+                      <EditIcon />
+                    </Link>
+                    <Link onClick={() => handleDelete(category.id)}>
+                      <DeleteIcon />
+                    </Link>
                   </TableCell>
                 </TableRow>
               ))}

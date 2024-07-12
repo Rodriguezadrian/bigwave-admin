@@ -3,7 +3,6 @@ import CssBaseline from "@mui/joy/CssBaseline";
 import Box from "@mui/joy/Box";
 import Button from "@mui/joy/Button";
 import Breadcrumbs from "@mui/joy/Breadcrumbs";
-import Link from "@mui/joy/Link";
 import Typography from "@mui/joy/Typography";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
@@ -14,6 +13,7 @@ import OrderList from "../components/OrderList";
 import Header from "../components/Header";
 import ChartProductsSold from "../components/ChartProductsSold";
 import BarChartUsers from "../components/BarChartUsers";
+import { Link } from "react-router-dom";
 
 function Home() {
   return (
@@ -48,22 +48,10 @@ function Home() {
               separator={<ChevronRightRoundedIcon fontSize="sm" />}
               sx={{ pl: 0 }}
             >
-              <Link
-                underline="none"
-                color="neutral"
-                href="#some-link"
-                aria-label="Home"
-              >
+              <Link to={"/"}>
                 <HomeRoundedIcon />
               </Link>
-              <Link
-                underline="hover"
-                color="neutral"
-                href="#some-link"
-                sx={{ fontSize: 12, fontWeight: 500 }}
-              >
-                Dashboard
-              </Link>
+              <Link sx={{ fontSize: 12, fontWeight: 500 }}>Dashboard</Link>
               <Typography
                 color="primary"
                 sx={{ fontWeight: 500, fontSize: 12 }}

@@ -3,7 +3,6 @@ import {
   Breadcrumbs,
   Button,
   Container,
-  Link,
   List,
   ListItem,
   ListItemText,
@@ -19,7 +18,7 @@ import { CssBaseline } from "@mui/joy";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -61,7 +60,7 @@ function CategoriesEdit() {
           name: response.data.name,
           image: response.data.image,
           description: response.data.description,
-          products: JSON.stringify(response.data.Products),
+          products: response.data.Products,
         });
       } catch (error) {
         console.error("Error:", error);
@@ -133,20 +132,12 @@ function CategoriesEdit() {
             <Box sx={{ display: "flex", alignItems: "center" }}>
               <Breadcrumbs size="sm" aria-label="breadcrumbs" sx={{ pl: 0 }}>
                 <Link
-                  underline="none"
-                  color="neutral"
-                  href="/"
-                  aria-label="Home"
+                  to={"/"}
                   separator={<ChevronRightRoundedIcon fontSize="sm" />}
                 >
                   <HomeRoundedIcon />
                 </Link>
-                <Link
-                  underline="hover"
-                  color="neutral"
-                  href="/dashboard"
-                  sx={{ fontSize: 12, fontWeight: 500 }}
-                >
+                <Link to={"/dashboard"} sx={{ fontSize: 12, fontWeight: 500 }}>
                   Dashboard
                 </Link>
                 <Typography

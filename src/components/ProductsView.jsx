@@ -14,6 +14,9 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
@@ -101,14 +104,12 @@ function ProductsView() {
           Products
         </Typography>
         <Box display="flex" justifyContent="flex-end" mb={2}>
-          <Button
-            variant="contained"
-            color="primary"
-            component={Link}
-            onClick={handleOpenModal}
-          >
-            Add Product
-          </Button>
+          <Link onClick={handleOpenModal}>
+            <Button variant="contained" color="success">
+              {" "}
+              <AddIcon color="white" fontSize="medium" />
+            </Button>
+          </Link>
         </Box>
         <TableContainer component={Paper}>
           <Table>
@@ -126,22 +127,12 @@ function ProductsView() {
                   <TableCell>{product.id}</TableCell>
                   <TableCell>{product.name}</TableCell>
                   <TableCell>{product.price}</TableCell>
-                  <TableCell>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      component={Link}
-                      to={`/products/edit/${product.slug}`}
-                    >
-                      Edit
-                    </Button>
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      onClick={() => handleDelete(product.id)}
-                    >
-                      Delete
-                    </Button>
+                  <TableCell
+                    sx={{ display: "flex", justifyContent: "space-around" }}
+                  >
+                    <EditIcon to={`/products/edit/${product.slug}`} />
+
+                    <DeleteIcon onClick={() => handleDelete(product.id)} />
                   </TableCell>
                 </TableRow>
               ))}

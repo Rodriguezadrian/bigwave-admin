@@ -4,7 +4,6 @@ import {
   Container,
   CssBaseline,
   Grid,
-  Link,
   Typography,
   Button,
 } from "@mui/joy";
@@ -16,6 +15,7 @@ import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import CategoriesView from "../components/CategoriesView";
 import ProductsView from "../components/ProductsView";
+import { Link } from "react-router-dom";
 
 function Dashboard() {
   return (
@@ -32,7 +32,7 @@ function Dashboard() {
             <Box width={{ xs: "100%", md: "48%" }} mb={3}>
               <Paper elevation={3}>
                 <Link
-                  to="/categories"
+                  to={"/categories"}
                   style={{ textDecoration: "none", color: "inherit" }}
                 ></Link>
                 <Box display="flex" justifyContent="center" padding={2}>
@@ -43,7 +43,7 @@ function Dashboard() {
             <Box width={{ xs: "100%", md: "48%" }} mb={3}>
               <Paper elevation={3}>
                 <Link
-                  to="/products"
+                  to={"/products"}
                   style={{ textDecoration: "none", color: "inherit" }}
                 ></Link>
                 <Box display="flex" justifyContent="center" padding={2}>

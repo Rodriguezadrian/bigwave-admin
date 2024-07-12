@@ -71,28 +71,15 @@ const AdminProfileForm = () => {
         >
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <Breadcrumbs size="sm" aria-label="breadcrumbs" sx={{ pl: 0 }}>
-              <Link
-                underline="none"
-                color="neutral"
-                href="#some-link"
-                aria-label="Home"
-                separator={<ChevronRightRoundedIcon fontSize="sm" />}
-              >
+              <Link separator={<ChevronRightRoundedIcon fontSize="sm" />}>
                 <HomeRoundedIcon />
               </Link>
-              <Link
-                underline="hover"
-                color="neutral"
-                href="/dashboard"
-                sx={{ fontSize: 12, fontWeight: 500 }}
-              >
-                Users
-              </Link>
+              <Link sx={{ fontSize: 12, fontWeight: 500 }}>Users</Link>
               <Typography
                 color="primary"
                 sx={{ fontWeight: 500, fontSize: 12 }}
               >
-               My profile
+                My profile
               </Typography>
             </Breadcrumbs>
           </Box>
@@ -106,9 +93,7 @@ const AdminProfileForm = () => {
               flexWrap: "wrap",
               justifyContent: "space-between",
             }}
-          >
-          
-          </Box>
+          ></Box>
           <Paper
             component="form"
             onSubmit={handleSubmit}

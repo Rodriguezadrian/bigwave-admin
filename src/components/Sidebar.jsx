@@ -6,7 +6,6 @@ import Card from "@mui/joy/Card";
 import Chip from "@mui/joy/Chip";
 import { IconButton } from "@mui/joy";
 import Input from "@mui/joy/Input";
-import Link from "@mui/joy/Link";
 import List from "@mui/joy/List";
 import ListItem from "@mui/joy/ListItem";
 import ListItemButton, { listItemButtonClasses } from "@mui/joy/ListItemButton";
@@ -28,8 +27,9 @@ import ColorSchemeToggle from "./ColorSchemeToggle";
 import { closeSidebar } from "../utils";
 import { LoginOutlined } from "@mui/icons-material";
 import { logout } from "../redux/userSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
+import { Link } from "react-router-dom";
 
 function Toggler({ defaultExpanded = false, renderToggle, children }) {
   const [open, setOpen] = React.useState(defaultExpanded);
@@ -55,6 +55,7 @@ function Toggler({ defaultExpanded = false, renderToggle, children }) {
 }
 
 export default function Sidebar() {
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const handleLogout = async (e) => {
@@ -153,28 +154,34 @@ export default function Sidebar() {
             }}
           >
             <ListItem>
-              <ListItemButton component={Link} href="/">
+              <ListItemButton>
                 <HomeRoundedIcon />
                 <ListItemContent>
-                  <Typography level="title-sm">Home</Typography>
+                  <Typography level="title-sm">
+                    <Link to={"/"}>Home</Link>
+                  </Typography>
                 </ListItemContent>
               </ListItemButton>
             </ListItem>
 
             <ListItem>
-              <ListItemButton component={Link} href="/dashboard">
+              <ListItemButton>
                 <DashboardRoundedIcon />
                 <ListItemContent>
-                  <Typography level="title-sm">Dashboard</Typography>
+                  <Typography level="title-sm">
+                    <Link to={"/dashboard"}>Dashboard</Link>
+                  </Typography>
                 </ListItemContent>
               </ListItemButton>
             </ListItem>
 
             <ListItem>
-              <ListItemButton component={Link} href="/">
+              <ListItemButton>
                 <ShoppingCartRoundedIcon />
                 <ListItemContent>
-                  <Typography level="title-sm">Orders</Typography>
+                  <Typography level="title-sm">
+                    <Link>Orders</Link>
+                  </Typography>
                 </ListItemContent>
               </ListItemButton>
             </ListItem>
@@ -219,10 +226,12 @@ export default function Sidebar() {
             </ListItem>
 
             <ListItem>
-              <ListItemButton role="menuitem" component={Link} href="/messages">
+              <ListItemButton role="menuitem">
                 <QuestionAnswerRoundedIcon />
                 <ListItemContent>
-                  <Typography level="title-sm">Messages</Typography>
+                  <Typography level="title-sm">
+                    <Link to={"/messages"}>Messages</Link>
+                  </Typography>
                 </ListItemContent>
                 <Chip size="sm" color="primary" variant="solid">
                   4
@@ -235,7 +244,9 @@ export default function Sidebar() {
                   <ListItemButton onClick={() => setOpen(!open)}>
                     <GroupRoundedIcon />
                     <ListItemContent>
-                      <Typography component={Link} href="/users" level="title-sm">Users</Typography>
+                      <Typography level="title-sm">
+                        <Link>Users</Link>
+                      </Typography>
                     </ListItemContent>
                     <KeyboardArrowDownIcon
                       sx={[
@@ -253,22 +264,18 @@ export default function Sidebar() {
               >
                 <List sx={{ gap: 0.5 }}>
                   <ListItem sx={{ mt: 0.5 }}>
-                    <ListItemButton
-                      role="menuitem"
-                      component={Link}
-                      href="/profile"
-                    >
-                      My profile
+                    <ListItemButton role="menuitem">
+                      <Link to={"/profile"}>My Profile</Link>
                     </ListItemButton>
                   </ListItem>
                   <ListItem>
-                    <ListItemButton component={Link} href="/create-user">
-                      Create a new user
+                    <ListItemButton>
+                      <Link to={"/create-user"}>Create a new user</Link>
                     </ListItemButton>
                   </ListItem>
                   <ListItem>
-                    <ListItemButton component={Link} href="/update-user">
-                      Update user
+                    <ListItemButton>
+                      <Link to={"/update-user"}>Update user</Link>
                     </ListItemButton>
                   </ListItem>
                 </List>
@@ -284,7 +291,7 @@ export default function Sidebar() {
             }}
           >
             <ListItem>
-              <ListItemButton component={Link} href="/support">
+              <ListItemButton>
                 <SupportRoundedIcon />
                 <ListItemContent>
                   <Typography level="title-sm">Support</Typography>
@@ -292,10 +299,12 @@ export default function Sidebar() {
               </ListItemButton>
             </ListItem>
             <ListItem>
-              <ListItemButton component={Link} href="/login">
+              <ListItemButton>
                 <LoginOutlined />
                 <ListItemContent>
-                  <Typography level="title-sm">Log In</Typography>
+                  <Typography level="title-sm">
+                    <Link to={"/login"}>Login</Link>
+                  </Typography>
                 </ListItemContent>
               </ListItemButton>
             </ListItem>
@@ -329,7 +338,6 @@ export default function Sidebar() {
             Please check our docs.
           </Typography>
           <Link
-            href="/help"
             level="body2"
             underline="none"
             startDecorator={<SupportRoundedIcon />}

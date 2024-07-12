@@ -3,7 +3,6 @@ import CssBaseline from "@mui/joy/CssBaseline";
 import Box from "@mui/joy/Box";
 import Button from "@mui/joy/Button";
 import Breadcrumbs from "@mui/joy/Breadcrumbs";
-import Link from "@mui/joy/Link";
 import Typography from "@mui/joy/Typography";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
@@ -12,6 +11,7 @@ import Sidebar from "../components/Sidebar";
 import OrderTable from "../components/OrderTable";
 import OrderList from "../components/OrderList";
 import Header from "../components/Header";
+import { Link } from "react-router-dom";
 
 function Home() {
   return (
@@ -46,7 +46,7 @@ function Home() {
               separator={<ChevronRightRoundedIcon fontSize="sm" />}
               sx={{ pl: 0 }}
             >
-              <Link underline="none" color="neutral" href="/" aria-label="Home">
+              <Link>
                 <HomeRoundedIcon />
               </Link>
               <Link color="neutral" sx={{ fontSize: 12, fontWeight: 500 }}>

@@ -3,7 +3,6 @@ import {
   Breadcrumbs,
   Button,
   Container,
-  Link,
   List,
   ListItem,
   ListItemText,
@@ -19,7 +18,7 @@ import { CssBaseline } from "@mui/joy";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -129,23 +128,10 @@ function ProductsEdit() {
           >
             <Box sx={{ display: "flex", alignItems: "center" }}>
               <Breadcrumbs size="sm" aria-label="breadcrumbs" sx={{ pl: 0 }}>
-                <Link
-                  underline="none"
-                  color="neutral"
-                  href="/"
-                  aria-label="Home"
-                  separator={<ChevronRightRoundedIcon fontSize="sm" />}
-                >
+                <Link separator={<ChevronRightRoundedIcon fontSize="sm" />}>
                   <HomeRoundedIcon />
                 </Link>
-                <Link
-                  underline="hover"
-                  color="neutral"
-                  href="/dashboard"
-                  sx={{ fontSize: 12, fontWeight: 500 }}
-                >
-                  Dashboard
-                </Link>
+                <Link sx={{ fontSize: 12, fontWeight: 500 }}>Dashboard</Link>
                 <Typography
                   color="primary"
                   sx={{ fontWeight: 500, fontSize: 12 }}
