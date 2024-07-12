@@ -158,7 +158,12 @@ export default function Sidebar() {
                 <HomeRoundedIcon />
                 <ListItemContent>
                   <Typography level="title-sm">
-                    <Link to={"/"}>Home</Link>
+                    <Link
+                      style={{ color: "black", textDecoration: "none" }}
+                      to={"/"}
+                    >
+                      Home
+                    </Link>
                   </Typography>
                 </ListItemContent>
               </ListItemButton>
@@ -169,7 +174,12 @@ export default function Sidebar() {
                 <DashboardRoundedIcon />
                 <ListItemContent>
                   <Typography level="title-sm">
-                    <Link to={"/dashboard"}>Dashboard</Link>
+                    <Link
+                      style={{ color: "black", textDecoration: "none" }}
+                      to={"/dashboard"}
+                    >
+                      Dashboard
+                    </Link>
                   </Typography>
                 </ListItemContent>
               </ListItemButton>
@@ -180,7 +190,9 @@ export default function Sidebar() {
                 <ShoppingCartRoundedIcon />
                 <ListItemContent>
                   <Typography level="title-sm">
-                    <Link>Orders</Link>
+                    <Link style={{ color: "black", textDecoration: "none" }}>
+                      Orders
+                    </Link>
                   </Typography>
                 </ListItemContent>
               </ListItemButton>
@@ -211,13 +223,23 @@ export default function Sidebar() {
                 <List sx={{ gap: 0.5 }}>
                   <ListItem sx={{ mt: 0.5 }}>
                     <ListItemButton>
-                      <Link to={"/categories"}>Categories</Link>
+                      <Link
+                        style={{ color: "black", textDecoration: "none" }}
+                        to={"/categories"}
+                      >
+                        Categories
+                      </Link>
                     </ListItemButton>
                   </ListItem>
                   <ListItem>
                     <ListItemButton>
                       {" "}
-                      <Link to={"/products"}>Products</Link>
+                      <Link
+                        style={{ color: "black", textDecoration: "none" }}
+                        to={"/products"}
+                      >
+                        Products
+                      </Link>
                     </ListItemButton>
                   </ListItem>
                 </List>
@@ -268,7 +290,12 @@ export default function Sidebar() {
                 <QuestionAnswerRoundedIcon />
                 <ListItemContent>
                   <Typography level="title-sm">
-                    <Link to={"/messages"}>Messages</Link>
+                    <Link
+                      style={{ color: "black", textDecoration: "none" }}
+                      to={"/messages"}
+                    >
+                      Messages
+                    </Link>
                   </Typography>
                 </ListItemContent>
                 <Chip size="sm" color="primary" variant="solid">
@@ -283,7 +310,11 @@ export default function Sidebar() {
                     <GroupRoundedIcon />
                     <ListItemContent>
                       <Typography level="title-sm">
-                        <Link>Users</Link>
+                        <Link
+                          style={{ color: "black", textDecoration: "none" }}
+                        >
+                          Users
+                        </Link>
                       </Typography>
                     </ListItemContent>
                     <KeyboardArrowDownIcon
@@ -303,17 +334,32 @@ export default function Sidebar() {
                 <List sx={{ gap: 0.5 }}>
                   <ListItem sx={{ mt: 0.5 }}>
                     <ListItemButton role="menuitem">
-                      <Link to={"/profile"}>My Profile</Link>
+                      <Link
+                        style={{ color: "black", textDecoration: "none" }}
+                        to={"/profile"}
+                      >
+                        My Profile
+                      </Link>
                     </ListItemButton>
                   </ListItem>
                   <ListItem>
                     <ListItemButton>
-                      <Link to={"/create-user"}>Create a new user</Link>
+                      <Link
+                        style={{ color: "black", textDecoration: "none" }}
+                        to={"/create-user"}
+                      >
+                        Create a new user
+                      </Link>
                     </ListItemButton>
                   </ListItem>
                   <ListItem>
                     <ListItemButton>
-                      <Link to={"/update-user"}>Update user</Link>
+                      <Link
+                        style={{ color: "black", textDecoration: "none" }}
+                        to={"/update-user"}
+                      >
+                        Update user
+                      </Link>
                     </ListItemButton>
                   </ListItem>
                 </List>
@@ -336,26 +382,34 @@ export default function Sidebar() {
                 </ListItemContent>
               </ListItemButton>
             </ListItem>
-            <ListItem>
-              <ListItemButton>
-                <LoginOutlined />
-                <ListItemContent>
-                  <Typography level="title-sm">
-                    <Link to={"/login"}>Login</Link>
-                  </Typography>
-                </ListItemContent>
-              </ListItemButton>
-            </ListItem>
-            <ListItem>
-              <ListItemButton>
-                <LogoutRoundedIcon />
-                <ListItemContent>
-                  <Typography onClick={handleLogout} level="title-sm">
-                    Log out
-                  </Typography>
-                </ListItemContent>
-              </ListItemButton>
-            </ListItem>
+            {user.token ? (
+              <ListItem>
+                <ListItemButton>
+                  <LogoutRoundedIcon />
+                  <ListItemContent>
+                    <Typography onClick={handleLogout} level="title-sm">
+                      Log out
+                    </Typography>
+                  </ListItemContent>
+                </ListItemButton>
+              </ListItem>
+            ) : (
+              <ListItem>
+                <ListItemButton>
+                  <LoginOutlined />
+                  <ListItemContent>
+                    <Typography level="title-sm">
+                      <Link
+                        style={{ color: "black", textDecoration: "none" }}
+                        to={"/login"}
+                      >
+                        Login
+                      </Link>
+                    </Typography>
+                  </ListItemContent>
+                </ListItemButton>
+              </ListItem>
+            )}
           </List>
         </Box>
         <Card
@@ -376,8 +430,6 @@ export default function Sidebar() {
             Please check our docs.
           </Typography>
           <Link
-            level="body2"
-            underline="none"
             startDecorator={<SupportRoundedIcon />}
             sx={{ alignItems: "flex-start" }}
           >
