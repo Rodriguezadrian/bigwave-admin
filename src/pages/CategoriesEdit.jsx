@@ -226,7 +226,7 @@ function CategoriesEdit() {
                     variant="contained"
                     color="primary"
                   >
-                    Update Order
+                    Update Category
                   </Button>
                 </Box>
               </Paper>

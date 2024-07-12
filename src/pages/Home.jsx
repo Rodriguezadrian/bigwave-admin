@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 
 function Home() {
   return (
-    <div>
+    <>
       <CssBaseline />
       <Box sx={{ display: "flex", minHeight: "100dvh" }}>
         <Header />
@@ -51,12 +51,11 @@ function Home() {
               <Link to={"/"}>
                 <HomeRoundedIcon />
               </Link>
-              <Link sx={{ fontSize: 12, fontWeight: 500 }}>Dashboard</Link>
               <Typography
                 color="primary"
                 sx={{ fontWeight: 500, fontSize: 12 }}
               >
-                Orders
+                Home
               </Typography>
             </Breadcrumbs>
           </Box>
@@ -72,7 +71,7 @@ function Home() {
             }}
           >
             <Typography level="h2" component="h1">
-              Orders
+            Home page
             </Typography>
             <Button
               color="primary"
@@ -94,7 +93,7 @@ function Home() {
           <OrderList />
         </Box>
       </Box>
-    </div>
+    </>
   );
 }
 

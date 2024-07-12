@@ -192,6 +192,44 @@ export default function Sidebar() {
                   <ListItemButton onClick={() => setOpen(!open)}>
                     <AssignmentRoundedIcon />
                     <ListItemContent>
+                      <Typography level="title-sm">Edit Store </Typography>
+                    </ListItemContent>
+                    <KeyboardArrowDownIcon
+                      sx={[
+                        open
+                          ? {
+                              transform: "rotate(180deg)",
+                            }
+                          : {
+                              transform: "none",
+                            },
+                      ]}
+                    />
+                  </ListItemButton>
+                )}
+              >
+                <List sx={{ gap: 0.5 }}>
+                  <ListItem sx={{ mt: 0.5 }}>
+                    <ListItemButton>
+                      <Link to={"/categories"}>Categories</Link>
+                    </ListItemButton>
+                  </ListItem>
+                  <ListItem>
+                    <ListItemButton>
+                      {" "}
+                      <Link to={"/products"}>Products</Link>
+                    </ListItemButton>
+                  </ListItem>
+                </List>
+              </Toggler>
+            </ListItem>
+
+            {/* <ListItem nested>
+              <Toggler
+                renderToggle={({ open, setOpen }) => (
+                  <ListItemButton onClick={() => setOpen(!open)}>
+                    <AssignmentRoundedIcon />
+                    <ListItemContent>
                       <Typography level="title-sm">Tasks</Typography>
                     </ListItemContent>
                     <KeyboardArrowDownIcon
@@ -223,7 +261,7 @@ export default function Sidebar() {
                   </ListItem>
                 </List>
               </Toggler>
-            </ListItem>
+            </ListItem> */}
 
             <ListItem>
               <ListItemButton role="menuitem">

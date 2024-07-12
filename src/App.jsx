@@ -6,11 +6,12 @@ import NewUser from "./pages/NewUser";
 import UpdateUser from "./pages/UpdateUser";
 import Dashboard from "./pages/Dashboard";
 import OrderView from "./pages/OrderView";
-import CategoriesView from "./components/CategoriesView";
+
 import ProductsView from "./components/ProductsView";
 import CategoriesEdit from "./pages/CategoriesEdit";
 import ProductsEdit from "./pages/ProductsEdit";
 import Login from "./pages/Login";
+import Categories from "./pages/Categories";
 import { useSelector } from "react-redux";
 import { Navigate, Outlet } from "react-router-dom";
 import { createRoutesFromElements, Route } from "react-router-dom";
@@ -39,6 +40,7 @@ function App() {
           <Route path="/orders/details/:id" element={<OrderView />} />
           <Route path="/edit" element={<ProductsView />} />
           <Route path="/users" element={<UsersList />} />
+          <Route path="/categories" element={<Categories />} />
           <Route path="/categories/edit/:id" element={<CategoriesEdit />} />
           <Route path="/products/edit/:id" element={<ProductsEdit />} />
           <Route path="/messages" element={<Messages />} />
