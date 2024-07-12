@@ -19,7 +19,7 @@ import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -38,6 +38,8 @@ function Products() {
     image: "",
     price: "",
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
@@ -65,11 +67,11 @@ function Products() {
   const handleOpenModal = () => setOpenModal(true);
   const handleCloseModal = () => setOpenModal(false);
 
-  const handleNewCategory = async (e) => {
+  const handleNewProduct = async (e) => {
     e.preventDefault();
     try {
       const response = await axios({
-        url: `${import.meta.env.VITE_API_URL}/categories`,
+        url: `${import.meta.env.VITE_API_URL}/products`,
         method: "post",
         headers: {
           Authorization: `Bearer ${user.token}`,
@@ -82,16 +84,33 @@ function Products() {
         },
       });
       handleCloseModal();
-      toast.info("Product created successfully");
+      toast.info(`Product created successfully`);
     } catch (error) {
       console.log(error);
     }
   };
 
+  const handleDelete = async (id) => {
+    try {
+      await axios({
+        url: `${import.meta.env.VITE_API_URL}/products/${id}`,
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+
+      setProducts(products.filter((product) => product.id !== id));
+      toast.info(`Product deleted succesfully`);
+      navigate("/products");
+    } catch (error) {
+      console.error("Error updating the product:", error);
+    }
+  };
   return (
     <>
       <CssBaseline />
-      <Box sx={{ display: "flex", minHeight: "100dvh", bgcolor:"white" }}>
+      <Box sx={{ display: "flex", minHeight: "100dvh", bgcolor: "white" }}>
         <Header />
         <Sidebar />
         <Box
@@ -111,7 +130,7 @@ function Products() {
             minWidth: 0,
             minHeightheight: "100dvh",
             gap: 1,
-            bgcolor:"white"
+            bgcolor: "white",
           }}
         >
           <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -140,7 +159,7 @@ function Products() {
               flexDirection: { xs: "column", sm: "row" },
               alignItems: { xs: "start", sm: "center" },
               flexWrap: "wrap",
-              justifyContent: "space-between",         
+              justifyContent: "space-between",
             }}
           ></Box>
           <Container>
@@ -200,7 +219,7 @@ function Products() {
           >
             <Box
               component="form"
-              onSubmit={handleNewCategory}
+              onSubmit={handleNewProduct}
               sx={{
                 position: "absolute",
                 top: "50%",

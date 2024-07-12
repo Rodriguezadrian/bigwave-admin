@@ -71,7 +71,7 @@ function ProductsEdit() {
     getProductsDetails();
   }, []);
 
-  const handleSubmit = async (e) => {
+  const handleUpdate = async (e) => {
     e.preventDefault();
     const data = {
       name: formData.name,
@@ -96,7 +96,7 @@ function ProductsEdit() {
       console.error("Error updating the product:", error);
     }
   };
-  
+
   return (
     productsDetails && (
       <>
@@ -178,7 +178,7 @@ function ProductsEdit() {
                   }}
                   noValidate
                   autoComplete="off"
-                  onSubmit={handleSubmit}
+                  onSubmit={handleUpdate}
                 >
                   <TextField
                     required
