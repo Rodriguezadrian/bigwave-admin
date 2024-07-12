@@ -218,7 +218,7 @@ function CategoriesEdit() {
                     Products
                   </Typography>
 
-                  <List>
+                  {/* <List>
                     {categoriesDetails.Products.map((product, index) => (
                       <ListItem key={index}>
                         <ListItemText
@@ -227,7 +227,7 @@ function CategoriesEdit() {
                         />
                       </ListItem>
                     ))}
-                  </List>
+                  </List> */}
 
                   <TextField
                     required

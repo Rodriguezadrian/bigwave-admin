@@ -53,7 +53,6 @@ function Products() {
         method: "get",
         headers: {
           Authorization: `Bearer ${user.token}`,
-          "Content-Type": "application/json",
         },
       });
       setProducts(response.data);
@@ -72,6 +71,9 @@ function Products() {
       const response = await axios({
         url: `${import.meta.env.VITE_API_URL}/categories`,
         method: "post",
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
         data: {
           name: formData.name,
           description: formData.description,
@@ -80,7 +82,7 @@ function Products() {
         },
       });
       handleCloseModal();
-      toast.info("Category created successfully");
+      toast.info("Product created successfully");
     } catch (error) {
       console.log(error);
     }
@@ -89,8 +91,7 @@ function Products() {
   return (
     <>
       <CssBaseline />
-      <ToastContainer />
-      <Box sx={{ display: "flex", minHeight: "100dvh" }}>
+      <Box sx={{ display: "flex", minHeight: "100dvh", bgcolor:"white" }}>
         <Header />
         <Sidebar />
         <Box
@@ -108,8 +109,9 @@ function Products() {
             display: "flex",
             flexDirection: "column",
             minWidth: 0,
-            height: "100dvh",
+            minHeightheight: "100dvh",
             gap: 1,
+            bgcolor:"white"
           }}
         >
           <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -138,7 +140,7 @@ function Products() {
               flexDirection: { xs: "column", sm: "row" },
               alignItems: { xs: "start", sm: "center" },
               flexWrap: "wrap",
-              justifyContent: "space-between",
+              justifyContent: "space-between",         
             }}
           ></Box>
           <Container>

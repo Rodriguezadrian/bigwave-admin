@@ -155,20 +155,10 @@ export default function Sidebar() {
               "--ListItem-radius": (theme) => theme.vars.radius.sm,
             }}
           >
-            <Link style={{ color: "black", textDecoration: "none" }} to={"/"}>
-              <ListItem>
-                <ListItemButton>
-                  <HomeRoundedIcon />
-                  <ListItemContent>
-                    <Typography level="title-sm">Home</Typography>
-                  </ListItemContent>
-                </ListItemButton>
-              </ListItem>
-            </Link>
-
+          
             <Link
               style={{ color: "black", textDecoration: "none" }}
-              to={"/dashboard"}
+              to={"/"}
             >
               <ListItem>
                 <ListItemButton>
@@ -232,6 +222,14 @@ export default function Sidebar() {
                   >
                     <ListItem>
                       <ListItemButton> Products</ListItemButton>
+                    </ListItem>
+                  </Link>
+                  <Link
+                    style={{ color: "black", textDecoration: "none" }}
+                    to={"/images"}
+                  >
+                    <ListItem>
+                      <ListItemButton> Images</ListItemButton>
                     </ListItem>
                   </Link>
                 </List>

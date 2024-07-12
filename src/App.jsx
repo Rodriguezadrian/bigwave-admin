@@ -1,5 +1,4 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Home from "./pages/Home";
 import ErrorPage from "./pages/ErrorPage";
 import Profile from "./pages/Profile";
 import NewUser from "./pages/NewUser";
@@ -33,8 +32,8 @@ function App() {
       <>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<ProtectedRoute />}>
-          <Route index element={<Home />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+      
+          <Route path="/" element={<Dashboard />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/users" element={<UsersList />} />
           <Route path="/create-user" element={<NewUser />} />

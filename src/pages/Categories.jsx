@@ -71,6 +71,9 @@ function Categories() {
       const response = await axios({
         url: `${import.meta.env.VITE_API_URL}/categories`,
         method: "post",
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
         data: {
           name: formData.name,
           description: formData.description,
@@ -87,7 +90,7 @@ function Categories() {
   return (
     <>
       <CssBaseline />
-      <ToastContainer />
+    
       <Box sx={{ display: "flex", minHeight: "100dvh" }}>
         <Header />
         <Sidebar />
