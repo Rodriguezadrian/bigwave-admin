@@ -1,73 +1,49 @@
+// AdminProfileForm.js
+import React, { useState } from "react";
 import {
+  Avatar,
   Box,
-  Breadcrumbs,
   Button,
-  Container,
-  CssBaseline,
+  Grid,
+  MenuItem,
+  TextField,
   Typography,
-} from "@mui/joy";
-import Paper from "@mui/material/Paper";
-import TextField from "@mui/material/TextField";
-import Sidebar from "../components/Sidebar";
+  Select,
+  InputLabel,
+  FormControl,
+  Paper,
+} from "@mui/material";
+import { Breadcrumbs, Container, CssBaseline, Link } from "@mui/joy";
 import Header from "../components/Header";
-import { InputLabel, Select, MenuItem, FormControl } from "@mui/material";
+import Sidebar from "../components/Sidebar";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { Link, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
 
-function NewUser() {
-  const user = useSelector((state) => state.user);
-  const [usersData, setUsersData] = useState();
-  const [userInfo, setUserInfo] = useState({
+const UpdateUser = () => {
+  const [user, setUser] = useState({
     name: "Admin",
-    lastname: "User",
+    lastName: "User",
     role: "UI Developer",
     email: "admin@example.com",
-    password: "1234",
+    avatarUrl: "https://via.placeholder.com/150",
+    country: "Thailand",
+    timezone: "GMT+07:00",
+    bio: "Admin bio goes here...",
   });
-  const params = useParams();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Aquí se puede agregar la lógica para enviar los datos del formulario a la API
-    console.log(formData);
+    // Aquí puedes manejar la lógica para enviar los datos del formulario
+    console.log("Form submitted:", user);
   };
 
-  const handleChange = (e) => {
+  const onChange = (e) => {
     const { name, value } = e.target;
     setUser((prevUser) => ({
       ...prevUser,
       [name]: value,
     }));
   };
-
-  useEffect(() => {
-    const getUserDetails = async () => {
-      try {
-        const response = await axios({
-          url: `${import.meta.env.VITE_API_URL}/users`,
-          method: "get",
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-            "Content-Type": "application/json",
-          },
-        });
-        setUsersData(response.data);
-        setUserInfo({
-          name: response.data.name,
-          description: response.data.description,
-          price: response.data.price,
-          image: response.data.image,
-        });
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
-    getUserDetails();
-  }, []);
-
   return (
     <>
       <CssBaseline />
@@ -98,14 +74,12 @@ function NewUser() {
               <Link separator={<ChevronRightRoundedIcon fontSize="sm" />}>
                 <HomeRoundedIcon />
               </Link>
-              <Link to={"/dashboard"} sx={{ fontSize: 12, fontWeight: 500 }}>
-                Users
-              </Link>
+              <Link sx={{ fontSize: 12, fontWeight: 500 }}>Users</Link>
               <Typography
                 color="primary"
                 sx={{ fontWeight: 500, fontSize: 12 }}
               >
-                Update user
+                Update User
               </Typography>
             </Breadcrumbs>
           </Box>
@@ -119,94 +93,140 @@ function NewUser() {
               flexWrap: "wrap",
               justifyContent: "space-between",
             }}
+          ></Box>
+          <Paper
+            component="form"
+            onSubmit={handleSubmit}
+            elevation={3}
+            sx={{ mt: 3, mx: "auto", maxWidth: 600, p: 3, bgcolor: "white" }}
           >
-            <Typography level="h2" component="h1">
-              Update new user
+            <Typography variant="h5" sx={{ mb: 3 }}>
+              Admin Profile
             </Typography>
-          </Box>
-          <Container maxWidth="sm">
-            <Paper elevation={3} sx={{ padding: 2, marginTop: 4 }}>
-              <Typography
-                sx={{ marginBottom: 4 }}
-                variant="h4"
-                component="h1"
-                gutterBottom
-              >
-                Information
-              </Typography>
-              <Box
-                component="form"
-                sx={{
-                  "& .MuiTextField-root": { marginBottom: 2 },
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-                noValidate
-                autoComplete="off"
-                onSubmit={handleSubmit}
-              >
+            <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
+              <Avatar
+                alt={user.name}
+                src={user.avatarUrl}
+                sx={{ width: 80, height: 80, mr: 2 }}
+              />
+              <Button variant="outlined" component="label">
+                Upload
+                <input type="file" hidden />
+              </Button>
+            </Box>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
                 <TextField
-                  required
-                  id="name"
-                  name="name"
-                  label="Name"
-                  value={user.name}
-                  onChange={handleChange}
+                  fullWidth
+                  margin="normal"
+                  label="First Name"
+                  name="firstName"
+                  value={user.firstName}
+                  onChange={onChange}
+                  variant="outlined"
                 />
+              </Grid>
+              <Grid item xs={12} sm={6}>
                 <TextField
-                  required
-                  id="lastname"
-                  name="lastname"
-                  label="Lastname"
-                  value={user.lastname}
-                  onChange={handleChange}
+                  fullWidth
+                  margin="normal"
+                  label="Last Name"
+                  name="lastName"
+                  value={user.lastName}
+                  onChange={onChange}
+                  variant="outlined"
                 />
+              </Grid>
+              <Grid item xs={12} sm={6}>
                 <FormControl fullWidth margin="normal" variant="outlined">
                   <InputLabel>Role</InputLabel>
                   <Select
-                    sx={{ marginBottom: 2 }}
                     name="role"
                     value={user.role}
+                    onChange={onChange}
                     label="Role"
-                    onChange={handleChange}
                   >
-                    <MenuItem value="Customer">Customer</MenuItem>
-                    <MenuItem value="Admin">Admin</MenuItem>
+                    <MenuItem value="UI Developer">UI Developer</MenuItem>
+                    <MenuItem value="Backend Developer">
+                      Backend Developer
+                    </MenuItem>
+                    <MenuItem value="Fullstack Developer">
+                      Fullstack Developer
+                    </MenuItem>
                   </Select>
                 </FormControl>
+              </Grid>
+              <Grid item xs={12} sm={6}>
                 <TextField
-                  required
-                  id="email"
-                  name="email"
+                  fullWidth
+                  margin="normal"
                   label="Email"
-                  type="email"
+                  name="email"
                   value={user.email}
-                  onChange={handleChange}
+                  onChange={onChange}
+                  variant="outlined"
                 />
-                <TextField
-                  required
-                  id="password"
-                  name="password"
-                  label="Password"
-                  type="password"
-                  value={user.password}
-                  onChange={handleChange}
-                />
-                <Button
-                  sx={{ backgroundColor: "blueviolet" }}
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                >
-                  Update user
-                </Button>
-              </Box>
-            </Paper>
-          </Container>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <FormControl fullWidth margin="normal" variant="outlined">
+                  <InputLabel>Country</InputLabel>
+                  <Select
+                    name="country"
+                    value={user.country}
+                    onChange={onChange}
+                    label="Country"
+                  >
+                    <MenuItem value="Thailand">Thailand</MenuItem>
+                    <MenuItem value="USA">USA</MenuItem>
+                    <MenuItem value="Germany">Germany</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <FormControl fullWidth margin="normal" variant="outlined">
+                  <InputLabel>Timezone</InputLabel>
+                  <Select
+                    name="timezone"
+                    value={user.timezone}
+                    onChange={onChange}
+                    label="Timezone"
+                  >
+                    <MenuItem value="GMT+07:00">GMT+07:00</MenuItem>
+                    <MenuItem value="GMT-05:00">GMT-05:00</MenuItem>
+                    <MenuItem value="GMT+01:00">GMT+01:00</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+            </Grid>
+            <TextField
+              fullWidth
+              margin="normal"
+              label="Bio"
+              name="bio"
+              value={user.bio}
+              onChange={onChange}
+              variant="outlined"
+              multiline
+              rows={4}
+            />
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "flex-end",
+                gap: 2,
+                mt: 2,
+              }}
+            >
+              <Button variant="outlined">Cancel</Button>
+              <Button type="submit" variant="contained" color="primary">
+                Save Changes
+              </Button>
+            </Box>
+          </Paper>
         </Box>
       </Box>
     </>
   );
-}
+};
 
-export default NewUser;
+export default UpdateUser;

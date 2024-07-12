@@ -122,9 +122,11 @@ export default function Sidebar() {
           onClick={() => closeSidebar()}
         />
         <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
-          <IconButton variant="soft" color="primary" size="sm">
-            <BrightnessAutoRoundedIcon />
-          </IconButton>
+          <Link to={"/"}>
+            <IconButton variant="soft" color="primary" size="sm">
+              <BrightnessAutoRoundedIcon />
+            </IconButton>
+          </Link>
           <Typography level="title-lg">BigWave</Typography>
           <ColorSchemeToggle sx={{ ml: "auto" }} />
         </Box>
@@ -153,50 +155,42 @@ export default function Sidebar() {
               "--ListItem-radius": (theme) => theme.vars.radius.sm,
             }}
           >
-            <ListItem>
-              <ListItemButton>
-                <HomeRoundedIcon />
-                <ListItemContent>
-                  <Typography level="title-sm">
-                    <Link
-                      style={{ color: "black", textDecoration: "none" }}
-                      to={"/"}
-                    >
-                      Home
-                    </Link>
-                  </Typography>
-                </ListItemContent>
-              </ListItemButton>
-            </ListItem>
+            <Link style={{ color: "black", textDecoration: "none" }} to={"/"}>
+              <ListItem>
+                <ListItemButton>
+                  <HomeRoundedIcon />
+                  <ListItemContent>
+                    <Typography level="title-sm">Home</Typography>
+                  </ListItemContent>
+                </ListItemButton>
+              </ListItem>
+            </Link>
 
-            <ListItem>
-              <ListItemButton>
-                <DashboardRoundedIcon />
-                <ListItemContent>
-                  <Typography level="title-sm">
-                    <Link
-                      style={{ color: "black", textDecoration: "none" }}
-                      to={"/dashboard"}
-                    >
-                      Dashboard
-                    </Link>
-                  </Typography>
-                </ListItemContent>
-              </ListItemButton>
-            </ListItem>
+            <Link
+              style={{ color: "black", textDecoration: "none" }}
+              to={"/dashboard"}
+            >
+              <ListItem>
+                <ListItemButton>
+                  <DashboardRoundedIcon />
+                  <ListItemContent>
+                    <Typography level="title-sm">Dashboard</Typography>
+                  </ListItemContent>
+                </ListItemButton>
+              </ListItem>
+            </Link>
 
-            <ListItem>
-              <ListItemButton>
-                <ShoppingCartRoundedIcon />
-                <ListItemContent>
-                  <Typography level="title-sm">
-                    <Link style={{ color: "black", textDecoration: "none" }}>
-                      Orders
-                    </Link>
-                  </Typography>
-                </ListItemContent>
-              </ListItemButton>
-            </ListItem>
+            <Link to={"/"} style={{ color: "black", textDecoration: "none" }}>
+              <ListItem>
+                <ListItemButton>
+                  <ShoppingCartRoundedIcon />
+
+                  <ListItemContent>
+                    <Typography level="title-sm">Orders</Typography>
+                  </ListItemContent>
+                </ListItemButton>
+              </ListItem>
+            </Link>
 
             <ListItem nested>
               <Toggler
@@ -221,27 +215,23 @@ export default function Sidebar() {
                 )}
               >
                 <List sx={{ gap: 0.5 }}>
-                  <ListItem sx={{ mt: 0.5 }}>
-                    <ListItemButton>
-                      <Link
-                        style={{ color: "black", textDecoration: "none" }}
-                        to={"/categories"}
-                      >
-                        Categories
-                      </Link>
-                    </ListItemButton>
-                  </ListItem>
-                  <ListItem>
-                    <ListItemButton>
-                      {" "}
-                      <Link
-                        style={{ color: "black", textDecoration: "none" }}
-                        to={"/products"}
-                      >
-                        Products
-                      </Link>
-                    </ListItemButton>
-                  </ListItem>
+                  <Link
+                    style={{ color: "black", textDecoration: "none" }}
+                    to={"/categories"}
+                  >
+                    <ListItem sx={{ mt: 0.5 }}>
+                      <ListItemButton>Categories</ListItemButton>
+                    </ListItem>
+                  </Link>
+
+                  <Link
+                    style={{ color: "black", textDecoration: "none" }}
+                    to={"/products"}
+                  >
+                    <ListItem>
+                      <ListItemButton> Products</ListItemButton>
+                    </ListItem>
+                  </Link>
                 </List>
               </Toggler>
             </ListItem>
@@ -284,25 +274,23 @@ export default function Sidebar() {
                 </List>
               </Toggler>
             </ListItem> */}
+            <Link
+              style={{ color: "black", textDecoration: "none" }}
+              to={"/messages"}
+            >
+              <ListItem>
+                <ListItemButton role="menuitem">
+                  <QuestionAnswerRoundedIcon />
+                  <ListItemContent>
+                    <Typography level="title-sm">Messages</Typography>
+                  </ListItemContent>
+                  <Chip size="sm" color="primary" variant="solid">
+                    4
+                  </Chip>
+                </ListItemButton>
+              </ListItem>
+            </Link>
 
-            <ListItem>
-              <ListItemButton role="menuitem">
-                <QuestionAnswerRoundedIcon />
-                <ListItemContent>
-                  <Typography level="title-sm">
-                    <Link
-                      style={{ color: "black", textDecoration: "none" }}
-                      to={"/messages"}
-                    >
-                      Messages
-                    </Link>
-                  </Typography>
-                </ListItemContent>
-                <Chip size="sm" color="primary" variant="solid">
-                  4
-                </Chip>
-              </ListItemButton>
-            </ListItem>
             <ListItem nested>
               <Toggler
                 renderToggle={({ open, setOpen }) => (
@@ -332,36 +320,34 @@ export default function Sidebar() {
                 )}
               >
                 <List sx={{ gap: 0.5 }}>
-                  <ListItem sx={{ mt: 0.5 }}>
-                    <ListItemButton role="menuitem">
-                      <Link
-                        style={{ color: "black", textDecoration: "none" }}
-                        to={"/profile"}
-                      >
+                  <Link
+                    style={{ color: "black", textDecoration: "none" }}
+                    to={"/profile"}
+                  >
+                    <ListItem sx={{ mt: 0.5 }}>
+                      <ListItemButton role="menuitem">
                         My Profile
-                      </Link>
-                    </ListItemButton>
-                  </ListItem>
-                  <ListItem>
-                    <ListItemButton>
-                      <Link
-                        style={{ color: "black", textDecoration: "none" }}
-                        to={"/create-user"}
-                      >
-                        Create a new user
-                      </Link>
-                    </ListItemButton>
-                  </ListItem>
-                  <ListItem>
-                    <ListItemButton>
-                      <Link
-                        style={{ color: "black", textDecoration: "none" }}
-                        to={"/update-user"}
-                      >
-                        Update user
-                      </Link>
-                    </ListItemButton>
-                  </ListItem>
+                      </ListItemButton>
+                    </ListItem>
+                  </Link>
+
+                  <Link
+                    style={{ color: "black", textDecoration: "none" }}
+                    to={"/create-user"}
+                  >
+                    <ListItem>
+                      <ListItemButton>Create a new user</ListItemButton>
+                    </ListItem>
+                  </Link>
+
+                  <Link
+                    to={"/update-user"}
+                    style={{ color: "black", textDecoration: "none" }}
+                  >
+                    <ListItem>
+                      <ListItemButton>Update user</ListItemButton>
+                    </ListItem>
+                  </Link>
                 </List>
               </Toggler>
             </ListItem>

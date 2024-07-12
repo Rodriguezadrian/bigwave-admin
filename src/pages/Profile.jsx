@@ -22,7 +22,7 @@ import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 const AdminProfileForm = () => {
   const [user, setUser] = useState({
     name: "Admin",
-    lastName: "User",
+    lastName: "Lopez",
     role: "UI Developer",
     email: "admin@example.com",
     avatarUrl: "https://via.placeholder.com/150",
@@ -121,7 +121,7 @@ const AdminProfileForm = () => {
                   margin="normal"
                   label="First Name"
                   name="firstName"
-                  value={user.firstName}
+                  value={user.name}
                   onChange={onChange}
                   variant="outlined"
                 />

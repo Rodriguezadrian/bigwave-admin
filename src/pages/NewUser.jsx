@@ -16,7 +16,7 @@ import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function NewUser() {
@@ -66,7 +66,7 @@ function NewUser() {
       [e.target.name]: e.target.value,
     });
   };
-  console.log(userData);
+
   return (
     <>
       <CssBaseline />
