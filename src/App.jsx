@@ -36,7 +36,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/users" element={<UsersList />} />
           <Route path="/create-user" element={<NewUser />} />
-          <Route path="/update-user" element={<UpdateUser />} />
+          <Route path="/update-user/:id" element={<UpdateUser />} />
           <Route path="/orders" element={<AllOrders />} />
           <Route path="/orders/details/:id" element={<OrderView />} />
           <Route path="/products" element={<Products />} />

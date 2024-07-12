@@ -19,9 +19,11 @@ import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const UpdateUser = () => {
   const user = useSelector((state) => state.user);
+  const params = useParams();
   const [userInfo, setUserInfo] = useState({
     firstName: "",
     lastName: "",
@@ -32,7 +34,19 @@ const UpdateUser = () => {
     bio: "",
   });
 
-  
+  useEffect(() => {
+    const getUserInfo = async () => {
+      const response = await axios({
+        url: `${import.meta.env.VITE_API_URL}/client-profile/${params.id}`,
+        method: "get",
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      setUserInfo(response.data);
+    };
+    getUserInfo();
+  }, [user.token]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

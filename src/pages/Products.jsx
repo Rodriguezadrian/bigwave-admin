@@ -28,10 +28,26 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Breadcrumbs, CssBaseline, IconButton, Tooltip } from "@mui/joy";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 
 function Products() {
   const user = useSelector((state) => state.user);
   const [products, setProducts] = useState([]);
+  const [page, setPage] = useState(1);
+
+  const productsPerPage = 10;
+  const displayedProducts = products.slice(
+    (page - 1) * productsPerPage,
+    page * productsPerPage
+  );
+
+  const emptyRows = productsPerPage - displayedProducts.length;
+
+  const handlePageChange = (event, value) => {
+    setPage(value);
+  };
+
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -83,7 +99,7 @@ function Products() {
           price: formData.price,
         },
       });
-      
+
       handleCloseModal();
       toast.info(`Product created successfully`);
     } catch (error) {
@@ -192,7 +208,7 @@ function Products() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {products.map((product) => (
+                  {displayedProducts.map((product) => (
                     <TableRow key={product.id}>
                       <TableCell>{product.id}</TableCell>
                       <TableCell>{product.name}</TableCell>
@@ -208,9 +224,21 @@ function Products() {
                       </TableCell>
                     </TableRow>
                   ))}
+                  {emptyRows > 0 && (
+                    <TableRow style={{ height: 53 * emptyRows }}>
+                      <TableCell colSpan={3} />
+                    </TableRow>
+                  )}
                 </TableBody>
               </Table>
             </TableContainer>
+            <Stack spacing={2} sx={{ mt: 2 }}>
+              <Pagination
+                count={Math.ceil(products.length / productsPerPage)}
+                page={page}
+                onChange={handlePageChange}
+              />
+            </Stack>
           </Container>
           <Modal
             open={openModal}
