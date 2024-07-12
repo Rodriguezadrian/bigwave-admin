@@ -90,12 +90,13 @@ function ProductsEdit() {
       });
 
       console.log("product updated:", response.data);
-      toast.info("product created succesfully");
-      navigate("/dashboard");
+      toast.info("product updated succesfully");
+      navigate("/products");
     } catch (error) {
       console.error("Error updating the product:", error);
     }
   };
+  
   return (
     productsDetails && (
       <>

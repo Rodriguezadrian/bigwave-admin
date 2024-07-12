@@ -26,9 +26,10 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 function CategoriesEdit() {
-  const params = useParams();
   const user = useSelector((state) => state.user);
+  const params = useParams();
   const [categoriesDetails, setCategoriesDetails] = useState();
+
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -70,19 +71,17 @@ function CategoriesEdit() {
     getCategoriesDetails();
   }, []);
 
-  const handleSubmit = async (e) => {
+  const handleUpdate = async (e) => {
     e.preventDefault();
     const data = {
       name: formData.name,
       description: formData.description,
       image: formData.image,
-      products: JSON.parse(formData.products),
+      price: formData.price,
     };
     try {
       const response = await axios({
-        url: `${import.meta.env.VITE_API_URL}/categories/${
-          categoriesDetails.id
-        }`,
+        url: `${import.meta.env.VITE_API_URL}/categories/${categoriesDetails.id}`,
         method: "PATCH",
         headers: {
           Authorization: `Bearer ${user.token}`,
@@ -90,15 +89,13 @@ function CategoriesEdit() {
         data: data,
       });
 
-      console.log("category updated:", response.data);
-      navigate("/dashboard");
-      toast.info("category created succesfully");
-      console.log(data.name);
+      console.log("Category updated:", response.data);
+      toast.info("Category updated succesfully");
+      navigate("/categories");
     } catch (error) {
       console.error("Error updating the category:", error);
     }
   };
-
   return (
     categoriesDetails && (
       <>
@@ -149,7 +146,7 @@ function CategoriesEdit() {
                 </Typography>
               </Breadcrumbs>
             </Box>
-            
+
             <Box
               sx={{
                 display: "flex",
@@ -176,11 +173,11 @@ function CategoriesEdit() {
                     Category Information
                   </Typography>
                   <Link to={"/categories"}>
-                  <Tooltip title="Back">
-                    <IconButton>
-                      <ArrowBackIcon />
-                    </IconButton>
-                  </Tooltip>
+                    <Tooltip title="Back">
+                      <IconButton>
+                        <ArrowBackIcon />
+                      </IconButton>
+                    </Tooltip>
                   </Link>
                 </Box>
                 <Box
@@ -192,7 +189,7 @@ function CategoriesEdit() {
                   }}
                   noValidate
                   autoComplete="off"
-                  onSubmit={handleSubmit}
+                  onSubmit={handleUpdate}
                 >
                   <TextField
                     required
