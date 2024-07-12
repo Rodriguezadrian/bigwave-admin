@@ -14,7 +14,8 @@ import {
   ChevronRightRounded as ChevronRightRoundedIcon,
   HomeRounded as HomeRoundedIcon,
 } from "@mui/icons-material";
-import { CssBaseline } from "@mui/joy";
+import { CssBaseline, IconButton, Tooltip } from "@mui/joy";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import React, { useEffect, useState } from "react";
@@ -132,12 +133,14 @@ function ProductsEdit() {
                   <HomeRoundedIcon />
                 </Link>
                 <Link sx={{ fontSize: 12, fontWeight: 500 }}>Dashboard</Link>
-                <Typography
-                  color="primary"
-                  sx={{ fontWeight: 500, fontSize: 12 }}
-                >
-                  Product details
-                </Typography>
+                <Box>
+                  <Typography
+                    color="primary"
+                    sx={{ fontWeight: 500, fontSize: 12 }}
+                  >
+                    Product details
+                  </Typography>
+                </Box>
               </Breadcrumbs>
             </Box>
             <Box
@@ -153,9 +156,18 @@ function ProductsEdit() {
             ></Box>
             <Container maxWidth="sm">
               <Paper elevation={3} sx={{ padding: 2, marginTop: 4 }}>
-                <Typography variant="h4" component="h1" gutterBottom>
-                  Product details
-                </Typography>
+                <Box display={"flex"} justifyContent={"space-between"}>
+                  <Typography variant="h4" component="h4" gutterBottom>
+                    Product details
+                  </Typography>
+                  <Link to={"/products"}>
+                    <Tooltip title="Back">
+                      <IconButton>
+                        <ArrowBackIcon />
+                      </IconButton>
+                    </Tooltip>
+                  </Link>
+                </Box>
                 <Box
                   component="form"
                   sx={{

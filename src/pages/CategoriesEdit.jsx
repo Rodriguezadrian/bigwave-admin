@@ -14,10 +14,11 @@ import {
   ChevronRightRounded as ChevronRightRoundedIcon,
   HomeRounded as HomeRoundedIcon,
 } from "@mui/icons-material";
-import { CssBaseline } from "@mui/joy";
+import { CssBaseline, IconButton, Tooltip } from "@mui/joy";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import React, { useEffect, useState } from "react";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
@@ -148,6 +149,7 @@ function CategoriesEdit() {
                 </Typography>
               </Breadcrumbs>
             </Box>
+            
             <Box
               sx={{
                 display: "flex",
@@ -161,9 +163,26 @@ function CategoriesEdit() {
             ></Box>
             <Container maxWidth="sm">
               <Paper elevation={3} sx={{ padding: 2, marginTop: 4 }}>
-                <Typography variant="h4" component="h1" gutterBottom>
-                  Category details
-                </Typography>
+                <Box
+                  display={"flex"}
+                  justifyContent={"space-between"}
+                  alignItems={"center"}
+                >
+                  <Typography
+                    id="modal-modal-title"
+                    variant="h6"
+                    component="h2"
+                  >
+                    Category Information
+                  </Typography>
+                  <Link to={"/categories"}>
+                  <Tooltip title="Back">
+                    <IconButton>
+                      <ArrowBackIcon />
+                    </IconButton>
+                  </Tooltip>
+                  </Link>
+                </Box>
                 <Box
                   component="form"
                   sx={{
