@@ -6,8 +6,6 @@ import NewUser from "./pages/NewUser";
 import UpdateUser from "./pages/UpdateUser";
 import Dashboard from "./pages/Dashboard";
 import OrderView from "./pages/OrderView";
-
-import ProductsView from "./components/ProductsView";
 import CategoriesEdit from "./pages/CategoriesEdit";
 import ProductsEdit from "./pages/ProductsEdit";
 import Login from "./pages/Login";
@@ -17,6 +15,7 @@ import { Navigate, Outlet } from "react-router-dom";
 import { createRoutesFromElements, Route } from "react-router-dom";
 import Messages from "./pages/Messages";
 import UsersList from "./pages/UsersList";
+import Products from "./pages/Products";
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -38,7 +37,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/update-user" element={<UpdateUser />} />
           <Route path="/orders/details/:id" element={<OrderView />} />
-          <Route path="/edit" element={<ProductsView />} />
+          <Route path="/products" element={<Products />} />
           <Route path="/users" element={<UsersList />} />
           <Route path="/categories" element={<Categories />} />
           <Route path="/categories/edit/:id" element={<CategoriesEdit />} />

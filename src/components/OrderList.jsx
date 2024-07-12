@@ -153,9 +153,7 @@ function OrderList() {
                     mb: 1,
                   }}
                 >
-                  <Link level="body-sm" component="button">
-                    Download
-                  </Link>
+               
                   <RowMenu />
                 </Box>
               </div>
