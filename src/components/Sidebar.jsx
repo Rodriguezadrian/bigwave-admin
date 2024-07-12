@@ -429,12 +429,6 @@ export default function Sidebar() {
           <Typography level="body2" fontWeight="lg">
             Please check our docs.
           </Typography>
-          <Link
-            startDecorator={<SupportRoundedIcon />}
-            sx={{ alignItems: "flex-start" }}
-          >
-            Help center
-          </Link>
         </Card>
       </Sheet>
     </>

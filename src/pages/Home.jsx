@@ -71,7 +71,7 @@ function Home() {
             }}
           >
             <Typography level="h2" component="h1">
-            Home page
+              Home page
             </Typography>
             <Button
               color="primary"

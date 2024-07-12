@@ -286,7 +286,6 @@ export default function OrderTable() {
                     color="primary"
                     component="button"
                     onClick={() => setOrders(orders === "asc" ? "desc" : "asc")}
-                    endDecorator={<ArrowDropDownIcon />}
                     sx={[
                       {
                         fontWeight: "lg",
@@ -386,13 +385,17 @@ export default function OrderTable() {
                           <Avatar size="sm" src={order.avatar} sx={{ mr: 2 }} />
                           <Box>
                             <Typography fontWeight="lg" level="body2">
-                              {order.User.firstname ? order.User.firstname : "Undefined"}
+                              {order.User.firstname
+                                ? order.User.firstname
+                                : "Undefined"}
                             </Typography>
                             <Typography
                               level="body2"
                               sx={{ color: "text.secondary" }}
                             >
-                              {order.User.email ? order.User.email : "default@gmail.com"}
+                              {order.User.email
+                                ? order.User.email
+                                : "default@gmail.com"}
                             </Typography>
                           </Box>
                         </Box>

@@ -1,3 +1,4 @@
+import { Box } from "@mui/joy";
 import { LineChart, YAxis, XAxis, Line, Tooltip, Legend } from "recharts";
 
 function ChartProductsSold() {
@@ -10,7 +11,7 @@ function ChartProductsSold() {
   ];
 
   return (
-    <div>
+    <Box>
       <LineChart data={productsChart} width={500} height={300}>
         <XAxis dataKey="category"></XAxis>
         <YAxis />
@@ -19,7 +20,7 @@ function ChartProductsSold() {
         <Line dataKey="sold" stroke="#8884d8" />
         <Line dataKey="stock" stroke="#82ca9d" />
       </LineChart>
-    </div>
+    </Box>
   );
 }
 export default ChartProductsSold;

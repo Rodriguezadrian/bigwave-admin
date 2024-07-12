@@ -19,6 +19,7 @@ import Products from "./pages/Products";
 
 function App() {
   const user = useSelector((state) => state.user);
+
   const ProtectedRoute = ({ children }) => {
     if (!user.token) {
       return <Navigate to="/login" />;
@@ -31,17 +32,17 @@ function App() {
       <>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<ProtectedRoute />}>
-          <Route path="/" element={<Home />} />
+          <Route index element={<Home />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/users" element={<UsersList />} />
           <Route path="/create-user" element={<NewUser />} />
-          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/update-user" element={<UpdateUser />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/orders/details/:id" element={<OrderView />} />
           <Route path="/products" element={<Products />} />
-          <Route path="/users" element={<UsersList />} />
+          <Route path="/products/edit/:id" element={<ProductsEdit />} />
           <Route path="/categories" element={<Categories />} />
           <Route path="/categories/edit/:id" element={<CategoriesEdit />} />
-          <Route path="/products/edit/:id" element={<ProductsEdit />} />
           <Route path="/messages" element={<Messages />} />
         </Route>
 

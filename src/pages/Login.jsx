@@ -80,7 +80,7 @@ const Login = () => {
           <Container component="main" maxWidth="sm" className="mt-5">
             <Paper elevation={6} sx={{ p: 4, borderRadius: 3 }}>
               <Typography
-                component="h1"
+                component="h2"
                 variant="h4"
                 align="center"
                 gutterBottom
@@ -143,14 +143,14 @@ const Login = () => {
             </Paper>
             <Paper elevation={6} sx={{ p: 4, mt: 3, borderRadius: 3 }}>
               <Typography variant="h6" gutterBottom>
-                User Credentials
+                Admin Credentials
               </Typography>
               <Typography>
-                To simplify access to the application, the following test user
+                To simplify access to the application, the following test admin
                 is provided:
               </Typography>
               <Box mt={2}>
-                <Typography variant="subtitle1">Login as an admin</Typography>
+                <Typography variant="subtitle1">Login as admin</Typography>
                 <ul>
                   <li>Email: menganito@gmail.com</li>
                   <li>Password: 1234</li>
