@@ -155,11 +155,7 @@ export default function Sidebar() {
               "--ListItem-radius": (theme) => theme.vars.radius.sm,
             }}
           >
-          
-            <Link
-              style={{ color: "black", textDecoration: "none" }}
-              to={"/"}
-            >
+            <Link style={{ color: "black", textDecoration: "none" }} to={"/"}>
               <ListItem>
                 <ListItemButton>
                   <DashboardRoundedIcon />
@@ -333,9 +329,7 @@ export default function Sidebar() {
                     to={"/profile"}
                   >
                     <ListItem sx={{ mt: 0.5 }}>
-                      <ListItemButton role="menuitem">
-                        My Profile
-                      </ListItemButton>
+                      <ListItemButton role="menuitem">Profile</ListItemButton>
                     </ListItem>
                   </Link>
 
@@ -344,7 +338,7 @@ export default function Sidebar() {
                     to={"/create-user"}
                   >
                     <ListItem>
-                      <ListItemButton>Create a new user</ListItemButton>
+                      <ListItemButton>New user</ListItemButton>
                     </ListItem>
                   </Link>
 

@@ -18,7 +18,6 @@ import AddIcon from "@mui/icons-material/Add";
 import CloseIcon from "@mui/icons-material/Close";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
-import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 import { Link } from "react-router-dom";

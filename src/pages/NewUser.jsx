@@ -28,16 +28,20 @@ function NewUser() {
     email: "",
     password: "",
   });
+
   const navigate = useNavigate();
-  const adminsPost = `${import.meta.env.VITE_API_URL}/admins`;
-  const userPost = `${import.meta.env.VITE_API_URL}/users`;
+
+
+  const handleChange = (e) => {
+    setUserData({
+      ...userData,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleAddNewUser = async (e) => {
     e.preventDefault();
     try {
-      {
-        userData.role === "Admin" ? adminsPost : userPost;
-      }
       const response = await axios({
         url: `${import.meta.env.VITE_API_URL}/users`,
         method: "post",
@@ -59,13 +63,7 @@ function NewUser() {
       toast.error("Failed to create user");
     }
   };
-
-  const handleChange = (e) => {
-    setUserData({
-      ...userData,
-      [e.target.name]: e.target.value,
-    });
-  };
+  console.log(userData);
 
   return (
     <>
@@ -144,10 +142,10 @@ function NewUser() {
               >
                 <TextField
                   required
-                  id="name"
-                  name="name"
-                  label="Name"
-                  value={userData.name}
+                  id="firstname"
+                  name="firstname"
+                  label="Firstname"
+                  value={userData.firstname}
                   onChange={handleChange}
                 />
                 <TextField

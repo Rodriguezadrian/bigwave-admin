@@ -83,6 +83,7 @@ function Products() {
           price: formData.price,
         },
       });
+      
       handleCloseModal();
       toast.info(`Product created successfully`);
     } catch (error) {

@@ -32,7 +32,6 @@ function App() {
       <>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<ProtectedRoute />}>
-      
           <Route path="/" element={<Dashboard />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/users" element={<UsersList />} />

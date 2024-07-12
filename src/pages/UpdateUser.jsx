@@ -1,5 +1,4 @@
-// AdminProfileForm.js
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Avatar,
   Box,
@@ -18,32 +17,35 @@ import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
 const UpdateUser = () => {
-  const [user, setUser] = useState({
-    name: "Admin",
-    lastName: "User",
-    role: "UI Developer",
-    email: "admin@example.com",
-    avatarUrl: "https://via.placeholder.com/150",
-    country: "Thailand",
-    timezone: "GMT+07:00",
-    bio: "Admin bio goes here...",
+  const user = useSelector((state) => state.user);
+  const [userInfo, setUserInfo] = useState({
+    firstName: "",
+    lastName: "",
+    role: "",
+    email: "",
+    country: "",
+    timezone: "",
+    bio: "",
   });
+
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Aquí puedes manejar la lógica para enviar los datos del formulario
-    console.log("Form submitted:", user);
+    console.log("Form submitted:", userInfo);
   };
 
-  const onChange = (e) => {
-    const { name, value } = e.target;
-    setUser((prevUser) => ({
-      ...prevUser,
-      [name]: value,
-    }));
+  const handleChange = (e) => {
+    setUserInfo({
+      ...userInfo,
+      [e.target.name]: e.target.value,
+    });
   };
+
   return (
     <>
       <CssBaseline />
@@ -121,8 +123,8 @@ const UpdateUser = () => {
                   margin="normal"
                   label="First Name"
                   name="firstName"
-                  value={user.firstName}
-                  onChange={onChange}
+                  value={userInfo.firstName}
+                  onChange={handleChange}
                   variant="outlined"
                 />
               </Grid>
@@ -132,8 +134,8 @@ const UpdateUser = () => {
                   margin="normal"
                   label="Last Name"
                   name="lastName"
-                  value={user.lastName}
-                  onChange={onChange}
+                  value={userInfo.lastName}
+                  onChange={handleChange}
                   variant="outlined"
                 />
               </Grid>
@@ -142,8 +144,8 @@ const UpdateUser = () => {
                   <InputLabel>Role</InputLabel>
                   <Select
                     name="role"
-                    value={user.role}
-                    onChange={onChange}
+                    value={userInfo.role}
+                    onChange={handleChange}
                     label="Role"
                   >
                     <MenuItem value="UI Developer">UI Developer</MenuItem>
@@ -162,8 +164,8 @@ const UpdateUser = () => {
                   margin="normal"
                   label="Email"
                   name="email"
-                  value={user.email}
-                  onChange={onChange}
+                  value={userInfo.email}
+                  onChange={handleChange}
                   variant="outlined"
                 />
               </Grid>
@@ -172,8 +174,8 @@ const UpdateUser = () => {
                   <InputLabel>Country</InputLabel>
                   <Select
                     name="country"
-                    value={user.country}
-                    onChange={onChange}
+                    value={userInfo.country}
+                    onChange={handleChange}
                     label="Country"
                   >
                     <MenuItem value="Thailand">Thailand</MenuItem>
@@ -187,8 +189,8 @@ const UpdateUser = () => {
                   <InputLabel>Timezone</InputLabel>
                   <Select
                     name="timezone"
-                    value={user.timezone}
-                    onChange={onChange}
+                    value={userInfo.timezone}
+                    onChange={handleChange}
                     label="Timezone"
                   >
                     <MenuItem value="GMT+07:00">GMT+07:00</MenuItem>
@@ -203,8 +205,8 @@ const UpdateUser = () => {
               margin="normal"
               label="Bio"
               name="bio"
-              value={user.bio}
-              onChange={onChange}
+              value={userInfo.bio}
+              onChange={handleChange}
               variant="outlined"
               multiline
               rows={4}
