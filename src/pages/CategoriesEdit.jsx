@@ -3,9 +3,6 @@ import {
   Breadcrumbs,
   Button,
   Container,
-  List,
-  ListItem,
-  ListItemText,
   Paper,
   TextField,
   Typography,
@@ -15,8 +12,6 @@ import {
   HomeRounded as HomeRoundedIcon,
 } from "@mui/icons-material";
 import { CssBaseline, IconButton, Tooltip } from "@mui/joy";
-import Header from "../components/Header";
-import Sidebar from "../components/Sidebar";
 import React, { useEffect, useState } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Link, useParams } from "react-router-dom";
@@ -81,7 +76,9 @@ function CategoriesEdit() {
     };
     try {
       const response = await axios({
-        url: `${import.meta.env.VITE_API_URL}/categories/${categoriesDetails.id}`,
+        url: `${import.meta.env.VITE_API_URL}/categories/${
+          categoriesDetails.id
+        }`,
         method: "PATCH",
         headers: {
           Authorization: `Bearer ${user.token}`,
@@ -96,10 +93,10 @@ function CategoriesEdit() {
       console.error("Error updating the category:", error);
     }
   };
+
   return (
     categoriesDetails && (
       <>
-        <CssBaseline />
         <Box
           sx={{
             display: "flex",
@@ -107,8 +104,6 @@ function CategoriesEdit() {
             background: "white",
           }}
         >
-          <Header />
-          <Sidebar />
           <Box
             component="main"
             className="MainContent"
@@ -127,26 +122,6 @@ function CategoriesEdit() {
               gap: 1,
             }}
           >
-            <Box sx={{ display: "flex", alignItems: "center" }}>
-              <Breadcrumbs size="sm" aria-label="breadcrumbs" sx={{ pl: 0 }}>
-                <Link
-                  to={"/"}
-                  separator={<ChevronRightRoundedIcon fontSize="sm" />}
-                >
-                  <HomeRoundedIcon />
-                </Link>
-                <Link to={"/dashboard"} sx={{ fontSize: 12, fontWeight: 500 }}>
-                  Dashboard
-                </Link>
-                <Typography
-                  color="primary"
-                  sx={{ fontWeight: 500, fontSize: 12 }}
-                >
-                  Category details
-                </Typography>
-              </Breadcrumbs>
-            </Box>
-
             <Box
               sx={{
                 display: "flex",

@@ -15,17 +15,13 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
-import Header from "../components/Header";
-import Sidebar from "../components/Sidebar";
-import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
-import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 import { Link, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import "react-toastify/dist/ReactToastify.css";
 import CloseIcon from "@mui/icons-material/Close";
-import { Breadcrumbs, CssBaseline, IconButton, Tooltip } from "@mui/joy";
+import { IconButton, Tooltip } from "@mui/joy";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import Pagination from "@mui/material/Pagination";
@@ -126,10 +122,7 @@ function Products() {
   };
   return (
     <>
-      <CssBaseline />
       <Box sx={{ display: "flex", minHeight: "100dvh", bgcolor: "white" }}>
-        <Header />
-        <Sidebar />
         <Box
           component="main"
           className="MainContent"
@@ -150,24 +143,6 @@ function Products() {
             bgcolor: "white",
           }}
         >
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Breadcrumbs
-              size="sm"
-              aria-label="breadcrumbs"
-              separator={<ChevronRightRoundedIcon fontSize="sm" />}
-              sx={{ pl: 0 }}
-            >
-              <Link to={"/"}>
-                <HomeRoundedIcon />
-              </Link>
-              <Typography
-                color="primary"
-                sx={{ fontWeight: 500, fontSize: 12 }}
-              >
-                Home
-              </Typography>
-            </Breadcrumbs>
-          </Box>
           <Box
             sx={{
               display: "flex",

@@ -1,22 +1,16 @@
 import {
   Box,
-  Breadcrumbs,
   Button,
   Container,
-  CssBaseline,
   Typography,
 } from "@mui/joy";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
-import Sidebar from "../components/Sidebar";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import Header from "../components/Header";
-import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
-import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { Formik, Form, Field } from "formik";
@@ -80,10 +74,9 @@ function OrderView() {
   return (
     orderDetails && (
       <>
-        <CssBaseline />
+
         <Box sx={{ display: "flex", minHeight: "100dvh" }}>
-          <Header />
-          <Sidebar />
+  
           <Box
             component="main"
             className="MainContent"
@@ -103,38 +96,6 @@ function OrderView() {
               gap: 1,
             }}
           >
-            <Box sx={{ display: "flex", alignItems: "center" }}>
-              <Breadcrumbs size="sm" aria-label="breadcrumbs" sx={{ pl: 0 }}>
-                <Link
-                  aria-label="Home"
-                  separator={<ChevronRightRoundedIcon fontSize="sm" />}
-                >
-                  <HomeRoundedIcon />
-                </Link>
-                <Link sx={{ fontSize: 12, fontWeight: 500 }}>Dashboard</Link>
-                <Typography
-                  color="primary"
-                  sx={{ fontWeight: 500, fontSize: 12 }}
-                >
-                  Order view
-                </Typography>
-              </Breadcrumbs>
-            </Box>
-            <Box
-              sx={{
-                display: "flex",
-                mb: 1,
-                gap: 1,
-                flexDirection: { xs: "column", sm: "row" },
-                alignItems: { xs: "start", sm: "center" },
-                flexWrap: "wrap",
-                justifyContent: "space-between",
-              }}
-            >
-              <Typography level="h2" component="h1">
-                Order details
-              </Typography>
-            </Box>
             <Container maxWidth="sm">
               <Paper elevation={3} sx={{ padding: 2, marginTop: 4 }}>
                 <Typography variant="h4" component="h1" gutterBottom>

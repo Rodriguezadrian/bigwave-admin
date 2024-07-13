@@ -1,23 +1,13 @@
 import {
   Box,
-  Breadcrumbs,
   Button,
   Container,
-  List,
-  ListItem,
-  ListItemText,
   Paper,
   TextField,
   Typography,
 } from "@mui/material";
-import {
-  ChevronRightRounded as ChevronRightRoundedIcon,
-  HomeRounded as HomeRoundedIcon,
-} from "@mui/icons-material";
-import { CssBaseline, IconButton, Tooltip } from "@mui/joy";
+import { IconButton, Tooltip } from "@mui/joy";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import Header from "../components/Header";
-import Sidebar from "../components/Sidebar";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
@@ -100,7 +90,6 @@ function ProductsEdit() {
   return (
     productsDetails && (
       <>
-        <CssBaseline />
         <Box
           sx={{
             display: "flex",
@@ -108,8 +97,6 @@ function ProductsEdit() {
             background: "white",
           }}
         >
-          <Header />
-          <Sidebar />
           <Box
             component="main"
             className="MainContent"
@@ -128,22 +115,6 @@ function ProductsEdit() {
               gap: 1,
             }}
           >
-            <Box sx={{ display: "flex", alignItems: "center" }}>
-              <Breadcrumbs size="sm" aria-label="breadcrumbs" sx={{ pl: 0 }}>
-                <Link separator={<ChevronRightRoundedIcon fontSize="sm" />}>
-                  <HomeRoundedIcon />
-                </Link>
-                <Link sx={{ fontSize: 12, fontWeight: 500 }}>Dashboard</Link>
-                <Box>
-                  <Typography
-                    color="primary"
-                    sx={{ fontWeight: 500, fontSize: 12 }}
-                  >
-                    Product details
-                  </Typography>
-                </Box>
-              </Breadcrumbs>
-            </Box>
             <Box
               sx={{
                 display: "flex",

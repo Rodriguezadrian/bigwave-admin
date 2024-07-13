@@ -13,9 +13,10 @@ import { useSelector } from "react-redux";
 import { Navigate, Outlet } from "react-router-dom";
 import { createRoutesFromElements, Route } from "react-router-dom";
 import Messages from "./pages/Messages";
-import UsersList from "./pages/UsersList";
 import Products from "./pages/Products";
 import AllOrders from "./pages/AllOrders";
+import Layout from "./pages/Layout";
+import AllUsers from "./pages/AllUsers";
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -32,24 +33,28 @@ function App() {
       <>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<ProtectedRoute />}>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/users" element={<UsersList />} />
-          <Route path="/create-user" element={<NewUser />} />
-          <Route path="/update-user/:id" element={<UpdateUser />} />
-          <Route path="/orders" element={<AllOrders />} />
-          <Route path="/orders/details/:id" element={<OrderView />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/products/edit/:id" element={<ProductsEdit />} />
-          <Route path="/categories" element={<Categories />} />
-          <Route path="/categories/edit/:id" element={<CategoriesEdit />} />
-          <Route path="/messages" element={<Messages />} />
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="profile" element={<Profile />} />
+            <Route path="users" element={<AllUsers />} />
+            <Route path="create-user" element={<NewUser />} />
+            <Route path="update-user/:id" element={<UpdateUser />} />
+            <Route path="orders" element={<AllOrders />} />
+            <Route path="orders/details/:id" element={<OrderView />} />
+            <Route path="products" element={<Products />} />
+            <Route path="products/edit/:id" element={<ProductsEdit />} />
+            <Route path="categories" element={<Categories />} />
+            <Route path="categories/edit/:id" element={<CategoriesEdit />} />
+            <Route path="messages" element={<Messages />} />
+            <Route path="layout" element={<Layout />} />
+          </Route>
         </Route>
-
         <Route path="*" element={<ErrorPage />} />
       </>
     )
   );
+
   return <RouterProvider router={router} />;
 }
+
 export default App;

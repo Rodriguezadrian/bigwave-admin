@@ -1,13 +1,4 @@
-import {
-  Box,
-  Breadcrumbs,
-  Container,
-  CssBaseline,
-  Grid,
-  Typography,
-  Button,
-  IconButton,
-} from "@mui/joy";
+import { Box, Button, Container } from "@mui/joy";
 import React, { useEffect, useState } from "react";
 import {
   TableContainer,
@@ -18,18 +9,15 @@ import {
   TableCell,
   TableBody,
 } from "@mui/material";
-import Header from "../components/Header";
-import Sidebar from "../components/Sidebar";
-import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
-import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import { Link } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
+import IconButton from "@mui/material/IconButton";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-function UsersList() {
+function AllUsers() {
   const user = useSelector((state) => state.user);
   const [users, setUsers] = useState([]);
   // Modal state
@@ -54,10 +42,7 @@ function UsersList() {
   return (
     users && (
       <>
-        <CssBaseline />
         <Box sx={{ display: "flex", minHeight: "100dvh" }}>
-          <Header />
-          <Sidebar />
           <Box
             component="main"
             className="MainContent"
@@ -77,35 +62,6 @@ function UsersList() {
               gap: 1,
             }}
           >
-            <Box sx={{ display: "flex", alignItems: "center" }}>
-              <Breadcrumbs
-                size="sm"
-                aria-label="breadcrumbs"
-                separator={<ChevronRightRoundedIcon fontSize="sm" />}
-                sx={{ pl: 0 }}
-              >
-                <Link to={"/"}>
-                  <HomeRoundedIcon />
-                </Link>
-                <Typography
-                  color="primary"
-                  sx={{ fontWeight: 500, fontSize: 12 }}
-                >
-                  Users
-                </Typography>
-              </Breadcrumbs>
-            </Box>
-            <Box
-              sx={{
-                display: "flex",
-                mb: 1,
-                gap: 1,
-                flexDirection: { xs: "column", sm: "row" },
-                alignItems: { xs: "start", sm: "center" },
-                flexWrap: "wrap",
-                justifyContent: "space-between",
-              }}
-            ></Box>
             <Container>
               <Box display="flex" justifyContent="flex-end" mb={2}>
                 <Button
@@ -169,4 +125,4 @@ function UsersList() {
   );
 }
 
-export default UsersList;
+export default AllUsers;

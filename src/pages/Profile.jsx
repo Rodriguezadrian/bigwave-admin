@@ -13,11 +13,6 @@ import {
   FormControl,
   Paper,
 } from "@mui/material";
-import { Breadcrumbs, Container, CssBaseline, Link } from "@mui/joy";
-import Header from "../components/Header";
-import Sidebar from "../components/Sidebar";
-import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
-import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 
 const AdminProfileForm = () => {
   const [user, setUser] = useState({
@@ -46,10 +41,7 @@ const AdminProfileForm = () => {
   };
   return (
     <>
-      <CssBaseline />
       <Box sx={{ display: "flex", minHeight: "100dvh" }}>
-        <Header />
-        <Sidebar />
         <Box
           component="main"
           className="MainContent"
@@ -69,31 +61,6 @@ const AdminProfileForm = () => {
             gap: 1,
           }}
         >
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Breadcrumbs size="sm" aria-label="breadcrumbs" sx={{ pl: 0 }}>
-              <Link separator={<ChevronRightRoundedIcon fontSize="sm" />}>
-                <HomeRoundedIcon />
-              </Link>
-              <Link sx={{ fontSize: 12, fontWeight: 500 }}>Users</Link>
-              <Typography
-                color="primary"
-                sx={{ fontWeight: 500, fontSize: 12 }}
-              >
-                My profile
-              </Typography>
-            </Breadcrumbs>
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              mb: 1,
-              gap: 1,
-              flexDirection: { xs: "column", sm: "row" },
-              alignItems: { xs: "start", sm: "center" },
-              flexWrap: "wrap",
-              justifyContent: "space-between",
-            }}
-          ></Box>
           <Paper
             component="form"
             onSubmit={handleSubmit}

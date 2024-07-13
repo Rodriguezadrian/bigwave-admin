@@ -1,22 +1,18 @@
 import {
   Box,
-  Breadcrumbs,
   Button,
   Container,
-  CssBaseline,
   Typography,
 } from "@mui/joy";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
-import Sidebar from "../components/Sidebar";
-import Header from "../components/Header";
+
 import { InputLabel, Select, MenuItem, FormControl } from "@mui/material";
-import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
-import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
+
 import { useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function NewUser() {
@@ -30,7 +26,6 @@ function NewUser() {
   });
 
   const navigate = useNavigate();
-
 
   const handleChange = (e) => {
     setUserData({
@@ -63,14 +58,10 @@ function NewUser() {
       toast.error("Failed to create user");
     }
   };
-  console.log(userData);
 
   return (
     <>
-      <CssBaseline />
       <Box sx={{ display: "flex", minHeight: "100dvh" }}>
-        <Header />
-        <Sidebar />
         <Box
           component="main"
           className="MainContent"
@@ -90,35 +81,6 @@ function NewUser() {
             gap: 1,
           }}
         >
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Breadcrumbs size="sm" aria-label="breadcrumbs" sx={{ pl: 0 }}>
-              <Link separator={<ChevronRightRoundedIcon fontSize="sm" />}>
-                <HomeRoundedIcon />
-              </Link>
-              <Link sx={{ fontSize: 12, fontWeight: 500 }}>Users</Link>
-              <Typography
-                color="primary"
-                sx={{ fontWeight: 500, fontSize: 12 }}
-              >
-                Create new user
-              </Typography>
-            </Breadcrumbs>
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              mb: 1,
-              gap: 1,
-              flexDirection: { xs: "column", sm: "row" },
-              alignItems: { xs: "start", sm: "center" },
-              flexWrap: "wrap",
-              justifyContent: "space-between",
-            }}
-          >
-            <Typography level="h2" component="h1">
-              Create new user
-            </Typography>
-          </Box>
           <Container maxWidth="sm">
             <Paper elevation={3} sx={{ padding: 2, marginTop: 4 }}>
               <Typography
@@ -127,7 +89,7 @@ function NewUser() {
                 component="h1"
                 gutterBottom
               >
-                Information
+                New User
               </Typography>
               <Box
                 component="form"

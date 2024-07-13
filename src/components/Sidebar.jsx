@@ -293,13 +293,7 @@ export default function Sidebar() {
                   <ListItemButton onClick={() => setOpen(!open)}>
                     <GroupRoundedIcon />
                     <ListItemContent>
-                      <Typography level="title-sm">
-                        <Link
-                          style={{ color: "black", textDecoration: "none" }}
-                        >
-                          Users
-                        </Link>
-                      </Typography>
+                      <Typography level="title-sm">Users</Typography>
                     </ListItemContent>
                     <KeyboardArrowDownIcon
                       sx={[
