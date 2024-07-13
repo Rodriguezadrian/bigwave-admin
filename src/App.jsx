@@ -17,6 +17,7 @@ import Products from "./pages/Products";
 import AllOrders from "./pages/AllOrders";
 import Layout from "./pages/Layout";
 import AllUsers from "./pages/AllUsers";
+import Images from "./pages/Images";
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -46,7 +47,7 @@ function App() {
             <Route path="categories" element={<Categories />} />
             <Route path="categories/edit/:id" element={<CategoriesEdit />} />
             <Route path="messages" element={<Messages />} />
-            <Route path="layout" element={<Layout />} />
+            <Route path="images" element={<Images />} />
           </Route>
         </Route>
         <Route path="*" element={<ErrorPage />} />
