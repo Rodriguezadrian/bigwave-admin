@@ -82,6 +82,25 @@ function Categories() {
     }
   };
 
+  const handleDeleteCategory = async (id) => {
+    if (window.confirm("Are you sure you want to delete this category?")) {
+      try {
+        await axios({
+          url: `${import.meta.env.VITE_API_URL}/categories/${id}`,
+          method: "delete",
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        });
+        setCategories(categories.filter((category) => category.id !== id));
+        toast.info("Category deleted successfully");
+      } catch (error) {
+        console.error("Error deleting category:", error);
+        toast.error("Failed to delete category");
+      }
+    }
+  };
+
   return (
     <>
       <Box sx={{ display: "flex", minHeight: "100dvh" }}>
@@ -154,8 +173,10 @@ function Categories() {
                         <Link to={`/categories/edit/${category.slug}`}>
                           <EditIcon />
                         </Link>
-                        <Link onClick={() => handleDelete(category.id)}>
-                          <DeleteIcon />
+                        <Link>
+                          <DeleteIcon
+                            onClick={() => handleDeleteCategory(category.id)}
+                          />
                         </Link>
                       </TableCell>
                     </TableRow>
