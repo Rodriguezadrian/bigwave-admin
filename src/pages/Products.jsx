@@ -103,23 +103,25 @@ function Products() {
     }
   };
 
-  const handleDelete = async (id) => {
-    try {
-      await axios({
-        url: `${import.meta.env.VITE_API_URL}/products/${id}`,
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
-      });
-
-      setProducts(products.filter((product) => product.id !== id));
-      toast.info(`Product deleted succesfully`);
-      navigate("/products");
-    } catch (error) {
-      console.error("Error updating the product:", error);
+  const handleDeleteProduct = async (id) => {
+    if (window.confirm("Are you sure you want to delete this product?")) {
+      try {
+        await axios({
+          url: `${import.meta.env.VITE_API_URL}/products/${id}`,
+          method: "delete",
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        });
+        setProducts(products.filter((product) => product.id !== id));
+        toast.info("Product deleted successfully");
+      } catch (error) {
+        console.error("Error deleting product:", error);
+        toast.error("Failed to delete product");
+      }
     }
   };
+
   return (
     <>
       <Box sx={{ display: "flex", minHeight: "100dvh", bgcolor: "white" }}>
@@ -193,8 +195,10 @@ function Products() {
                         <Link to={`/products/edit/${product.slug}`}>
                           <EditIcon />
                         </Link>
-                        <Link onClick={() => handleDelete(product.id)}>
-                          <DeleteIcon />
+                        <Link>
+                          <DeleteIcon
+                            onClick={() => handleDeleteProduct(product.id)}
+                          />
                         </Link>
                       </TableCell>
                     </TableRow>
@@ -246,7 +250,7 @@ function Products() {
                 </Typography>
                 <Tooltip title="Close">
                   <IconButton>
-                    <CloseIcon color="danger" onClick={handleCloseModal} />
+                    <CloseIcon color="danger" onClick={handleDeleteProduct} />
                   </IconButton>
                 </Tooltip>
               </Box>
