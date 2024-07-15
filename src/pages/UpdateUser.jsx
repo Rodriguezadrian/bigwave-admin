@@ -24,15 +24,12 @@ const UpdateUser = () => {
     lastName: "",
     role: "",
     email: "",
-    country: "",
-    timezone: "",
-    bio: "",
   });
 
   useEffect(() => {
     const getUserInfo = async () => {
       const response = await axios({
-        url: `${import.meta.env.VITE_API_URL}/client-profile/${params.id}`,
+        url: `${import.meta.env.VITE_API_URL}/admins/${params.id}`,
         method: "get",
         headers: {
           Authorization: `Bearer ${user.token}`,
@@ -104,7 +101,7 @@ const UpdateUser = () => {
                   margin="normal"
                   label="First Name"
                   name="firstName"
-                  value={userInfo.firstName}
+                  value={userInfo.firstName ? userInfo.firstName : "Undefined"}
                   onChange={handleChange}
                   variant="outlined"
                 />
@@ -115,30 +112,12 @@ const UpdateUser = () => {
                   margin="normal"
                   label="Last Name"
                   name="lastName"
-                  value={userInfo.lastName}
+                  value={userInfo.lastName ? userInfo.lastName : "Undefined"}
                   onChange={handleChange}
                   variant="outlined"
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
-                <FormControl fullWidth margin="normal" variant="outlined">
-                  <InputLabel>Role</InputLabel>
-                  <Select
-                    name="role"
-                    value={userInfo.role}
-                    onChange={handleChange}
-                    label="Role"
-                  >
-                    <MenuItem value="UI Developer">UI Developer</MenuItem>
-                    <MenuItem value="Backend Developer">
-                      Backend Developer
-                    </MenuItem>
-                    <MenuItem value="Fullstack Developer">
-                      Fullstack Developer
-                    </MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
+
               <Grid item xs={12} sm={6}>
                 <TextField
                   fullWidth
@@ -150,48 +129,8 @@ const UpdateUser = () => {
                   variant="outlined"
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
-                <FormControl fullWidth margin="normal" variant="outlined">
-                  <InputLabel>Country</InputLabel>
-                  <Select
-                    name="country"
-                    value={userInfo.country}
-                    onChange={handleChange}
-                    label="Country"
-                  >
-                    <MenuItem value="Thailand">Thailand</MenuItem>
-                    <MenuItem value="USA">USA</MenuItem>
-                    <MenuItem value="Germany">Germany</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <FormControl fullWidth margin="normal" variant="outlined">
-                  <InputLabel>Timezone</InputLabel>
-                  <Select
-                    name="timezone"
-                    value={userInfo.timezone}
-                    onChange={handleChange}
-                    label="Timezone"
-                  >
-                    <MenuItem value="GMT+07:00">GMT+07:00</MenuItem>
-                    <MenuItem value="GMT-05:00">GMT-05:00</MenuItem>
-                    <MenuItem value="GMT+01:00">GMT+01:00</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
             </Grid>
-            <TextField
-              fullWidth
-              margin="normal"
-              label="Bio"
-              name="bio"
-              value={userInfo.bio}
-              onChange={handleChange}
-              variant="outlined"
-              multiline
-              rows={4}
-            />
+
             <Box
               sx={{
                 display: "flex",
