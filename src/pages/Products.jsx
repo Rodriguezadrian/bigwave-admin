@@ -255,7 +255,7 @@ function Products() {
                 </Typography>
                 <Tooltip title="Close">
                   <IconButton>
-                    <CloseIcon color="danger" onClick={handleDeleteProduct} />
+                    <CloseIcon color="danger" onClick={handleCloseModal} />
                   </IconButton>
                 </Tooltip>
               </Box>

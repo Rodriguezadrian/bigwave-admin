@@ -1,4 +1,4 @@
-import { Tooltip } from "@mui/joy";
+import { FormControl, Tooltip } from "@mui/joy";
 import React, { useEffect, useState } from "react";
 import {
   TableContainer,
@@ -9,11 +9,14 @@ import {
   TextField,
   TableHead,
   TableRow,
+  MenuItem,
   TableCell,
   Container,
   Modal,
   TableBody,
   Typography,
+  InputLabel,
+  Select,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
@@ -30,9 +33,11 @@ function AllUsers() {
   const user = useSelector((state) => state.user);
   const [users, setUsers] = useState([]);
   const [formData, setFormData] = useState({
-    name: "",
-    description: "",
-    image: "",
+    firstname: "",
+    lastname: "",
+    role: "",
+    email: "",
+    password: "",
   });
 
   const handleChange = (e) => {
@@ -60,6 +65,8 @@ function AllUsers() {
     };
     getUsers();
   }, [user.token]);
+
+  console.log(formData);
 
   const handleDelete = (userEmail) => {
     const toastId = toast.warn(
@@ -142,6 +149,7 @@ function AllUsers() {
                       <TableCell>ID</TableCell>
                       <TableCell>Name</TableCell>
                       <TableCell>Email</TableCell>
+                      <TableCell>Role</TableCell>
                       <TableCell
                         sx={{ display: "flex", justifyContent: "center" }}
                       >
@@ -161,6 +169,9 @@ function AllUsers() {
                         <TableCell>{user.id}</TableCell>
                         <TableCell>{user.firstname}</TableCell>
                         <TableCell>{user.email}</TableCell>
+                        <TableCell>
+                          {user.role ? user.role : "Undefined"}
+                        </TableCell>
                         <TableCell
                           sx={{
                             display: "flex",
@@ -184,6 +195,7 @@ function AllUsers() {
             </Container>
           </Box>
         </Box>
+
         <Modal
           open={openModal}
           onClose={handleCloseModal}
@@ -220,36 +232,61 @@ function AllUsers() {
               </Tooltip>
             </Box>
             <TextField
-              id="name"
-              name="name"
-              label="Name"
+              id="firstname"
+              name="firstname"
+              label="Firstname"
               type="text"
               variant="outlined"
-              value={formData.name}
+              value={formData.firstname}
               onChange={handleChange}
               fullWidth
               required
               sx={{ marginBottom: 2, marginTop: 2 }}
             />
             <TextField
-              id="description"
-              name="description"
-              label="Description"
+              id="lastname"
+              name="lastname"
+              label="Lastname"
               type="text"
               variant="outlined"
-              value={formData.description}
+              value={formData.lastname}
+              onChange={handleChange}
+              fullWidth
+              required
+              sx={{ marginBottom: 2 }}
+            />
+            <FormControl margin="normal" variant="outlined">
+              <InputLabel>Role</InputLabel>
+              <Select
+                sx={{ marginBottom: 2 }}
+                name="role"
+                value={formData.role}
+                label="Role"
+                onChange={handleChange}
+              >
+                <MenuItem value="Customer">Customer</MenuItem>
+                <MenuItem value="Admin">Admin</MenuItem>
+              </Select>
+            </FormControl>
+            <TextField
+              id="email"
+              name="email"
+              label="Email"
+              type="text"
+              variant="outlined"
+              value={formData.email}
               onChange={handleChange}
               fullWidth
               required
               sx={{ marginBottom: 2 }}
             />
             <TextField
-              id="image"
-              name="image"
-              label="Image Link"
+              id="password"
+              name="password"
+              label="Password"
               type="text"
               variant="outlined"
-              value={formData.image}
+              value={formData.password}
               onChange={handleChange}
               fullWidth
               required
