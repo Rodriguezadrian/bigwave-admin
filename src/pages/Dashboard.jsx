@@ -1,7 +1,5 @@
 import * as React from "react";
 import Box from "@mui/joy/Box";
-import OrderTable from "../components/OrderTable";
-import OrderList from "../components/OrderList";
 import ChartsProducts from "../components/ChartProducts";
 
 function Dashboard() {
@@ -22,14 +20,11 @@ function Dashboard() {
           display: "flex",
           flexDirection: "column",
           minWidth: 0,
-          height: "100dvh",
+          minHeightheight: "100dvh",
           gap: 1,
         }}
       >
         <ChartsProducts />
-
-        <OrderTable />
-        <OrderList />
       </Box>
     </>
   );
