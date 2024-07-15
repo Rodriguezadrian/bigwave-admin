@@ -29,7 +29,7 @@ import { closeSidebar } from "../utils";
 import { Image, LoginOutlined } from "@mui/icons-material";
 import { logout } from "../redux/userSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { toast, ToastContainer } from "react-toastify";
+import { toast} from "react-toastify";
 import { Link } from "react-router-dom";
 
 function Toggler({ defaultExpanded = false, renderToggle, children }) {
@@ -70,7 +70,7 @@ export default function Sidebar() {
   };
   return (
     <>
-      <ToastContainer />
+   
       <Sheet
         className="Sidebar"
         sx={{

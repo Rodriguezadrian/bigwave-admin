@@ -25,6 +25,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useSelector } from "react-redux";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function AllUsers() {
   const user = useSelector((state) => state.user);
@@ -59,7 +61,43 @@ function AllUsers() {
       setUsers(response.data);
     };
     getUsers();
-  }, []);
+  }, [user.token]);
+
+  const handleDelete = (userEmail) => {
+    const toastId = toast.warn(
+      <div>
+        <p>Are you sure you want to delete this user?</p>
+        <Button
+          onClick={() => {
+            toast.dismiss(toastId);
+            confirmDelete(userEmail);
+          }}
+        >
+          Yes, delete
+        </Button>
+        <Button onClick={() => toast.dismiss(toastId)}>Cancel</Button>
+      </div>,
+      { autoClose: false, closeOnClick: false, draggable: false }
+    );
+  };
+
+  const confirmDelete = async (userEmail) => {
+    try {
+      await axios({
+        url: `${import.meta.env.VITE_API_URL}/users/client-profile`,
+        method: "delete",
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+        data: { email: userEmail },
+      });
+      setUsers(users.filter((u) => u.email !== userEmail));
+      toast.success("User deleted successfully.");
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      toast.error("Failed to delete user.");
+    }
+  };
 
   return (
     users && (
@@ -125,9 +163,11 @@ function AllUsers() {
                           }}
                         >
                           <Link to={`/update-user/${user.id}`}>
-                            <EditIcon />
+                            <IconButton>
+                              <EditIcon />
+                            </IconButton>
                           </Link>
-                          <IconButton onClick={() => handleDelete("")}>
+                          <IconButton onClick={() => handleDelete(user.email)}>
                             <DeleteIcon />
                           </IconButton>
                         </TableCell>
@@ -168,7 +208,7 @@ function AllUsers() {
                 Add New Category
               </Typography>
               <Tooltip title="Close">
-                <IconButton onClick={handleCloseModal} >
+                <IconButton onClick={handleCloseModal}>
                   <CloseIcon color="danger" />
                 </IconButton>
               </Tooltip>

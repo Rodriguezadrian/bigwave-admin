@@ -28,7 +28,6 @@ const AdminProfileForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Aquí puedes manejar la lógica para enviar los datos del formulario
     console.log("Form submitted:", user);
   };
 
