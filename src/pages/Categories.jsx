@@ -19,8 +19,9 @@ import CloseIcon from "@mui/icons-material/Close";
 import { toast } from "react-toastify";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import Pagination from "@mui/material/Pagination";
 import "react-toastify/dist/ReactToastify.css";
-import { IconButton, Tooltip } from "@mui/joy";
+import { IconButton, Stack, Tooltip } from "@mui/joy";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -28,11 +29,24 @@ import { Link } from "react-router-dom";
 function Categories() {
   const user = useSelector((state) => state.user);
   const [categories, setCategories] = useState([]);
+  const [page, setPage] = useState(1);
   const [formData, setFormData] = useState({
     name: "",
     description: "",
     image: "",
   });
+
+  const categoriesPerPage = 10;
+  const displayedCategories = categories.slice(
+    (page - 1) * categoriesPerPage,
+    page * categoriesPerPage
+  );
+
+  const emptyRows = categoriesPerPage - displayedCategories.length;
+
+  const handlePageChange = (event, value) => {
+    setPage(value);
+  };
 
   const handleChange = (e) => {
     setFormData({
@@ -76,7 +90,7 @@ function Categories() {
         },
       });
       handleCloseModal();
-      console.log("Category created:", response.data)
+      console.log("Category created:", response.data);
       toast.info("Category created successfully");
     } catch (error) {
       console.log(error);
@@ -153,7 +167,7 @@ function Categories() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {categories.map((category) => (
+                  {displayedCategories.map((category) => (
                     <TableRow key={category.id}>
                       <TableCell>{category.id}</TableCell>
                       <TableCell>{category.name}</TableCell>
@@ -171,9 +185,21 @@ function Categories() {
                       </TableCell>
                     </TableRow>
                   ))}
+                  {emptyRows > 0 && (
+                    <TableRow style={{ height: 53 * emptyRows }}>
+                      <TableCell colSpan={3} />
+                    </TableRow>
+                  )}
                 </TableBody>
               </Table>
             </TableContainer>
+            <Stack spacing={2} sx={{ mt: 2 }}>
+              <Pagination
+                count={Math.ceil(categories.length / displayedCategories)}
+                page={page}
+                onChange={handlePageChange}
+              />
+            </Stack>
           </Container>
           <Modal
             open={openModal}

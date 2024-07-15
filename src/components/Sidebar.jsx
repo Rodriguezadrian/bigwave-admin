@@ -24,8 +24,9 @@ import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import BrightnessAutoRoundedIcon from "@mui/icons-material/BrightnessAutoRounded";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import ColorSchemeToggle from "./ColorSchemeToggle";
+
 import { closeSidebar } from "../utils";
-import { LoginOutlined } from "@mui/icons-material";
+import { Image, LoginOutlined } from "@mui/icons-material";
 import { logout } from "../redux/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
@@ -121,20 +122,28 @@ export default function Sidebar() {
           }}
           onClick={() => closeSidebar()}
         />
-        <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
+        <Box
+          sx={{
+            display: "flex",
+            gap: 1,
+            alignItems: "center",
+          }}
+        >
           <Link to={"/"}>
-            <IconButton variant="soft" color="primary" size="sm">
-              <BrightnessAutoRoundedIcon />
-            </IconButton>
+            <Box
+              component="img"
+              sx={{
+                height: 60,
+                width: 160,
+                maxHeight: { xs: 233, md: 167 },
+                maxWidth: { xs: 350, md: 250 },
+              }}
+              alt="Logo de BigWave"
+              src="src/assets/bigwave-logo.png"
+            />
+            <ColorSchemeToggle sx={{ ml: "auto" }} />
           </Link>
-          <Typography level="title-lg">BigWave</Typography>
-          <ColorSchemeToggle sx={{ ml: "auto" }} />
         </Box>
-        <Input
-          size="sm"
-          startDecorator={<SearchRoundedIcon />}
-          placeholder="Search"
-        />
         <Box
           sx={{
             minHeight: 0,
