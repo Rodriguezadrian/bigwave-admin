@@ -66,17 +66,6 @@ const Login = () => {
             gap: 1,
           }}
         >
-          <Box
-            sx={{
-              display: "flex",
-              mb: 1,
-              gap: 1,
-              flexDirection: { xs: "column", sm: "row" },
-              alignItems: { xs: "start", sm: "center" },
-              flexWrap: "wrap",
-              justifyContent: "space-between",
-            }}
-          ></Box>
           <Container component="main" maxWidth="sm" className="mt-5">
             <Paper elevation={6} sx={{ p: 4, borderRadius: 3 }}>
               <Typography

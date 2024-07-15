@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 
 const AdminProfileForm = () => {
-  const [user, setUser] = useState({
+  const [userEx, setUserEx] = useState({
     name: "Admin",
     lastName: "Lopez",
     role: "UI Developer",
@@ -72,8 +72,8 @@ const AdminProfileForm = () => {
             </Typography>
             <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
               <Avatar
-                alt={user.name}
-                src={user.avatarUrl}
+                alt={userEx.name}
+                src={userEx.avatarUrl}
                 sx={{ width: 80, height: 80, mr: 2 }}
               />
               <Button variant="outlined" component="label">
@@ -88,7 +88,7 @@ const AdminProfileForm = () => {
                   margin="normal"
                   label="First Name"
                   name="firstName"
-                  value={user.name}
+                  value={userEx.name}
                   onChange={onChange}
                   variant="outlined"
                 />
@@ -99,7 +99,7 @@ const AdminProfileForm = () => {
                   margin="normal"
                   label="Last Name"
                   name="lastName"
-                  value={user.lastName}
+                  value={userEx.lastName}
                   onChange={onChange}
                   variant="outlined"
                 />
@@ -109,7 +109,7 @@ const AdminProfileForm = () => {
                   <InputLabel>Role</InputLabel>
                   <Select
                     name="role"
-                    value={user.role}
+                    value={userEx.role}
                     onChange={onChange}
                     label="Role"
                   >
@@ -129,7 +129,7 @@ const AdminProfileForm = () => {
                   margin="normal"
                   label="Email"
                   name="email"
-                  value={user.email}
+                  value={userEx.email}
                   onChange={onChange}
                   variant="outlined"
                 />
@@ -139,7 +139,7 @@ const AdminProfileForm = () => {
                   <InputLabel>Country</InputLabel>
                   <Select
                     name="country"
-                    value={user.country}
+                    value={userEx.country}
                     onChange={onChange}
                     label="Country"
                   >
@@ -154,7 +154,7 @@ const AdminProfileForm = () => {
                   <InputLabel>Timezone</InputLabel>
                   <Select
                     name="timezone"
-                    value={user.timezone}
+                    value={userEx.timezone}
                     onChange={onChange}
                     label="Timezone"
                   >
@@ -170,7 +170,7 @@ const AdminProfileForm = () => {
               margin="normal"
               label="Bio"
               name="bio"
-              value={user.bio}
+              value={userEx.bio}
               onChange={onChange}
               variant="outlined"
               multiline

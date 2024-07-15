@@ -145,17 +145,6 @@ function Products() {
             bgcolor: "white",
           }}
         >
-          <Box
-            sx={{
-              display: "flex",
-              mb: 1,
-              gap: 1,
-              flexDirection: { xs: "column", sm: "row" },
-              alignItems: { xs: "start", sm: "center" },
-              flexWrap: "wrap",
-              justifyContent: "space-between",
-            }}
-          ></Box>
           <Container>
             <Typography variant="h4" gutterBottom>
               Products

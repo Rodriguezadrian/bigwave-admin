@@ -1,9 +1,4 @@
-import {
-  Box,
-  Button,
-  Container,
-  Typography,
-} from "@mui/joy";
+import { Box, Button, Container, Typography } from "@mui/joy";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 
@@ -50,8 +45,7 @@ function NewUser() {
           lastname: userData.lastname,
         },
       });
-      console.log("User created:", response.data);
-      toast.info("User created successfully");
+      toast.info(`User ${userData.firstname} created successfully`);
       navigate("/users");
     } catch (error) {
       console.log(error);

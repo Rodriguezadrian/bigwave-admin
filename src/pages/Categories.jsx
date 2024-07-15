@@ -76,6 +76,7 @@ function Categories() {
         },
       });
       handleCloseModal();
+      console.log("Category created:", response.data)
       toast.info("Category created successfully");
     } catch (error) {
       console.log(error);
@@ -123,17 +124,6 @@ function Categories() {
             gap: 1,
           }}
         >
-          <Box
-            sx={{
-              display: "flex",
-              mb: 1,
-              gap: 1,
-              flexDirection: { xs: "column", sm: "row" },
-              alignItems: { xs: "start", sm: "center" },
-              flexWrap: "wrap",
-              justifyContent: "space-between",
-            }}
-          ></Box>
           <Container>
             <Typography variant="h4" gutterBottom>
               Categories

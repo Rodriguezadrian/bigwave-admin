@@ -115,17 +115,6 @@ function ProductsEdit() {
               gap: 1,
             }}
           >
-            <Box
-              sx={{
-                display: "flex",
-                mb: 1,
-                gap: 1,
-                flexDirection: { xs: "column", sm: "row" },
-                alignItems: { xs: "start", sm: "center" },
-                flexWrap: "wrap",
-                justifyContent: "space-between",
-              }}
-            ></Box>
             <Container maxWidth="sm">
               <Paper elevation={3} sx={{ padding: 2, marginTop: 4 }}>
                 <Box display={"flex"} justifyContent={"space-between"}>
