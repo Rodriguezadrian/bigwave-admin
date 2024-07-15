@@ -7,13 +7,11 @@ import {
   TextField,
   Typography,
   Paper,
-  CircularProgress,
   Divider,
   Modal,
 } from "@mui/material";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import CloseIcon from "@mui/icons-material/Close";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import EditIcon from "@mui/icons-material/Edit";
@@ -38,7 +36,9 @@ const UserEdit = () => {
       try {
         setLoading(true);
         const response = await axios({
-          url: `${import.meta.env.VITE_API_URL}/admins/1`,
+          url: `${import.meta.env.VITE_API_URL}/users/client-profile/${
+            params.id
+          }`,
           method: "get",
           headers: {
             Authorization: `Bearer ${user.token}`,

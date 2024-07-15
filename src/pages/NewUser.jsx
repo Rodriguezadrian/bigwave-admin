@@ -27,11 +27,16 @@ function NewUser() {
     });
   };
 
+  const handleUrl =
+    userData.role === "Customer"
+      ? `${import.meta.env.VITE_API_URL}/users`
+      : `${import.meta.env.VITE_API_URL}/admins`;
+
   const handleAddNewUser = async (e) => {
     e.preventDefault();
     try {
       const response = await axios({
-        url: `${import.meta.env.VITE_API_URL}/users`,
+        url: handleUrl,
         method: "post",
         headers: {
           Authorization: `Bearer ${user.token}`,
