@@ -14,6 +14,7 @@ import {
   Paper,
 } from "@mui/material";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const AdminProfileForm = () => {
   const user = useSelector((state) => state.user);
@@ -116,7 +117,9 @@ const AdminProfileForm = () => {
                 mt: 2,
               }}
             >
-              <Button variant="outlined">Cancel</Button>
+              <Link to={"/users"}>
+                <Button variant="outlined">Cancel</Button>
+              </Link>
               <Button type="submit" variant="contained" color="primary">
                 Save Changes
               </Button>
