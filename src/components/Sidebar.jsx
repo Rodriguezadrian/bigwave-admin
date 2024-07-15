@@ -29,7 +29,7 @@ import { closeSidebar } from "../utils";
 import { Image, LoginOutlined } from "@mui/icons-material";
 import { logout } from "../redux/userSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { toast} from "react-toastify";
+import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
 function Toggler({ defaultExpanded = false, renderToggle, children }) {
@@ -70,7 +70,6 @@ export default function Sidebar() {
   };
   return (
     <>
-   
       <Sheet
         className="Sidebar"
         sx={{
@@ -342,15 +341,6 @@ export default function Sidebar() {
                   >
                     <ListItem>
                       <ListItemButton>New user</ListItemButton>
-                    </ListItem>
-                  </Link>
-
-                  <Link
-                    to={"/update-user"}
-                    style={{ color: "black", textDecoration: "none" }}
-                  >
-                    <ListItem>
-                      <ListItemButton>Update user</ListItemButton>
                     </ListItem>
                   </Link>
                 </List>

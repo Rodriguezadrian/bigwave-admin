@@ -13,18 +13,10 @@ import {
   FormControl,
   Paper,
 } from "@mui/material";
+import { useSelector } from "react-redux";
 
 const AdminProfileForm = () => {
-  const [userEx, setUserEx] = useState({
-    name: "Admin",
-    lastName: "Lopez",
-    role: "UI Developer",
-    email: "admin@example.com",
-    avatarUrl: "https://via.placeholder.com/150",
-    country: "Thailand",
-    timezone: "GMT+07:00",
-    bio: "Admin bio goes here...",
-  });
+  const user = useSelector((state) => state.user);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -33,7 +25,7 @@ const AdminProfileForm = () => {
 
   const onChange = (e) => {
     const { name, value } = e.target;
-    setUser((prevUser) => ({
+    setUserEx((prevUser) => ({
       ...prevUser,
       [name]: value,
     }));
@@ -71,8 +63,8 @@ const AdminProfileForm = () => {
             </Typography>
             <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
               <Avatar
-                alt={userEx.name}
-                src={userEx.avatarUrl}
+                alt={user.name ? user.name : "Undefined"}
+                src={user.avatarUrl ? user.avatarUrl : "Undefined"}
                 sx={{ width: 80, height: 80, mr: 2 }}
               />
               <Button variant="outlined" component="label">
@@ -87,7 +79,7 @@ const AdminProfileForm = () => {
                   margin="normal"
                   label="First Name"
                   name="firstName"
-                  value={userEx.name}
+                  value={user.name ? user.name : "Undefined"}
                   onChange={onChange}
                   variant="outlined"
                 />
@@ -98,29 +90,10 @@ const AdminProfileForm = () => {
                   margin="normal"
                   label="Last Name"
                   name="lastName"
-                  value={userEx.lastName}
+                  value={user.lastName ? user.lastName : "Undefined"}
                   onChange={onChange}
                   variant="outlined"
                 />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <FormControl fullWidth margin="normal" variant="outlined">
-                  <InputLabel>Role</InputLabel>
-                  <Select
-                    name="role"
-                    value={userEx.role}
-                    onChange={onChange}
-                    label="Role"
-                  >
-                    <MenuItem value="UI Developer">UI Developer</MenuItem>
-                    <MenuItem value="Backend Developer">
-                      Backend Developer
-                    </MenuItem>
-                    <MenuItem value="Fullstack Developer">
-                      Fullstack Developer
-                    </MenuItem>
-                  </Select>
-                </FormControl>
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -128,53 +101,13 @@ const AdminProfileForm = () => {
                   margin="normal"
                   label="Email"
                   name="email"
-                  value={userEx.email}
+                  value={user.email}
                   onChange={onChange}
                   variant="outlined"
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
-                <FormControl fullWidth margin="normal" variant="outlined">
-                  <InputLabel>Country</InputLabel>
-                  <Select
-                    name="country"
-                    value={userEx.country}
-                    onChange={onChange}
-                    label="Country"
-                  >
-                    <MenuItem value="Thailand">Thailand</MenuItem>
-                    <MenuItem value="USA">USA</MenuItem>
-                    <MenuItem value="Germany">Germany</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <FormControl fullWidth margin="normal" variant="outlined">
-                  <InputLabel>Timezone</InputLabel>
-                  <Select
-                    name="timezone"
-                    value={userEx.timezone}
-                    onChange={onChange}
-                    label="Timezone"
-                  >
-                    <MenuItem value="GMT+07:00">GMT+07:00</MenuItem>
-                    <MenuItem value="GMT-05:00">GMT-05:00</MenuItem>
-                    <MenuItem value="GMT+01:00">GMT+01:00</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
             </Grid>
-            <TextField
-              fullWidth
-              margin="normal"
-              label="Bio"
-              name="bio"
-              value={userEx.bio}
-              onChange={onChange}
-              variant="outlined"
-              multiline
-              rows={4}
-            />
+
             <Box
               sx={{
                 display: "flex",
