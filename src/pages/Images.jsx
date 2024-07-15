@@ -72,17 +72,15 @@ function ImageManagement() {
   };
 
   const handleDeleteImage = async (id) => {
-    if (window.confirm("Are you sure you want to delete this image?")) {
-      try {
-        await axios.delete(`${import.meta.env.VITE_API_URL}/images/${id}`, {
-          headers: { Authorization: `Bearer ${user.token}` },
-        });
-        toast.success("Image deleted successfully");
-        fetchImages();
-      } catch (error) {
-        console.error("Error deleting image:", error);
-        toast.error("Failed to delete image");
-      }
+    try {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/images/${id}`, {
+        headers: { Authorization: `Bearer ${user.token}` },
+      });
+      toast.success("Image deleted successfully");
+      fetchImages();
+    } catch (error) {
+      console.error("Error deleting image:", error);
+      toast.error("Failed to delete image");
     }
   };
 

@@ -17,10 +17,10 @@ import React, { useEffect, useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import CloseIcon from "@mui/icons-material/Close";
 import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Pagination from "@mui/material/Pagination";
-import "react-toastify/dist/ReactToastify.css";
 import { IconButton, Stack, Tooltip } from "@mui/joy";
 import axios from "axios";
 import { useSelector } from "react-redux";
@@ -46,6 +46,24 @@ function Categories() {
 
   const handlePageChange = (event, value) => {
     setPage(value);
+  };
+
+  const handleDelete = (id) => {
+    const toastId = toast.warn(
+      <div>
+        <p>Are you sure you want to delete this user?</p>
+        <Button
+          onClick={() => {
+            toast.dismiss(toastId);
+            handleDeleteCategory(id);
+          }}
+        >
+          Yes, delete
+        </Button>
+        <Button onClick={() => toast.dismiss(toastId)}>Cancel</Button>
+      </div>,
+      { autoClose: false, closeOnClick: false, draggable: false }
+    );
   };
 
   const handleChange = (e) => {
@@ -91,28 +109,25 @@ function Categories() {
       });
       handleCloseModal();
       console.log("Category created:", response.data);
-      toast.info("Category created successfully");
     } catch (error) {
       console.log(error);
     }
   };
 
   const handleDeleteCategory = async (id) => {
-    if (window.confirm("Are you sure you want to delete this category?")) {
-      try {
-        await axios({
-          url: `${import.meta.env.VITE_API_URL}/categories/${id}`,
-          method: "delete",
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-        });
-        setCategories(categories.filter((category) => category.id !== id));
-        toast.info("Category deleted successfully");
-      } catch (error) {
-        console.error("Error deleting category:", error);
-        toast.error("Failed to delete category");
-      }
+    try {
+      await axios({
+        url: `${import.meta.env.VITE_API_URL}/categories/${id}`,
+        method: "delete",
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      setCategories(categories.filter((category) => category.id !== id));
+      toast.info("Category deleted successfully");
+    } catch (error) {
+      console.error("Error deleting category:", error);
+      toast.error("Failed to delete category");
     }
   };
 
@@ -179,7 +194,7 @@ function Categories() {
                         </Link>
                         <Link>
                           <DeleteIcon
-                            onClick={() => handleDeleteCategory(category.id)}
+                            onClick={() => handleDelete(category.id)}
                           />
                         </Link>
                       </TableCell>

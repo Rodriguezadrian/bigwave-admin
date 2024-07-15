@@ -1,21 +1,19 @@
-import {
-  Box,
-  Button,
-  Container,
-  Modal,
-  TextField,
-  Tooltip,
-  Typography,
-} from "@mui/joy";
+import { Tooltip } from "@mui/joy";
 import React, { useEffect, useState } from "react";
 import {
   TableContainer,
+  Box,
   Paper,
   Table,
+  Button,
+  TextField,
   TableHead,
   TableRow,
   TableCell,
+  Container,
+  Modal,
   TableBody,
+  Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
@@ -123,8 +121,15 @@ function AllUsers() {
             }}
           >
             <Container>
+              <Typography variant="h4" gutterBottom>
+                All users
+              </Typography>
               <Box display="flex" justifyContent="flex-end" mb={2}>
-                <Button variant="contained" color="success">
+                <Button
+                  onClick={handleOpenModal}
+                  variant="contained"
+                  color="success"
+                >
                   {" "}
                   New
                   <AddIcon fontSize="medium" color="white" />
@@ -205,8 +210,9 @@ function AllUsers() {
               alignItems={"center"}
             >
               <Typography id="modal-modal-title" variant="h6" component="h2">
-                Add New Category
+                Add New User
               </Typography>
+
               <Tooltip title="Close">
                 <IconButton onClick={handleCloseModal}>
                   <CloseIcon color="danger" />

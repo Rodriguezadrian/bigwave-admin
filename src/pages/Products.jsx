@@ -60,6 +60,24 @@ function Products() {
     });
   };
 
+  const handleDelete = (id) => {
+    const toastId = toast.warn(
+      <div>
+        <p>Are you sure you want to delete this user?</p>
+        <Button
+          onClick={() => {
+            toast.dismiss(toastId);
+            handleDeleteProduct(id);
+          }}
+        >
+          Yes, delete
+        </Button>
+        <Button onClick={() => toast.dismiss(toastId)}>Cancel</Button>
+      </div>,
+      { autoClose: false, closeOnClick: false, draggable: false }
+    );
+  };
+
   useEffect(() => {
     const getProducts = async () => {
       const response = await axios({
@@ -104,21 +122,19 @@ function Products() {
   };
 
   const handleDeleteProduct = async (id) => {
-    if (window.confirm("Are you sure you want to delete this product?")) {
-      try {
-        await axios({
-          url: `${import.meta.env.VITE_API_URL}/products/${id}`,
-          method: "delete",
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-        });
-        setProducts(products.filter((product) => product.id !== id));
-        toast.info("Product deleted successfully");
-      } catch (error) {
-        console.error("Error deleting product:", error);
-        toast.error("Failed to delete product");
-      }
+    try {
+      await axios({
+        url: `${import.meta.env.VITE_API_URL}/products/${id}`,
+        method: "delete",
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      setProducts(products.filter((product) => product.id !== id));
+      toast.info("Product deleted successfully");
+    } catch (error) {
+      console.error("Error deleting product:", error);
+      toast.error("Failed to delete product");
     }
   };
 
@@ -186,7 +202,7 @@ function Products() {
                         </Link>
                         <Link>
                           <DeleteIcon
-                            onClick={() => handleDeleteProduct(product.id)}
+                            onClick={() => handleDelete(product.id)}
                           />
                         </Link>
                       </TableCell>
