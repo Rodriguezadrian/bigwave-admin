@@ -10,7 +10,7 @@ import {
   CircularProgress,
 } from "@mui/material";
 import { useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Profile = () => {
@@ -21,38 +21,38 @@ const Profile = () => {
     email: "",
   });
   const [loading, setLoading] = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getCategories = async () => {
       const response = await axios({
-        url: `${import.meta.env.VITE_API_URL}/admins/1`,
+        url: `${import.meta.env.VITE_API_URL}/admins/${user.id}`,
         method: "get",
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
       });
       setUserInfo(response.data);
-     
     };
     getCategories();
   }, []);
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const response = await axios({
-  //       url: `${import.meta.env.VITE_API_URL}/admins/${user.email}`,
-  //       method: "PATCH",
-  //       headers: { Authorization: `Bearer ${user.token}` },
-  //       data: userInfo,
-  //     });
-  //     console.log("Profile updated:", response.data);
-  //     // Aquí puedes agregar una notificación de éxito o redirigir al usuario
-  //   } catch (error) {
-  //     console.error("Error updating profile:", error);
-  //     // Aquí puedes agregar una notificación de error
-  //   }
-  // };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios({
+        url: `${import.meta.env.VITE_API_URL}/admins/${user.id}`,
+        method: "PATCH",
+        headers: { Authorization: `Bearer ${user.token}` },
+        data: userInfo.email,
+      });
+      console.log("Profile updated:", response.data);
+      navigate("/users");
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      // Aquí puedes agregar una notificación de error
+    }
+  };
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -95,7 +95,7 @@ const Profile = () => {
         ) : (
           <Paper
             component="form"
-   
+            onSubmit={handleSubmit}
             elevation={3}
             sx={{ mt: 3, mx: "auto", maxWidth: 600, p: 3, bgcolor: "white" }}
           >
