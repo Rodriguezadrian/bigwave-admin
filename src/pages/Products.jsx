@@ -57,8 +57,6 @@ function Products() {
     categoryId: "",
   });
 
-  const navigate = useNavigate();
-
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -96,7 +94,7 @@ function Products() {
       setProducts(response.data);
     };
     getProducts();
-  }, [products]);
+  }, []);
 
   //open update profile modal
   const [openModal, setOpenModal] = useState(false);
@@ -156,7 +154,7 @@ function Products() {
       setCategories(response.data);
     };
     getCategories();
-  }, [categories]);
+  }, []);
 
   return (
     <>
@@ -202,7 +200,7 @@ function Products() {
                   <TableRow>
                     <TableCell>ID</TableCell>
                     <TableCell>Name</TableCell>
-                    <TableCell>CategoryID</TableCell>
+                    <TableCell>Category</TableCell>
                     <TableCell>Price</TableCell>
                     <TableCell>Stock</TableCell>
                     <TableCell
@@ -217,7 +215,21 @@ function Products() {
                     <TableRow key={product.id}>
                       <TableCell>{product.id}</TableCell>
                       <TableCell>{product.name}</TableCell>
-                      <TableCell>{product.CategoryId}</TableCell>
+                      <TableCell>
+                        {product.CategoryId === 1
+                          ? "Nuts, Cereals and Seeds"
+                          : product.CategoryId === 2
+                          ? "Sugars and Substitutes"
+                          : product.CategoryId === 3
+                          ? "Dairy, Plant based milk"
+                          : product.CategoryId === 4
+                          ? "Superfoods"
+                          : product.CategoryId === 5
+                          ? "Beverages"
+                          : product.CategoryId === 6
+                          ? "Pantry and Spices"
+                          : "Snacks"}
+                      </TableCell>
                       <TableCell>{product.price}</TableCell>
                       <TableCell>{product.stock}</TableCell>
                       <TableCell

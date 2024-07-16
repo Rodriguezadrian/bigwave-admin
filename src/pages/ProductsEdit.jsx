@@ -89,7 +89,7 @@ function ProductsEdit() {
       description: formData.description,
       image: formData.image,
       price: formData.price,
-      CategoryId: parseInt(formData.CategoryId, 10), // Convierte a número
+      CategoryId: parseInt(formData.CategoryId, 10),
     };
     try {
       const response = await axios({
