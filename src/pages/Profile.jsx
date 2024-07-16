@@ -7,6 +7,7 @@ import {
   TextField,
   Typography,
   Paper,
+  CircularProgress,
 } from "@mui/material";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
@@ -15,37 +16,43 @@ import axios from "axios";
 const Profile = () => {
   const user = useSelector((state) => state.user);
   const [userInfo, setUserInfo] = useState({
-    firstName: user.name || "",
-    lastName: user.lastName || "",
-    email: user.email || "",
+    firstName: "",
+    lastName: "",
+    email: "",
   });
-  const params = useParams();
+  const [loading, setLoading] = useState();
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const response = await axios({
-          url: `${import.meta.env.VITE_API_URL}/admins/${params.id}`,
-          method: "PATCH",
-          headers: { Authorization: `Bearer ${user.token}` },
-        });
-        setUserInfo({
-          firstName: response.data.name,
-          lastName: response.data.lastName,
-          email: response.data.email,
-        });
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
+    const getCategories = async () => {
+      const response = await axios({
+        url: `${import.meta.env.VITE_API_URL}/admins/1`,
+        method: "get",
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      setUserInfo(response.data);
+     
     };
+    getCategories();
+  }, []);
 
-    fetchUserData();
-  }, [user.id, user.token]);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form submitted:", user);
-  };
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const response = await axios({
+  //       url: `${import.meta.env.VITE_API_URL}/admins/${user.email}`,
+  //       method: "PATCH",
+  //       headers: { Authorization: `Bearer ${user.token}` },
+  //       data: userInfo,
+  //     });
+  //     console.log("Profile updated:", response.data);
+  //     // Aquí puedes agregar una notificación de éxito o redirigir al usuario
+  //   } catch (error) {
+  //     console.error("Error updating profile:", error);
+  //     // Aquí puedes agregar una notificación de error
+  //   }
+  // };
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -55,32 +62,40 @@ const Profile = () => {
     }));
   };
 
-
   return (
-    <>
-      <Box sx={{ display: "flex", minHeight: "100dvh" }}>
-        <Box
-          component="main"
-          className="MainContent"
-          sx={{
-            px: { xs: 2, md: 6 },
-            pt: {
-              xs: "calc(12px + var(--Header-height))",
-              sm: "calc(12px + var(--Header-height))",
-              md: 3,
-            },
-            pb: { xs: 2, sm: 2, md: 3 },
-            flex: 1,
-            display: "flex",
-            flexDirection: "column",
-            minWidth: 0,
-            height: "100dvh",
-            gap: 1,
-          }}
-        >
+    <Box sx={{ display: "flex", minHeight: "100dvh" }}>
+      <Box
+        component="main"
+        className="MainContent"
+        sx={{
+          px: { xs: 2, md: 6 },
+          pt: {
+            xs: "calc(12px + var(--Header-height))",
+            sm: "calc(12px + var(--Header-height))",
+            md: 3,
+          },
+          pb: { xs: 2, sm: 2, md: 3 },
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          minWidth: 0,
+          height: "100dvh",
+          gap: 1,
+        }}
+      >
+        {loading ? (
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            height="100%"
+          >
+            <CircularProgress />
+          </Box>
+        ) : (
           <Paper
             component="form"
-            onSubmit={handleSubmit}
+   
             elevation={3}
             sx={{ mt: 3, mx: "auto", maxWidth: 600, p: 3, bgcolor: "white" }}
           >
@@ -89,11 +104,11 @@ const Profile = () => {
             </Typography>
             <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
               <Avatar
-                alt={user.name ? user.name : "Undefined"}
-                src={user.avatarUrl ? user.avatarUrl : "Undefined"}
+                alt={userInfo.firstName || "User"}
+                src={user.avatarUrl || "/default-avatar.png"}
                 sx={{ width: 80, height: 80, mr: 2 }}
               />
-              <Button variant="outlined" component="label">
+              <Button variant="outlined" component="label" disabled={loading}>
                 Upload
                 <input type="file" hidden />
               </Button>
@@ -108,6 +123,7 @@ const Profile = () => {
                   value={userInfo.firstName}
                   onChange={onChange}
                   variant="outlined"
+                  disabled={loading}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -119,6 +135,7 @@ const Profile = () => {
                   value={userInfo.lastName}
                   onChange={onChange}
                   variant="outlined"
+                  disabled={loading}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -130,6 +147,7 @@ const Profile = () => {
                   value={userInfo.email}
                   onChange={onChange}
                   variant="outlined"
+                  disabled={loading}
                 />
               </Grid>
             </Grid>
@@ -143,16 +161,23 @@ const Profile = () => {
               }}
             >
               <Link to={"/users"}>
-                <Button variant="outlined">Cancel</Button>
+                <Button variant="outlined" disabled={loading}>
+                  Cancel
+                </Button>
               </Link>
-              <Button type="submit" variant="contained" color="primary">
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                disabled={loading}
+              >
                 Save Changes
               </Button>
             </Box>
           </Paper>
-        </Box>
+        )}
       </Box>
-    </>
+    </Box>
   );
 };
 

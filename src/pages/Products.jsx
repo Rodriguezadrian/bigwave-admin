@@ -182,6 +182,7 @@ function Products() {
                   <TableRow>
                     <TableCell>ID</TableCell>
                     <TableCell>Name</TableCell>
+                    <TableCell>Price</TableCell>
                     <TableCell
                       sx={{ display: "flex", justifyContent: "center" }}
                     >
@@ -194,6 +195,7 @@ function Products() {
                     <TableRow key={product.id}>
                       <TableCell>{product.id}</TableCell>
                       <TableCell>{product.name}</TableCell>
+                      <TableCell>{product.price}</TableCell>
                       <TableCell
                         sx={{ display: "flex", justifyContent: "space-evenly" }}
                       >

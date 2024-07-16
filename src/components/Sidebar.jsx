@@ -278,22 +278,7 @@ export default function Sidebar() {
                 </List>
               </Toggler>
             </ListItem> */}
-            <Link
-              style={{ color: "black", textDecoration: "none" }}
-              to={"/messages"}
-            >
-              <ListItem>
-                <ListItemButton role="menuitem">
-                  <QuestionAnswerRoundedIcon />
-                  <ListItemContent>
-                    <Typography level="title-sm">Messages</Typography>
-                  </ListItemContent>
-                  <Chip size="sm" color="primary" variant="solid">
-                    4
-                  </Chip>
-                </ListItemButton>
-              </ListItem>
-            </Link>
+          
 
             <ListItem nested>
               <Toggler

@@ -12,12 +12,12 @@ import {
   Typography,
   Grid,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { toast } from "react-toastify";
@@ -28,10 +28,13 @@ function AllUsers() {
   const user = useSelector((state) => state.user);
   const [customers, setCustomers] = useState([]);
   const [admins, setAdmins] = useState([]);
+  const dispatch = useDispatch();
   // Modal state
   const [openModal, setOpenModal] = useState(false);
   const handleOpenModal = () => setOpenModal(true);
   const handleCloseModal = () => setOpenModal(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getCustomers = async () => {

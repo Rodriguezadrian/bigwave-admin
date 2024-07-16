@@ -12,7 +12,6 @@ import Categories from "./pages/Categories";
 import { useSelector } from "react-redux";
 import { Navigate, Outlet } from "react-router-dom";
 import { createRoutesFromElements, Route } from "react-router-dom";
-import Messages from "./pages/Messages";
 import Products from "./pages/Products";
 import AllOrders from "./pages/AllOrders";
 import Layout from "./pages/Layout";
@@ -48,7 +47,6 @@ function App() {
             <Route path="products/edit/:id" element={<ProductsEdit />} />
             <Route path="categories" element={<Categories />} />
             <Route path="categories/edit/:id" element={<CategoriesEdit />} />
-            <Route path="messages" element={<Messages />} />
             <Route path="images" element={<Images />} />
           </Route>
         </Route>

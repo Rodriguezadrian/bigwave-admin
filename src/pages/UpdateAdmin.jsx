@@ -26,40 +26,33 @@ const UpdateAdmin = () => {
     email: "",
     firstname: "",
     lastname: "",
-    role: "",
   });
   const [loading, setLoading] = useState(true);
   const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
-    const getUserInfo = async () => {
+    const fetchAdminData = async () => {
+      setLoading(true);
       try {
-        setLoading(true);
         const response = await axios({
           url: `${import.meta.env.VITE_API_URL}/admins/${params.id}`,
-          method: "get",
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
+          method: "GET",
+          headers: { Authorization: `Bearer ${user.token}` },
         });
         setUserInfo({
-          email: response.data.email || "",
-          firstname: response.data.firstname || "",
-          lastname: response.data.lastname || "",
-          role: response.data.role || "",
+          firstName: response.data.name ?? "",
+          lastName: response.data.lastName ?? "",
+          email: response.data.email ?? "",
         });
-        if (response.data.role === "Admin") {
-          setOpenModal(true);
-        }
       } catch (error) {
-        console.error("Error fetching user info:", error);
-        toast.error("Failed to fetch user information");
+        console.error("Error fetching user data:", error);
       } finally {
         setLoading(false);
       }
     };
-    getUserInfo();
-  }, [user.token, params.id]);
+
+    fetchAdminData();
+  }, [user.token]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -70,7 +63,7 @@ const UpdateAdmin = () => {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
-        data: userInfo,
+        data: {email: userInfo.email}
       });
       toast.success("User information updated successfully");
       navigate("/users");
