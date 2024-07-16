@@ -1,23 +1,46 @@
-// AdminProfileForm.js
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Avatar,
   Box,
   Button,
   Grid,
-  MenuItem,
   TextField,
   Typography,
-  Select,
-  InputLabel,
-  FormControl,
   Paper,
 } from "@mui/material";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import axios from "axios";
 
-const AdminProfileForm = () => {
+const Profile = () => {
   const user = useSelector((state) => state.user);
+  const [userInfo, setUserInfo] = useState({
+    firstName: user.name || "",
+    lastName: user.lastName || "",
+    email: user.email || "",
+  });
+  const params = useParams();
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axios({
+          url: `${import.meta.env.VITE_API_URL}/admins/${params.id}`,
+          method: "PATCH",
+          headers: { Authorization: `Bearer ${user.token}` },
+        });
+        setUserInfo({
+          firstName: response.data.name,
+          lastName: response.data.lastName,
+          email: response.data.email,
+        });
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, [user.id, user.token]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -26,11 +49,13 @@ const AdminProfileForm = () => {
 
   const onChange = (e) => {
     const { name, value } = e.target;
-    setUserEx((prevUser) => ({
+    setUserInfo((prevUser) => ({
       ...prevUser,
       [name]: value,
     }));
   };
+
+
   return (
     <>
       <Box sx={{ display: "flex", minHeight: "100dvh" }}>
@@ -80,7 +105,7 @@ const AdminProfileForm = () => {
                   margin="normal"
                   label="First Name"
                   name="firstName"
-                  value={user.name ? user.name : "Undefined"}
+                  value={userInfo.firstName}
                   onChange={onChange}
                   variant="outlined"
                 />
@@ -91,7 +116,7 @@ const AdminProfileForm = () => {
                   margin="normal"
                   label="Last Name"
                   name="lastName"
-                  value={user.lastName ? user.lastName : "Undefined"}
+                  value={userInfo.lastName}
                   onChange={onChange}
                   variant="outlined"
                 />
@@ -102,7 +127,7 @@ const AdminProfileForm = () => {
                   margin="normal"
                   label="Email"
                   name="email"
-                  value={user.email}
+                  value={userInfo.email}
                   onChange={onChange}
                   variant="outlined"
                 />
@@ -131,4 +156,4 @@ const AdminProfileForm = () => {
   );
 };
 
-export default AdminProfileForm;
+export default Profile;

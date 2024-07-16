@@ -185,9 +185,11 @@ function AllUsers() {
                     <TableCell>{user.firstname}</TableCell>
                     <TableCell>{user.email}</TableCell>
                     <TableCell>
-                      <IconButton onClick={handleOpenModal}>
-                        <EditIcon />
-                      </IconButton>
+                      <Link to={`/update-admin/${user.id}`}>
+                        <IconButton>
+                          <EditIcon />
+                        </IconButton>
+                      </Link>
 
                       <IconButton
                         onClick={() => handleDelete(user.email, userType)}
@@ -202,65 +204,6 @@ function AllUsers() {
           </Paper>
         </Grid>
       </Grid>
-
-      <Modal
-        open={openModal}
-        onClose={handleCloseModal}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box
-          component="form"
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: 400,
-            bgcolor: "background.paper",
-            boxShadow: 24,
-            p: 4,
-            borderRadius: 1,
-          }}
-        >
-          <Box
-            display={"flex"}
-            justifyContent={"space-between"}
-            alignItems={"center"}
-          >
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Edit Admin
-            </Typography>
-            <Tooltip title="Close">
-              <IconButton onClick={handleCloseModal}>
-                <CloseIcon color="danger" />
-              </IconButton>
-            </Tooltip>
-          </Box>
-          <TextField
-            id="email"
-            name="email"
-            label="Email"
-            type="text"
-            variant="outlined"
-            value=""
-            // onChange={handleChange}
-            fullWidth
-            required
-            sx={{ marginBottom: 2, marginTop: 2 }}
-          />
-
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            fullWidth
-            sx={{ mt: 2 }}
-          >
-            Save
-          </Button>
-        </Box>
-      </Modal>
     </Box>
   );
 }

@@ -18,6 +18,7 @@ import AllOrders from "./pages/AllOrders";
 import Layout from "./pages/Layout";
 import AllUsers from "./pages/AllUsers";
 import Images from "./pages/Images";
+import UpdateAdmin from "./pages/UpdateAdmin";
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -40,6 +41,7 @@ function App() {
             <Route path="users" element={<AllUsers />} />
             <Route path="create-user" element={<NewUser />} />
             <Route path="update-user/:id" element={<UpdateUser />} />
+            <Route path="update-admin/:id" element={<UpdateAdmin />} />
             <Route path="orders" element={<AllOrders />} />
             <Route path="orders/details/:id" element={<OrderView />} />
             <Route path="products" element={<Products />} />
