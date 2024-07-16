@@ -91,27 +91,35 @@ function AllUsers() {
     );
   };
 
-  const confirmDelete = async (id) => {
+  const confirmDelete = async (id, userType) => {
     try {
+      let url;
+      if (userType === "Customer") {
+        url = `${import.meta.env.VITE_API_URL}/users/client-profile/${id}`;
+      } else {
+        url = `${import.meta.env.VITE_API_URL}/admins/${id}`;
+      }
+
       await axios({
-        url: `${import.meta.env.VITE_API_URL}/users/client-profile/${id}`,
+        url: url,
         method: "delete",
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
       });
+
       if (userType === "Customer") {
-        setCustomers(customers.filter((u) => u.email !== id));
+        setCustomers(customers.filter((customer) => customer.id !== id));
       } else {
-        setAdmins(admins.filter((u) => u.email !== id));
+        setAdmins(admins.filter((admin) => admin.id !== id));
       }
+
       toast.success("User deleted successfully.");
     } catch (error) {
       console.error("Error deleting user:", error);
       toast.error("Failed to delete user.");
     }
   };
-
   return (
     <Box sx={{ flexGrow: 1, p: 3 }}>
       <Typography variant="h4" gutterBottom>
@@ -194,9 +202,7 @@ function AllUsers() {
                         </IconButton>
                       </Link>
 
-                      <IconButton
-                        onClick={() => handleDelete(user.email, userType)}
-                      >
+                      <IconButton onClick={() => handleDelete(user.id)}>
                         <DeleteIcon />
                       </IconButton>
                     </TableCell>
