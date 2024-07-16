@@ -19,7 +19,7 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
-import { Link, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { toast } from "react-toastify";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -52,9 +52,10 @@ function Products() {
   const [formData, setFormData] = useState({
     name: "",
     description: "",
+    stock: "",
     image: "",
     price: "",
-    categoryId: "",
+    CategoryId: "",
   });
 
   const handleChange = (e) => {
@@ -115,6 +116,7 @@ function Products() {
           description: formData.description,
           image: formData.image,
           price: formData.price,
+          stock: parseInt(formData.stock),
         },
       });
 
@@ -262,6 +264,7 @@ function Products() {
               />
             </Stack>
           </Container>
+          
           <Modal
             open={openModal}
             onClose={handleCloseModal}
@@ -323,6 +326,18 @@ function Products() {
                 sx={{ marginBottom: 2 }}
               />
               <TextField
+                id="stock"
+                name="stock"
+                label="Stock"
+                type="number"
+                variant="outlined"
+                value={formData.stock || ""}
+                onChange={handleChange}
+                fullWidth
+                required
+                sx={{ marginBottom: 2 }}
+              />
+              <TextField
                 id="price"
                 name="price"
                 label="Price"
@@ -338,9 +353,9 @@ function Products() {
                 <InputLabel>Category</InputLabel>
                 <Select
                   sx={{ marginBottom: 2 }}
-                  name="category"
+                  name="CategoryId"
                   onChange={handleChange}
-                  value={formData.categoryId || ""}
+                  value={formData.CategoryId || ""}
                 >
                   {categories.map((category) => (
                     <MenuItem key={category.id} value={category.name}>
