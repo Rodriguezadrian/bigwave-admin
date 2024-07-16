@@ -88,20 +88,19 @@ function AllUsers() {
     );
   };
 
-  const confirmDelete = async (userEmail, userType) => {
+  const confirmDelete = async (id) => {
     try {
       await axios({
-        url: `${import.meta.env.VITE_API_URL}/users/client-profile`,
+        url: `${import.meta.env.VITE_API_URL}/users/client-profile/${id}`,
         method: "delete",
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
-        data: { email: userEmail },
       });
       if (userType === "Customer") {
-        setCustomers(customers.filter((u) => u.email !== userEmail));
+        setCustomers(customers.filter((u) => u.email !== id));
       } else {
-        setAdmins(admins.filter((u) => u.email !== userEmail));
+        setAdmins(admins.filter((u) => u.email !== id));
       }
       toast.success("User deleted successfully.");
     } catch (error) {
@@ -115,15 +114,7 @@ function AllUsers() {
       <Typography variant="h4" gutterBottom>
         All Users
       </Typography>
-      <Box display="flex" justifyContent="flex-end" mb={2}>
-        <Button
-          onClick={() => setOpenModal(true)}
-          variant="contained"
-          color="success"
-        >
-          New <AddIcon fontSize="small" />
-        </Button>
-      </Box>
+
       <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
           <Paper sx={{ mb: 2 }}>
@@ -157,9 +148,7 @@ function AllUsers() {
                           <EditIcon />
                         </IconButton>
                       </Link>
-                      <IconButton
-                        onClick={() => handleDelete(user.email, userType)}
-                      >
+                      <IconButton onClick={() => handleDelete(user.id)}>
                         <DeleteIcon />
                       </IconButton>
                     </TableCell>
