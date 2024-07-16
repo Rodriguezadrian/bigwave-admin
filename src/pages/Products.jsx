@@ -7,6 +7,10 @@ import {
   Table,
   TableBody,
   TableCell,
+  MenuItem,
+  FormControl,
+  InputLabel,
+  Select,
   TextField,
   TableContainer,
   TableHead,
@@ -31,6 +35,7 @@ function Products() {
   const user = useSelector((state) => state.user);
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
+  const [categories, setCategories] = useState([]);
 
   const productsPerPage = 10;
   const displayedProducts = products.slice(
@@ -49,6 +54,7 @@ function Products() {
     description: "",
     image: "",
     price: "",
+    categoryId: "",
   });
 
   const navigate = useNavigate();
@@ -138,6 +144,20 @@ function Products() {
     }
   };
 
+  useEffect(() => {
+    const getCategories = async () => {
+      const response = await axios({
+        url: `${import.meta.env.VITE_API_URL}/categories`,
+        method: "get",
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      setCategories(response.data);
+    };
+    getCategories();
+  }, [categories]);
+
   return (
     <>
       <Box sx={{ display: "flex", minHeight: "100dvh", bgcolor: "white" }}>
@@ -182,6 +202,7 @@ function Products() {
                   <TableRow>
                     <TableCell>ID</TableCell>
                     <TableCell>Name</TableCell>
+                    <TableCell>CategoryID</TableCell>
                     <TableCell>Price</TableCell>
                     <TableCell>Stock</TableCell>
                     <TableCell
@@ -196,6 +217,7 @@ function Products() {
                     <TableRow key={product.id}>
                       <TableCell>{product.id}</TableCell>
                       <TableCell>{product.name}</TableCell>
+                      <TableCell>{product.CategoryId}</TableCell>
                       <TableCell>{product.price}</TableCell>
                       <TableCell>{product.stock}</TableCell>
                       <TableCell
@@ -270,7 +292,7 @@ function Products() {
                 label="Name"
                 type="text"
                 variant="outlined"
-                value={formData.name}
+                value={formData.name || ""}
                 onChange={handleChange}
                 fullWidth
                 required
@@ -282,7 +304,7 @@ function Products() {
                 label="Description"
                 type="text"
                 variant="outlined"
-                value={formData.description}
+                value={formData.description || ""}
                 onChange={handleChange}
                 fullWidth
                 required
@@ -294,12 +316,28 @@ function Products() {
                 label="Price"
                 type="text"
                 variant="outlined"
-                value={formData.price}
+                value={formData.price || ""}
                 onChange={handleChange}
                 fullWidth
                 required
                 sx={{ marginBottom: 2 }}
               />
+              <FormControl fullWidth margin="normal" variant="outlined">
+                <InputLabel>Category</InputLabel>
+                <Select
+                  sx={{ marginBottom: 2 }}
+                  name="category"
+                  onChange={handleChange}
+                  value={formData.categoryId || ""}
+                >
+                  {categories.map((category) => (
+                    <MenuItem key={category.id} value={category.name}>
+                      {category.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+
               <TextField
                 id="image"
                 name="image"

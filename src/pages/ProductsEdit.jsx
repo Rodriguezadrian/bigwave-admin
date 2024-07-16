@@ -2,6 +2,10 @@ import {
   Box,
   Button,
   Container,
+  FormControl,
+  MenuItem,
+  Select,
+  InputLabel,
   Paper,
   TextField,
   Typography,
@@ -19,12 +23,14 @@ function ProductsEdit() {
   const user = useSelector((state) => state.user);
   const params = useParams();
   const [productsDetails, setProductsDetails] = useState();
+  const [categories, setCategories] = useState([]);
 
   const [formData, setFormData] = useState({
     name: "",
     description: "",
     price: "",
     image: "",
+    CategoryId: "",
   });
 
   const handleChange = (e) => {
@@ -53,6 +59,7 @@ function ProductsEdit() {
           description: response.data.description,
           price: response.data.price,
           image: response.data.image,
+          CategoryId: response.data.CategoryId,
         });
       } catch (error) {
         console.error("Error:", error);
@@ -61,6 +68,20 @@ function ProductsEdit() {
     getProductsDetails();
   }, []);
 
+  useEffect(() => {
+    const getCategories = async () => {
+      const response = await axios({
+        url: `${import.meta.env.VITE_API_URL}/categories`,
+        method: "get",
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      setCategories(response.data);
+    };
+    getCategories();
+  }, [categories]);
+
   const handleUpdate = async (e) => {
     e.preventDefault();
     const data = {
@@ -68,6 +89,7 @@ function ProductsEdit() {
       description: formData.description,
       image: formData.image,
       price: formData.price,
+      CategoryId: parseInt(formData.CategoryId, 10), // Convierte a número
     };
     try {
       const response = await axios({
@@ -80,10 +102,11 @@ function ProductsEdit() {
       });
 
       console.log("product updated:", response.data);
-      toast.info("product updated succesfully");
+      toast.info("product updated successfully");
       navigate("/products");
     } catch (error) {
       console.error("Error updating the product:", error);
+      toast.error("Failed to update product");
     }
   };
 
@@ -170,6 +193,26 @@ function ProductsEdit() {
                     fullWidth
                     margin="normal"
                   />
+                  <FormControl fullWidth margin="normal">
+                    <InputLabel id="category-label">Category</InputLabel>
+                    <Select
+                      labelId="CategoryId"
+                      id="CategoryId"
+                      name="CategoryId"
+                      value={formData.CategoryId}
+                      onChange={handleChange}
+                      label="Category"
+                    >
+                      {categories.map((category) => (
+                        <MenuItem
+                          key={category.id}
+                          value={category.id.toString()}
+                        >
+                          {category.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
                   <TextField
                     required
                     id="description"
