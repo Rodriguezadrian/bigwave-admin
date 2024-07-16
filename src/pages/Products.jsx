@@ -183,6 +183,7 @@ function Products() {
                     <TableCell>ID</TableCell>
                     <TableCell>Name</TableCell>
                     <TableCell>Price</TableCell>
+                    <TableCell>Stock</TableCell>
                     <TableCell
                       sx={{ display: "flex", justifyContent: "center" }}
                     >
@@ -196,6 +197,7 @@ function Products() {
                       <TableCell>{product.id}</TableCell>
                       <TableCell>{product.name}</TableCell>
                       <TableCell>{product.price}</TableCell>
+                      <TableCell>{product.stock}</TableCell>
                       <TableCell
                         sx={{ display: "flex", justifyContent: "space-evenly" }}
                       >

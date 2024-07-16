@@ -35,7 +35,7 @@ const Profile = () => {
       setUserInfo(response.data);
     };
     getCategories();
-  }, []);
+  }, [user.id, user.token]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -120,7 +120,7 @@ const Profile = () => {
                   margin="normal"
                   label="First Name"
                   name="firstName"
-                  value={userInfo.firstName}
+                  value={userInfo.firstName || ""}
                   onChange={onChange}
                   variant="outlined"
                   disabled={loading}
@@ -132,7 +132,7 @@ const Profile = () => {
                   margin="normal"
                   label="Last Name"
                   name="lastName"
-                  value={userInfo.lastName}
+                  value={userInfo.lastName || ""}
                   onChange={onChange}
                   variant="outlined"
                   disabled={loading}
@@ -144,7 +144,7 @@ const Profile = () => {
                   margin="normal"
                   label="Email"
                   name="email"
-                  value={userInfo.email}
+                  value={userInfo.email || ""}
                   onChange={onChange}
                   variant="outlined"
                   disabled={loading}

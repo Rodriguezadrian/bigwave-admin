@@ -32,7 +32,7 @@ const Login = () => {
         method: "post",
         data: { email, password },
       });
-console.log(response.data)
+
       if (response.data.token) {
         dispatch(login(response.data));
         navigate("/");
