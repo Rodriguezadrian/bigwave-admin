@@ -90,7 +90,7 @@ function Products() {
       setProducts(response.data);
     };
     getProducts();
-  }, []);
+  }, [products]);
 
   //open update profile modal
   const [openModal, setOpenModal] = useState(false);

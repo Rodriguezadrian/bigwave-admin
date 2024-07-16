@@ -85,7 +85,7 @@ function Categories() {
       setCategories(response.data);
     };
     getCategories();
-  }, []);
+  }, [categories]);
 
   //open update profile modal
   const [openModal, setOpenModal] = useState(false);
