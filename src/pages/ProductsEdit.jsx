@@ -30,6 +30,7 @@ function ProductsEdit() {
     description: "",
     price: "",
     image: "",
+    stock: "",
     CategoryId: "",
   });
 
@@ -59,6 +60,7 @@ function ProductsEdit() {
           description: response.data.description,
           price: response.data.price,
           image: response.data.image,
+          stock: response.data.stock,
           CategoryId: response.data.CategoryId,
         });
       } catch (error) {
@@ -88,6 +90,7 @@ function ProductsEdit() {
       name: formData.name,
       description: formData.description,
       image: formData.image,
+      stock: formData.stock,
       price: formData.price,
       CategoryId: parseInt(formData.CategoryId, 10),
     };
@@ -189,6 +192,16 @@ function ProductsEdit() {
                     name="price"
                     label="Price"
                     value={formData.price}
+                    onChange={handleChange}
+                    fullWidth
+                    margin="normal"
+                  />
+                  <TextField
+                    required
+                    id="stocl"
+                    name="stock"
+                    label="Stock"
+                    value={formData.stock}
                     onChange={handleChange}
                     fullWidth
                     margin="normal"
