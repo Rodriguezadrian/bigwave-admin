@@ -29,6 +29,7 @@ import { Link } from "react-router-dom";
 function Categories() {
   const user = useSelector((state) => state.user);
   const [categories, setCategories] = useState([]);
+  const [updateTrigger, setUpdateTrigger] = useState(0);
   const [page, setPage] = useState(1);
   const [formData, setFormData] = useState({
     name: "",
@@ -85,7 +86,7 @@ function Categories() {
       setCategories(response.data);
     };
     getCategories();
-  }, [categories]);
+  }, []);
 
   //open update profile modal
   const [openModal, setOpenModal] = useState(false);

@@ -71,18 +71,48 @@ function ImageManagement() {
     setImageForm({ ...imageForm, [e.target.name]: e.target.value });
   };
 
-  const handleDeleteImage = async (id) => {
+  const uploadImage = async (file) => {
+    const formData = new FormData();
+    formData.append("image", file);
+
     try {
-      await axios.delete(`${import.meta.env.VITE_API_URL}/images/${id}`, {
-        headers: { Authorization: `Bearer ${user.token}` },
+      const response = await axios({
+        url: `${import.meta.env.VITE_API_URL}/upload-image`,
+        method: "POST",
+        body: formData,
       });
-      toast.success("Image deleted successfully");
-      fetchImages();
+
+      const result = await response.json();
+      if (response.ok) {
+        console.log("Imagen subida con éxito:", result.data);
+      } else {
+        console.error("Error al subir la imagen:", result.error);
+      }
     } catch (error) {
-      console.error("Error deleting image:", error);
-      toast.error("Failed to delete image");
+      console.error("Error al subir la imagen:", error);
     }
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const file = e.target.elements.image.files[0];
+    if (file) {
+      await uploadImage(file);
+    }
+  };
+
+  // const handleDeleteImage = async (id) => {
+  //   try {
+  //     await axios.delete(`${import.meta.env.VITE_API_URL}/images/${id}`, {
+  //       headers: { Authorization: `Bearer ${user.token}` },
+  //     });
+  //     toast.success("Image deleted successfully");
+  //     fetchImages();
+  //   } catch (error) {
+  //     console.error("Error deleting image:", error);
+  //     toast.error("Failed to delete image");
+  //   }
+  // };
 
   return (
     <Container maxWidth="lg">
@@ -170,7 +200,8 @@ function ImageManagement() {
           >
             <CloseIcon />
           </IconButton>
-          <Box component="form" sx={{ mt: 2 }}>
+
+          <Box onSubmit={handleSubmit} component="form" sx={{ mt: 2 }}>
             <TextField
               fullWidth
               margin="normal"
@@ -184,7 +215,7 @@ function ImageManagement() {
               fullWidth
               margin="normal"
               name="url"
-              label="Image URL"
+              type="file"
               value={imageForm.url}
               onChange={handleInputChange}
               required

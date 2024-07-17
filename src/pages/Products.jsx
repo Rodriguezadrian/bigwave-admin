@@ -19,7 +19,7 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -123,7 +123,7 @@ function Products() {
       handleCloseModal();
       toast.info(`Product created successfully`);
     } catch (error) {
-      console.log(error);
+      console.log(`Error adding the product`, error);
     }
   };
 
@@ -264,7 +264,7 @@ function Products() {
               />
             </Stack>
           </Container>
-          
+
           <Modal
             open={openModal}
             onClose={handleCloseModal}
