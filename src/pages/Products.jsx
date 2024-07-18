@@ -26,7 +26,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import "react-toastify/dist/ReactToastify.css";
 import CloseIcon from "@mui/icons-material/Close";
-import { IconButton, Tooltip } from "@mui/joy";
+import { IconButton, Input, Tooltip } from "@mui/joy";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import Pagination from "@mui/material/Pagination";
@@ -56,11 +56,12 @@ function Products() {
     name: "",
     description: "",
     stock: "",
-    image: "",
     price: "",
     netWeight: "",
     CategoryId: "",
   });
+
+  const [formDataImage, setformDataImage] = useState(null);
 
   const handleChange = (e) => {
     setFormData({
@@ -113,23 +114,25 @@ function Products() {
 
   const handleNewProduct = async (e) => {
     e.preventDefault();
+ 
     try {
       const response = await axios({
         url: `${import.meta.env.VITE_API_URL}/products`,
         method: "post",
         headers: {
+          "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${user.token}`,
         },
         data: {
           name: formData.name,
           description: formData.description,
-          image: formData.image,
+          image: e.target.elements.image.files[0],
           price: formData.price,
           netWeight: formData.netWeight,
           stock: parseInt(formData.stock),
         },
       });
-
+console.log(response.data)
       handleCloseModal();
       setProductCreated(true);
       toast.info(`Product created successfully`);
@@ -408,14 +411,13 @@ function Products() {
                 </Select>
               </FormControl>
 
-              <TextField
+              <Input
                 id="image"
                 name="image"
                 label="Image Link"
-                type="text"
+                type="file"
                 variant="outlined"
-                value={formData.image}
-                onChange={handleChange}
+                accept="image/*"
                 fullWidth
                 required
                 sx={{ marginBottom: 2 }}

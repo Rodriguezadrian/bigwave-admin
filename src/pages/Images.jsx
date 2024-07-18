@@ -21,25 +21,8 @@ const Image = () => {
   const [loading, setLoading] = useState(false);
   const user = useSelector((state) => state.user);
 
-  useEffect(() => {
-    const fetchCurrentImage = async () => {
-      try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/hero-image`,
-          {
-            headers: { Authorization: `Bearer ${user.token}` },
-          }
-        );
-        setCurrentImage(response.data.imageUrl);
-      } catch (error) {
-        console.error("Error fetching current hero image:", error);
-        toast.error("Failed to fetch current hero image");
-      }
-    };
-
-    fetchCurrentImage();
-  }, [user.token]);
-
+ 
+   
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
     setFile(selectedFile);
