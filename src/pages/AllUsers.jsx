@@ -16,6 +16,7 @@ import { Link, useNavigate } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
+import StarIcon from "@mui/icons-material/Star";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import EditIcon from "@mui/icons-material/Edit";
@@ -122,9 +123,17 @@ function AllUsers() {
   };
   return (
     <Box sx={{ flexGrow: 1, p: 3 }}>
-      <Typography variant="h4" gutterBottom>
-        All Users
-      </Typography>
+      <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
+        <StarIcon sx={{ mr: 1, color: "#68844a" }} />
+        <Typography
+          variant="h4"
+          component="h2"
+          color="#68844a"
+          fontWeight="medium"
+        >
+          All users
+        </Typography>
+      </Box>
 
       <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
@@ -155,11 +164,14 @@ function AllUsers() {
                     <TableCell>{user.email}</TableCell>
                     <TableCell>
                       <Link to={`/update-user/${user.id}`}>
-                        <IconButton>
+                        <IconButton style={{ color: "black" }}>
                           <EditIcon />
                         </IconButton>
                       </Link>
-                      <IconButton onClick={() => handleDelete(user.id)}>
+                      <IconButton
+                        style={{ color: "#cf2727" }}
+                        onClick={() => handleDelete(user.id)}
+                      >
                         <DeleteIcon />
                       </IconButton>
                     </TableCell>
@@ -197,12 +209,15 @@ function AllUsers() {
                     <TableCell>{user.email}</TableCell>
                     <TableCell>
                       <Link to={`/update-admin/${user.id}`}>
-                        <IconButton>
+                        <IconButton style={{ color: "black" }}>
                           <EditIcon />
                         </IconButton>
                       </Link>
 
-                      <IconButton onClick={() => handleDelete(user.id)}>
+                      <IconButton
+                        style={{ color: "#cf2727" }}
+                        onClick={() => handleDelete(user.id)}
+                      >
                         <DeleteIcon />
                       </IconButton>
                     </TableCell>

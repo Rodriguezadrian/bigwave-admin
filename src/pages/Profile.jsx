@@ -44,7 +44,7 @@ const Profile = () => {
         url: `${import.meta.env.VITE_API_URL}/admins/${user.id}`,
         method: "PATCH",
         headers: { Authorization: `Bearer ${user.token}` },
-        data: userInfo.email,
+        data: { email: userInfo.email },
       });
       console.log("Profile updated:", response.data);
       navigate("/users");
@@ -168,7 +168,7 @@ const Profile = () => {
               <Button
                 type="submit"
                 variant="contained"
-                color="primary"
+                color="success"
                 disabled={loading}
               >
                 Save Changes

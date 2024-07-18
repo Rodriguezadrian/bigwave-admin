@@ -27,8 +27,6 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import BlockIcon from "@mui/icons-material/Block";
 import AutorenewRoundedIcon from "@mui/icons-material/AutorenewRounded";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import MoreHorizRoundedIcon from "@mui/icons-material/MoreHorizRounded";
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -215,7 +213,7 @@ export default function OrderTable() {
           }}
         >
           <FormControl sx={{ flex: 1 }} size="sm">
-            <FormLabel>Search for order</FormLabel>
+            <FormLabel>Search by order</FormLabel>
             <Input
               size="sm"
               placeholder="Search"
@@ -279,13 +277,19 @@ export default function OrderTable() {
                   />
                 </th>
                 <th style={{ width: 120, padding: "12px 6px" }}>
-                  <Link
+                  <Box
                     underline="none"
-                    color="primary"
                     component="button"
-                    onClick={() => setOrders(orders === "asc" ? "desc" : "asc")}
+                    onClick={() =>
+                      setOrders((prevOrders) =>
+                        prevOrders === "asc" ? "desc" : "asc"
+                      )
+                    }
                     sx={[
                       {
+                        background: "white",
+                        color: "#32383e",
+                        border: "none",
                         fontWeight: "lg",
                         "& svg": {
                           transition: "0.2s",
@@ -301,7 +305,7 @@ export default function OrderTable() {
                     ]}
                   >
                     Invoice
-                  </Link>
+                  </Box>
                 </th>
                 <th style={{ width: 140, padding: "12px 6px" }}>Date</th>
                 <th style={{ width: 140, padding: "12px 6px" }}>Address</th>

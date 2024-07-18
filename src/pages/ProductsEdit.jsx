@@ -30,6 +30,8 @@ function ProductsEdit() {
     description: "",
     price: "",
     image: "",
+    stock: "",
+    netWeight: "",
     CategoryId: "",
   });
 
@@ -59,6 +61,8 @@ function ProductsEdit() {
           description: response.data.description,
           price: response.data.price,
           image: response.data.image,
+          netWeight: response.data.netWeight,
+          stock: response.data.stock,
           CategoryId: response.data.CategoryId,
         });
       } catch (error) {
@@ -88,6 +92,8 @@ function ProductsEdit() {
       name: formData.name,
       description: formData.description,
       image: formData.image,
+      stock: formData.stock,
+      netWeight: formData.netWeight,
       price: formData.price,
       CategoryId: parseInt(formData.CategoryId, 10),
     };
@@ -101,8 +107,8 @@ function ProductsEdit() {
         data: data,
       });
 
-      console.log("product updated:", response.data);
-      toast.info("product updated successfully");
+      console.log("Product updated:", response.data);
+      toast.info("Product updated successfully");
       navigate("/products");
     } catch (error) {
       console.error("Error updating the product:", error);
@@ -193,6 +199,26 @@ function ProductsEdit() {
                     fullWidth
                     margin="normal"
                   />
+                  <TextField
+                    required
+                    id="stock"
+                    name="stock"
+                    label="Stock"
+                    value={formData.stock}
+                    onChange={handleChange}
+                    fullWidth
+                    margin="normal"
+                  />
+                  <TextField
+                    required
+                    id="netWeight"
+                    name="netWeight"
+                    label="netWeight"
+                    value={formData.netWeight}
+                    onChange={handleChange}
+                    fullWidth
+                    margin="normal"
+                  />
                   <FormControl fullWidth margin="normal">
                     <InputLabel id="category-label">Category</InputLabel>
                     <Select
@@ -224,10 +250,10 @@ function ProductsEdit() {
                     margin="normal"
                   />
                   <Button
-                    sx={{ backgroundColor: "blue" }}
+            
                     type="submit"
                     variant="contained"
-                    color="primary"
+                    color="success"
                   >
                     Update product
                   </Button>

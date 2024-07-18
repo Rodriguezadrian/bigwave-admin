@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
+import StarIcon from "@mui/icons-material/Star";
 import CloseIcon from "@mui/icons-material/Close";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -29,6 +30,7 @@ import { Link } from "react-router-dom";
 function Categories() {
   const user = useSelector((state) => state.user);
   const [categories, setCategories] = useState([]);
+  const [updateTrigger, setUpdateTrigger] = useState(0);
   const [page, setPage] = useState(1);
   const [formData, setFormData] = useState({
     name: "",
@@ -85,7 +87,7 @@ function Categories() {
       setCategories(response.data);
     };
     getCategories();
-  }, [categories]);
+  }, []);
 
   //open update profile modal
   const [openModal, setOpenModal] = useState(false);
@@ -108,6 +110,7 @@ function Categories() {
         },
       });
       handleCloseModal();
+      toast.info(`Category created successfully`);
       console.log("Category created:", response.data);
     } catch (error) {
       console.log(error);
@@ -124,7 +127,7 @@ function Categories() {
         },
       });
       setCategories(categories.filter((category) => category.id !== id));
-      toast.info("Category deleted successfully");
+      toast.success("Category deleted successfully");
     } catch (error) {
       console.error("Error deleting category:", error);
       toast.error("Failed to delete category");
@@ -154,9 +157,17 @@ function Categories() {
           }}
         >
           <Container>
-            <Typography variant="h4" gutterBottom>
-              Categories
-            </Typography>
+            <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
+              <StarIcon sx={{ mr: 1, color: "#68844a" }} />
+              <Typography
+                variant="h4"
+                component="h2"
+                color="#68844a"
+                fontWeight="medium"
+              >
+                Categories
+              </Typography>
+            </Box>
             <Box display="flex" justifyContent="flex-end" mb={2}>
               <Button
                 onClick={handleOpenModal}
@@ -174,11 +185,7 @@ function Categories() {
                   <TableRow>
                     <TableCell>ID</TableCell>
                     <TableCell>Name</TableCell>
-                    <TableCell
-                      sx={{ display: "flex", justifyContent: "center" }}
-                    >
-                      Actions
-                    </TableCell>
+                    <TableCell align="center">Actions</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -186,17 +193,27 @@ function Categories() {
                     <TableRow key={category.id}>
                       <TableCell>{category.id}</TableCell>
                       <TableCell>{category.name}</TableCell>
-                      <TableCell
-                        sx={{ display: "flex", justifyContent: "space-evenly" }}
-                      >
-                        <Link to={`/categories/edit/${category.slug}`}>
-                          <EditIcon />
-                        </Link>
-                        <Link>
-                          <DeleteIcon
-                            onClick={() => handleDelete(category.id)}
-                          />
-                        </Link>
+                      <TableCell align="center">
+                        <Box
+                          sx={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            gap: 2,
+                          }}
+                        >
+                          <Link
+                            style={{ color: "black" }}
+                            to={`/categories/edit/${category.slug}`}
+                          >
+                            <EditIcon />
+                          </Link>
+                          <Link style={{ color: "#cf2727" }}>
+                            <DeleteIcon
+                              onClick={() => handleDelete(category.id)}
+                            />
+                          </Link>
+                        </Box>
                       </TableCell>
                     </TableRow>
                   ))}
@@ -208,7 +225,12 @@ function Categories() {
                 </TableBody>
               </Table>
             </TableContainer>
-            <Stack spacing={2} sx={{ mt: 2 }}>
+            <Stack
+              direction="row"
+              justifyContent="center"
+              spacing={2}
+              sx={{ mt: 2 }}
+            >
               <Pagination
                 count={Math.ceil(categories.length / categoriesPerPage)}
                 page={page}
@@ -290,7 +312,7 @@ function Categories() {
               <Button
                 type="submit"
                 variant="contained"
-                color="primary"
+                color="success"
                 fullWidth
                 sx={{ mt: 2 }}
               >

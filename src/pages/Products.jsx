@@ -19,8 +19,9 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import StarIcon from "@mui/icons-material/Star";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import "react-toastify/dist/ReactToastify.css";
@@ -55,6 +56,7 @@ function Products() {
     stock: "",
     image: "",
     price: "",
+    netWeight: "",
     CategoryId: "",
   });
 
@@ -116,6 +118,7 @@ function Products() {
           description: formData.description,
           image: formData.image,
           price: formData.price,
+          netWeight: formData.netWeight,
           stock: parseInt(formData.stock),
         },
       });
@@ -123,7 +126,7 @@ function Products() {
       handleCloseModal();
       toast.info(`Product created successfully`);
     } catch (error) {
-      console.log(error);
+      console.log(`Error adding the product`, error);
     }
   };
 
@@ -182,9 +185,17 @@ function Products() {
           }}
         >
           <Container>
-            <Typography variant="h4" gutterBottom>
-              Products
-            </Typography>
+          <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
+              <StarIcon sx={{ mr: 1, color: "#68844a" }} />
+              <Typography
+                variant="h4"
+                component="h2"
+                color="#68844a"
+                fontWeight="medium"
+              >
+                Products
+              </Typography>
+            </Box>
             <Box display="flex" justifyContent="flex-end" mb={2}>
               <Button
                 onClick={handleOpenModal}
@@ -205,11 +216,7 @@ function Products() {
                     <TableCell>Category</TableCell>
                     <TableCell>Price</TableCell>
                     <TableCell>Stock</TableCell>
-                    <TableCell
-                      sx={{ display: "flex", justifyContent: "center" }}
-                    >
-                      Actions
-                    </TableCell>
+                    <TableCell align="center">Actions</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -234,17 +241,27 @@ function Products() {
                       </TableCell>
                       <TableCell>{product.price}</TableCell>
                       <TableCell>{product.stock}</TableCell>
-                      <TableCell
-                        sx={{ display: "flex", justifyContent: "space-evenly" }}
-                      >
-                        <Link to={`/products/edit/${product.slug}`}>
-                          <EditIcon />
-                        </Link>
-                        <Link>
-                          <DeleteIcon
-                            onClick={() => handleDelete(product.id)}
-                          />
-                        </Link>
+                      <TableCell>
+                        <Box
+                          sx={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            gap: 2,
+                          }}
+                        >
+                          <Link
+                            style={{ color: "black" }}
+                            to={`/products/edit/${product.slug}`}
+                          >
+                            <EditIcon />
+                          </Link>
+                          <Link style={{ color: "#cf2727" }}>
+                            <DeleteIcon
+                              onClick={() => handleDelete(product.id)}
+                            />
+                          </Link>
+                        </Box>
                       </TableCell>
                     </TableRow>
                   ))}
@@ -256,7 +273,12 @@ function Products() {
                 </TableBody>
               </Table>
             </TableContainer>
-            <Stack spacing={2} sx={{ mt: 2 }}>
+            <Stack
+              direction="row"
+              justifyContent="center"
+              spacing={2}
+              sx={{ mt: 2 }}
+            >
               <Pagination
                 count={Math.ceil(products.length / productsPerPage)}
                 page={page}
@@ -264,7 +286,7 @@ function Products() {
               />
             </Stack>
           </Container>
-          
+
           <Modal
             open={openModal}
             onClose={handleCloseModal}
@@ -332,6 +354,18 @@ function Products() {
                 type="number"
                 variant="outlined"
                 value={formData.stock || ""}
+                onChange={handleChange}
+                fullWidth
+                required
+                sx={{ marginBottom: 2 }}
+              />
+              <TextField
+                id="netWeight"
+                name="netWeight"
+                label="NetWeight"
+                type="number"
+                variant="outlined"
+                value={formData.netWeight || ""}
                 onChange={handleChange}
                 fullWidth
                 required
