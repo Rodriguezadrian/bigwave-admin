@@ -122,6 +122,7 @@ const Image = () => {
               <label htmlFor="hero-image-upload">
                 <Button
                   variant="contained"
+                  color="success"
                   component="span"
                   startIcon={<CloudUploadIcon />}
                 >
@@ -143,7 +144,7 @@ const Image = () => {
               <Button
                 type="submit"
                 variant="contained"
-                color="primary"
+                color="success"
                 disabled={loading || !file}
                 sx={{ mt: 2 }}
               >

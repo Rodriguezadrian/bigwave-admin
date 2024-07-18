@@ -250,10 +250,10 @@ function ProductsEdit() {
                     margin="normal"
                   />
                   <Button
-                    sx={{ backgroundColor: "blue" }}
+            
                     type="submit"
                     variant="contained"
-                    color="primary"
+                    color="success"
                   >
                     Update product
                   </Button>
