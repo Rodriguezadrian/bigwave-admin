@@ -26,6 +26,7 @@ import { IconButton, Stack, Tooltip } from "@mui/joy";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import Filter from "../components/Filter";
 
 function Categories() {
   const user = useSelector((state) => state.user);
@@ -80,6 +81,7 @@ function Categories() {
       const response = await axios({
         url: `${import.meta.env.VITE_API_URL}/categories`,
         method: "get",
+       
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
@@ -170,6 +172,7 @@ function Categories() {
                 Categories
               </Typography>
             </Box>
+            <Filter />
             <Box display="flex" justifyContent="flex-end" mb={2}>
               <Button
                 onClick={handleOpenModal}

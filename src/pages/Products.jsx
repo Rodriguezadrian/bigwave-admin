@@ -31,6 +31,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
+import Filter from "../components/Filter";
 
 function Products() {
   const user = useSelector((state) => state.user);
@@ -91,6 +92,10 @@ function Products() {
       const response = await axios({
         url: `${import.meta.env.VITE_API_URL}/products`,
         method: "get",
+        params: {
+          sortBy: "id",
+          order: "DESC",
+        },
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
@@ -199,6 +204,7 @@ function Products() {
                 Products
               </Typography>
             </Box>
+            <Filter />
             <Box display="flex" justifyContent="flex-end" mb={2}>
               <Button
                 onClick={handleOpenModal}
