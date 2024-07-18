@@ -239,10 +239,13 @@ function Products() {
                       <TableCell
                         sx={{ display: "flex", justifyContent: "space-evenly" }}
                       >
-                        <Link to={`/products/edit/${product.slug}`}>
+                        <Link
+                          style={{ color: "black" }}
+                          to={`/products/edit/${product.slug}`}
+                        >
                           <EditIcon />
                         </Link>
-                        <Link>
+                        <Link style={{ color: "#cf2727" }}>
                           <DeleteIcon
                             onClick={() => handleDelete(product.id)}
                           />
@@ -258,7 +261,12 @@ function Products() {
                 </TableBody>
               </Table>
             </TableContainer>
-            <Stack direction="row" justifyContent="center"  spacing={2} sx={{ mt: 2 }}>
+            <Stack
+              direction="row"
+              justifyContent="center"
+              spacing={2}
+              sx={{ mt: 2 }}
+            >
               <Pagination
                 count={Math.ceil(products.length / productsPerPage)}
                 page={page}

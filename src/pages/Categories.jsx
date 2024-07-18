@@ -175,11 +175,7 @@ function Categories() {
                   <TableRow>
                     <TableCell>ID</TableCell>
                     <TableCell>Name</TableCell>
-                    <TableCell
-                      sx={{ display: "flex", justifyContent: "center" }}
-                    >
-                      Actions
-                    </TableCell>
+                    <TableCell align="center">Actions</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -187,17 +183,27 @@ function Categories() {
                     <TableRow key={category.id}>
                       <TableCell>{category.id}</TableCell>
                       <TableCell>{category.name}</TableCell>
-                      <TableCell
-                        sx={{ display: "flex", justifyContent: "space-evenly" }}
-                      >
-                        <Link to={`/categories/edit/${category.slug}`}>
-                          <EditIcon />
-                        </Link>
-                        <Link>
-                          <DeleteIcon
-                            onClick={() => handleDelete(category.id)}
-                          />
-                        </Link>
+                      <TableCell align="center">
+                        <Box
+                          sx={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            gap: 2,
+                          }}
+                        >
+                          <Link
+                            style={{ color: "black" }}
+                            to={`/categories/edit/${category.slug}`}
+                          >
+                            <EditIcon />
+                          </Link>
+                          <Link style={{ color: "#cf2727" }}>
+                            <DeleteIcon
+                              onClick={() => handleDelete(category.id)}
+                            />
+                          </Link>
+                        </Box>
                       </TableCell>
                     </TableRow>
                   ))}
@@ -209,7 +215,12 @@ function Categories() {
                 </TableBody>
               </Table>
             </TableContainer>
-            <Stack direction="row" justifyContent="center" spacing={2} sx={{ mt: 2 }}>
+            <Stack
+              direction="row"
+              justifyContent="center"
+              spacing={2}
+              sx={{ mt: 2 }}
+            >
               <Pagination
                 count={Math.ceil(categories.length / categoriesPerPage)}
                 page={page}

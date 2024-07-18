@@ -155,11 +155,14 @@ function AllUsers() {
                     <TableCell>{user.email}</TableCell>
                     <TableCell>
                       <Link to={`/update-user/${user.id}`}>
-                        <IconButton>
+                        <IconButton style={{ color: "black" }}>
                           <EditIcon />
                         </IconButton>
                       </Link>
-                      <IconButton onClick={() => handleDelete(user.id)}>
+                      <IconButton
+                        style={{ color: "#cf2727" }}
+                        onClick={() => handleDelete(user.id)}
+                      >
                         <DeleteIcon />
                       </IconButton>
                     </TableCell>
@@ -197,12 +200,15 @@ function AllUsers() {
                     <TableCell>{user.email}</TableCell>
                     <TableCell>
                       <Link to={`/update-admin/${user.id}`}>
-                        <IconButton>
+                        <IconButton style={{ color: "black" }}>
                           <EditIcon />
                         </IconButton>
                       </Link>
 
-                      <IconButton onClick={() => handleDelete(user.id)}>
+                      <IconButton
+                        style={{ color: "#cf2727" }}
+                        onClick={() => handleDelete(user.id)}
+                      >
                         <DeleteIcon />
                       </IconButton>
                     </TableCell>

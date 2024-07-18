@@ -200,12 +200,7 @@ function CategoriesEdit() {
                     fullWidth
                     margin="normal"
                   />
-                  <Button
-                    sx={{ backgroundColor: "blue" }}
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                  >
+                  <Button type="submit" variant="contained" color="success">
                     Update Category
                   </Button>
                 </Box>
