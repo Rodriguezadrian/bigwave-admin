@@ -168,7 +168,7 @@ const Profile = () => {
               <Button
                 type="submit"
                 variant="contained"
-                color="primary"
+                color="success"
                 disabled={loading}
               >
                 Save Changes

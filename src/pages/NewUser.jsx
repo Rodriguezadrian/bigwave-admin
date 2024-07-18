@@ -1,7 +1,6 @@
 import { Box, Button, Container, Typography } from "@mui/joy";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
-import { InputLabel, Select, MenuItem, FormControl } from "@mui/material";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -109,7 +108,7 @@ function NewUser() {
                   value={userData.lastname}
                   onChange={handleChange}
                 />
-              
+
                 <TextField
                   required
                   id="email"
@@ -128,12 +127,7 @@ function NewUser() {
                   value={userData.password}
                   onChange={handleChange}
                 />
-                <Button
-                  sx={{ backgroundColor: "blueviolet" }}
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                >
+                <Button type="submit" color="success">
                   Create user
                 </Button>
               </Box>

@@ -121,6 +121,7 @@ function ImageManagement() {
           Image Management
         </Typography>
         <Button
+          color="success"
           variant="contained"
           startIcon={<AddPhotoAlternateIcon />}
           onClick={() => handleOpenModal()}
