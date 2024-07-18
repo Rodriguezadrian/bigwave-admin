@@ -207,11 +207,7 @@ function Products() {
                     <TableCell>Category</TableCell>
                     <TableCell>Price</TableCell>
                     <TableCell>Stock</TableCell>
-                    <TableCell
-                      sx={{ display: "flex", justifyContent: "center" }}
-                    >
-                      Actions
-                    </TableCell>
+                    <TableCell align="center">Actions</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -236,20 +232,27 @@ function Products() {
                       </TableCell>
                       <TableCell>{product.price}</TableCell>
                       <TableCell>{product.stock}</TableCell>
-                      <TableCell
-                        sx={{ display: "flex", justifyContent: "space-evenly" }}
-                      >
-                        <Link
-                          style={{ color: "black" }}
-                          to={`/products/edit/${product.slug}`}
+                      <TableCell>
+                        <Box
+                          sx={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            gap: 2,
+                          }}
                         >
-                          <EditIcon />
-                        </Link>
-                        <Link style={{ color: "#cf2727" }}>
-                          <DeleteIcon
-                            onClick={() => handleDelete(product.id)}
-                          />
-                        </Link>
+                          <Link
+                            style={{ color: "black" }}
+                            to={`/products/edit/${product.slug}`}
+                          >
+                            <EditIcon />
+                          </Link>
+                          <Link style={{ color: "#cf2727" }}>
+                            <DeleteIcon
+                              onClick={() => handleDelete(product.id)}
+                            />
+                          </Link>
+                        </Box>
                       </TableCell>
                     </TableRow>
                   ))}
