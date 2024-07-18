@@ -55,6 +55,7 @@ function Products() {
     stock: "",
     image: "",
     price: "",
+    netWeight: "",
     CategoryId: "",
   });
 
@@ -116,6 +117,7 @@ function Products() {
           description: formData.description,
           image: formData.image,
           price: formData.price,
+          netWeight: formData.netWeight,
           stock: parseInt(formData.stock),
         },
       });
@@ -332,6 +334,18 @@ function Products() {
                 type="number"
                 variant="outlined"
                 value={formData.stock || ""}
+                onChange={handleChange}
+                fullWidth
+                required
+                sx={{ marginBottom: 2 }}
+              />
+              <TextField
+                id="netWeight"
+                name="netWeight"
+                label="NetWeight"
+                type="number"
+                variant="outlined"
+                value={formData.netWeight || ""}
                 onChange={handleChange}
                 fullWidth
                 required

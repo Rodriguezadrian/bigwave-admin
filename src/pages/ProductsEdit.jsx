@@ -31,6 +31,7 @@ function ProductsEdit() {
     price: "",
     image: "",
     stock: "",
+    netWeight: "",
     CategoryId: "",
   });
 
@@ -60,6 +61,7 @@ function ProductsEdit() {
           description: response.data.description,
           price: response.data.price,
           image: response.data.image,
+          netWeight: response.data.netWeight,
           stock: response.data.stock,
           CategoryId: response.data.CategoryId,
         });
@@ -91,6 +93,7 @@ function ProductsEdit() {
       description: formData.description,
       image: formData.image,
       stock: formData.stock,
+      netWeight: formData.netWeight,
       price: formData.price,
       CategoryId: parseInt(formData.CategoryId, 10),
     };
@@ -104,8 +107,8 @@ function ProductsEdit() {
         data: data,
       });
 
-      console.log("product updated:", response.data);
-      toast.info("product updated successfully");
+      console.log("Product updated:", response.data);
+      toast.info("Product updated successfully");
       navigate("/products");
     } catch (error) {
       console.error("Error updating the product:", error);
@@ -198,10 +201,20 @@ function ProductsEdit() {
                   />
                   <TextField
                     required
-                    id="stocl"
+                    id="stock"
                     name="stock"
                     label="Stock"
                     value={formData.stock}
+                    onChange={handleChange}
+                    fullWidth
+                    margin="normal"
+                  />
+                  <TextField
+                    required
+                    id="netWeight"
+                    name="netWeight"
+                    label="netWeight"
+                    value={formData.netWeight}
                     onChange={handleChange}
                     fullWidth
                     margin="normal"
