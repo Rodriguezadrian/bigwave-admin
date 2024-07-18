@@ -22,8 +22,6 @@ const Login = () => {
   const [password, setPassword] = useState("1234");
   const navigate = useNavigate();
 
-  
-
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -45,7 +43,7 @@ const Login = () => {
   return (
     <div>
       <CssBaseline />
-      <Box sx={{ display: "flex", minHeight: "100dvh" }}>
+      <Box sx={{ display: "flex", minHeight: "100dvh", alignItems: "center" }}>
         <Header />
         <Box
           component="main"
@@ -62,24 +60,15 @@ const Login = () => {
             display: "flex",
             flexDirection: "column",
             minWidth: 0,
-            height: "100dvh",
+            minHeightheight: "100dvh",
             gap: 1,
           }}
         >
           <Container component="main" maxWidth="sm" className="mt-5">
             <Paper elevation={6} sx={{ p: 4, borderRadius: 3 }}>
-              <Typography
-                component="h2"
-                variant="h4"
-                align="center"
-                gutterBottom
-              >
-                Login to your account
-              </Typography>
               <Box component="form" onSubmit={handleLogin} sx={{ mt: 2 }}>
                 <TextField
                   margin="normal"
-                  required
                   fullWidth
                   id="email"
                   label="Email Address"
@@ -92,7 +81,6 @@ const Login = () => {
                 />
                 <TextField
                   margin="normal"
-                  required
                   fullWidth
                   name="password"
                   label="Password"
@@ -118,7 +106,7 @@ const Login = () => {
                 </Button>
                 <Typography align="center" sx={{ mt: 2 }}>
                   <Link
-                    to="/register"
+                    to="#"
                     style={{
                       textDecoration: "none",
                       color: "#1976d2",

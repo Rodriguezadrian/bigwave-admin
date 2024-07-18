@@ -36,6 +36,7 @@ function Products() {
   const user = useSelector((state) => state.user);
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
+  const [productCreated, setProductCreated] = useState(false);
   const [categories, setCategories] = useState([]);
 
   const productsPerPage = 10;
@@ -97,7 +98,8 @@ function Products() {
       setProducts(response.data);
     };
     getProducts();
-  }, []);
+    setProductCreated(false);
+  }, [productCreated]);
 
   //open update profile modal
   const [openModal, setOpenModal] = useState(false);
@@ -124,6 +126,7 @@ function Products() {
       });
 
       handleCloseModal();
+      setProductCreated(true);
       toast.info(`Product created successfully`);
     } catch (error) {
       console.log(`Error adding the product`, error);
@@ -185,7 +188,7 @@ function Products() {
           }}
         >
           <Container>
-          <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
+            <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
               <StarIcon sx={{ mr: 1, color: "#68844a" }} />
               <Typography
                 variant="h4"
