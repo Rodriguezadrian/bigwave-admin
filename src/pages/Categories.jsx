@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
+import StarIcon from "@mui/icons-material/Star";
 import CloseIcon from "@mui/icons-material/Close";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -109,6 +110,7 @@ function Categories() {
         },
       });
       handleCloseModal();
+      toast.info(`Category created successfully`);
       console.log("Category created:", response.data);
     } catch (error) {
       console.log(error);
@@ -125,7 +127,7 @@ function Categories() {
         },
       });
       setCategories(categories.filter((category) => category.id !== id));
-      toast.info("Category deleted successfully");
+      toast.success("Category deleted successfully");
     } catch (error) {
       console.error("Error deleting category:", error);
       toast.error("Failed to delete category");
@@ -155,9 +157,17 @@ function Categories() {
           }}
         >
           <Container>
-            <Typography variant="h4" gutterBottom>
-              Categories
-            </Typography>
+            <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
+              <StarIcon sx={{ mr: 1, color: "#68844a" }} />
+              <Typography
+                variant="h4"
+                component="h2"
+                color="#68844a"
+                fontWeight="medium"
+              >
+                Categories
+              </Typography>
+            </Box>
             <Box display="flex" justifyContent="flex-end" mb={2}>
               <Button
                 onClick={handleOpenModal}

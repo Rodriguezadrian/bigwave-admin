@@ -21,6 +21,7 @@ import React, { useEffect, useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import StarIcon from "@mui/icons-material/Star";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import "react-toastify/dist/ReactToastify.css";
@@ -184,9 +185,17 @@ function Products() {
           }}
         >
           <Container>
-            <Typography variant="h4" gutterBottom>
-              Products
-            </Typography>
+          <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
+              <StarIcon sx={{ mr: 1, color: "#68844a" }} />
+              <Typography
+                variant="h4"
+                component="h2"
+                color="#68844a"
+                fontWeight="medium"
+              >
+                Products
+              </Typography>
+            </Box>
             <Box display="flex" justifyContent="flex-end" mb={2}>
               <Button
                 onClick={handleOpenModal}
