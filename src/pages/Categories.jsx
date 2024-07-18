@@ -209,7 +209,7 @@ function Categories() {
                 </TableBody>
               </Table>
             </TableContainer>
-            <Stack spacing={2} sx={{ mt: 2 }}>
+            <Stack direction="row" justifyContent="center" spacing={2} sx={{ mt: 2 }}>
               <Pagination
                 count={Math.ceil(categories.length / categoriesPerPage)}
                 page={page}

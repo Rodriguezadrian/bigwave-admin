@@ -13,7 +13,6 @@ function NewUser() {
   const [userData, setUserData] = useState({
     firstname: "",
     lastname: "",
-    role: "",
     email: "",
     password: "",
   });
@@ -27,16 +26,11 @@ function NewUser() {
     });
   };
 
-  const handleUrl =
-    userData.role === "Customer"
-      ? `${import.meta.env.VITE_API_URL}/users`
-      : `${import.meta.env.VITE_API_URL}/admins`;
-
   const handleAddNewUser = async (e) => {
     e.preventDefault();
     try {
       const response = await axios({
-        url: handleUrl,
+        url: `${import.meta.env.VITE_API_URL}/admins`,
         method: "post",
         headers: {
           Authorization: `Bearer ${user.token}`,
@@ -115,19 +109,7 @@ function NewUser() {
                   value={userData.lastname}
                   onChange={handleChange}
                 />
-                <FormControl fullWidth margin="normal" variant="outlined">
-                  <InputLabel>Role</InputLabel>
-                  <Select
-                    sx={{ marginBottom: 2 }}
-                    name="role"
-                    value={userData.role}
-                    label="Role"
-                    onChange={handleChange}
-                  >
-                    <MenuItem value="Customer">Customer</MenuItem>
-                    <MenuItem value="Admin">Admin</MenuItem>
-                  </Select>
-                </FormControl>
+              
                 <TextField
                   required
                   id="email"
