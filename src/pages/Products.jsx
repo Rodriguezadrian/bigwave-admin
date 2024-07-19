@@ -61,8 +61,6 @@ function Products() {
     CategoryId: "",
   });
 
-  const [formDataImage, setformDataImage] = useState(null);
-
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -114,7 +112,7 @@ function Products() {
 
   const handleNewProduct = async (e) => {
     e.preventDefault();
- 
+
     try {
       const response = await axios({
         url: `${import.meta.env.VITE_API_URL}/products`,
@@ -132,7 +130,7 @@ function Products() {
           stock: parseInt(formData.stock),
         },
       });
-console.log(response.data)
+      console.log(response.data);
       handleCloseModal();
       setProductCreated(true);
       toast.info(`Product created successfully`);
