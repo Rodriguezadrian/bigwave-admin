@@ -128,9 +128,10 @@ function Products() {
           price: formData.price,
           netWeight: formData.netWeight,
           stock: parseInt(formData.stock),
+          CategoryId: formData.CategoryId,
         },
       });
-      console.log(response.data);
+
       handleCloseModal();
       setProductCreated(true);
       toast.info(`Product created successfully`);
