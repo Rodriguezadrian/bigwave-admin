@@ -216,7 +216,8 @@ function AllUsers() {
 
                       <IconButton
                         style={{ color: "#cf2727" }}
-                        onClick={() => handleDelete(user.id)}
+                        onClick={() => toast.info("You can't delete an admin")}
+                        // onClick={() => handleDelete(user.id)}
                       >
                         <DeleteIcon />
                       </IconButton>
