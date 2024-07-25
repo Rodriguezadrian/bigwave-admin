@@ -129,7 +129,7 @@ export default function Sidebar() {
                 maxWidth: { xs: 350, md: 250 },
               }}
               alt="Logo de BigWave"
-              src="src/assets/bigwave-logo.png"
+              src="/bigwave-logo.png"
             />
             <ColorSchemeToggle sx={{ ml: "auto" }} />
           </Link>
